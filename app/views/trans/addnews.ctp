@@ -19,7 +19,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'addnews'));
 	</tr>
 	<tr>
 		<td></td>
-		<td><?php echo $form->submit('Update'); ?></td>
+		<td><?php echo $form->submit('Update', array('style' => 'width:112px;')); ?></td>
 	</tr>
 </table>
 <?php
