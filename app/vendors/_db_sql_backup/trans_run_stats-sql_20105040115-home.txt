@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS `trans_run_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `runtime` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+)

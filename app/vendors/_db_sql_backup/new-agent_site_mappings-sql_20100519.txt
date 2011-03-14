@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS `agent_site_mappings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `siteid` int(11) NOT NULL,
+  `agentid` int(11) NOT NULL,
+  `campaignid` varchar(64) COLLATE ascii_bin NOT NULL,
+  PRIMARY KEY (`id`)
+)

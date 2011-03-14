@@ -1,0 +1,6 @@
+CREATE  ALGORITHM =  UNDEFINED VIEW `trans_view_clickouts` AS 
+SELECT c.id as companyid, c.officename, a.agentid, d.username, a.clicktime, a.fromip
+FROM trans_clickouts a, trans_agents b, trans_companies c, trans_accounts d
+WHERE a.agentid = b.id
+AND b.id = d.id
+AND b.companyid = c.id

@@ -1,0 +1,19 @@
+drop view trans_view_agents;
+create view trans_view_agents as
+select 
+	`trans_agents`.`id` AS `id`,`trans_accounts`.`username` AS `username`,`trans_accounts`.`username4m` AS `username4m`,
+	`trans_accounts`.`originalpwd` AS `originalpwd`,`trans_accounts`.`regtime` AS `regtime`,`trans_accounts`.`lastlogintime` AS `lastlogintime`,
+	(select count(online_logs.id) from online_logs where online_logs.accountid = trans_accounts.id) as logintimes,
+	`trans_accounts`.`status` AS `status`,
+	`trans_accounts`.`online` AS `online`,`trans_companies`.`id` AS `companyid`,`trans_companies`.`officename` AS `officename`,
+	`trans_agents`.`name` AS `name`,`trans_agents`.`paytoname` AS `paytoname`,`trans_agents`.`keystring` AS `keystring`,
+	`trans_agents`.`ag1stname` AS `ag1stname`,`trans_agents`.`aglastname` AS `aglastname`,`trans_agents`.`email` AS `email`,
+	`trans_agents`.`street` AS `street`,`trans_agents`.`city` AS `city`,`trans_agents`.`state` AS `state`,`trans_countries`.`fullname` AS `country`,
+	`trans_agents`.`im` AS `im`,`trans_agents`.`cellphone` AS `cellphone`,
+	(select count(`agent_site_mappings`.`id`) AS `count(id)` from `agent_site_mappings` where (`agent_site_mappings`.`agentid` = `trans_agents`.`id`)) AS `campaigns`
+from (((`trans_agents` join `trans_companies`) join `trans_accounts`) join `trans_countries`)
+where (
+	(`trans_agents`.`id` = `trans_accounts`.`id`)
+	and (`trans_agents`.`companyid` = `trans_companies`.`id`)
+	and (`trans_agents`.`country` = `trans_countries`.`abbr`)
+);

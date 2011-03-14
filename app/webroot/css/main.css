@@ -1,0 +1,339 @@
+* {
+ padding: 0;
+ margin: 0;
+}
+body {
+ font-family: Arial, Helvetica, sans-serif;
+ color: #666666;
+ /*background-color: #555b34;*/
+ font-size: 15px;
+ /*background-image:url(../img/main/bg-tile.gif);
+ background-repeat:repeat;*/
+}
+.wrapper {
+ width: 955px;/**/
+ margin: 0 auto;
+}
+#border {
+ border: 0px solid #8ECE5F;
+ margin: 20px 0px 0px 0px;
+ background-color: #fff;
+ min-height: 123px;/**/
+ float: right;
+ width: 955px;/**/
+}
+* html #border {height:123px} /* IE Min-Height Hack */ 
+/* ------------------------ Start Header -----------------*/
+.header {
+ text-align: center;
+ margin: 0px 0px 0px 0px;
+ background-image: url(../img/main/header.jpg);
+ min-height:140px;
+}
+/* ------------------------ End Header -----------------*/
+
+
+/* ------------------------ Start Navigation Bar -----------------*/
+#nav-bar {
+ color: #fff;
+ font-weight: bold;
+ margin: 0px 0px 0px 0px;
+ background-image: url(../img/main/nav-bar.png);
+ background-repeat: no-repeat;
+ min-height: 28px;
+ padding: 4px 0px 0px 5px;
+}
+/* ------------------------ End Navigation Bar -----------------*/
+
+
+/* ------------------------ Start Images -----------------*/
+img {
+ display: inline;
+ border: none;
+}
+img.block {
+ display: block;
+}
+img.float {
+ float: left;
+ margin: 0px 14px 10px 0px;
+}
+/* ------------------------ End Images -----------------*/
+
+
+/* ------------------------ Start Main Columns -----------------*/
+#leftcolumn { /* Parent Wrapper for inside boxes */
+ margin: 0px 0px 0px 0px;
+ display: inline; /* IE Hack */
+ width: 240px;
+ float: left;
+ background-image:url(../img/main/search-box.gif);
+ background-repeat: no-repeat;
+ min-height: 200px;
+ padding: 0;
+
+}
+* html #leftcolumn {height:200px} /* IE Min-Height Hack */
+
+.leftcolumn-inner { /* Parent Wrapper for inside boxes */
+ display: inline; /* IE Hack */
+ width: 220px;
+ float: left;
+ background-image:url(../img/main/search-box.gif);
+ background-repeat: no-repeat;
+ min-height: 40px;
+ padding: 10px;
+ margin-bottom: 7px;
+}
+* html .leftcolumn-inner {height:40px} /* IE Min-Height Hack */
+
+.in-the-news { /* Parent Wrapper for inside boxes */
+ display: inline; /* IE Hack */
+ width: 235px;
+ float: left;
+ min-height: 125px;
+ margin-bottom: 7px;
+}
+* html .in-the-news {height:125px} /* IE Min-Height Hack */
+
+
+#rightcolumn {
+/* border: 1px solid red;*/
+ margin: 0px 0px 0px 0px;
+ display: inline; /* IE Hack */
+ width: 933px;/**/
+ float: left;
+ min-height: 200px;
+}
+* html #rightcolumn {height:200px} /* IE Min-Height Hack */
+
+#logincolumn {
+/* border: 1px solid red;*/
+ margin: auto;
+ display: inline; /* IE Hack */
+ width: 933px;/**/
+ float: left;
+ min-height: 23px;
+}
+* html #logincolumn {height:200px} /* IE Min-Height Hack */
+
+.sponsor {
+ background-image:url(../img/main/sponsor.gif);
+ min-height: 80px;
+ background-repeat: no-repeat;
+ text-align: center;
+ padding: 15px 10px 10px 13px;
+ display: inline; /* IE Hack */
+ float: left;
+ width: 930px;/**/
+}
+* html .sponsor {height:80px} /* IE Min-Height Hack */
+
+.maincontent {
+ min-height: 80px;
+ display: inline; /* IE Hack */
+ float: left;
+ margin-bottom: 7px;
+ width: 950px;/**/
+}
+* html .maincontent {height:80px} /* IE Min-Height Hack */
+
+.content-top {
+ background-image:url(../img/main/content-top.gif);
+ background-repeat: no-repeat;
+ height:8px;
+}
+
+.content-mid {
+ background-image:url(../img/main/content-mid.gif);
+ background-repeat: repeat;
+ padding: 5px 14px 5px 14px;
+}
+
+.content-bottom {
+ background-image:url(../img/main/content-bottom.gif);
+ background-repeat: no-repeat;
+ height:8px;
+}
+
+.left-bottom {
+ background-image:url(../img/main/left-bottom.gif);
+ background-repeat: no-repeat;
+ height:7px;
+}
+
+.left-mid {
+ background-image:url(../img/main/left-mid.gif);
+ background-repeat: repeat;
+ padding: 5px 14px 10px 14px;
+}
+.left-heading {
+ background-image:url(../img/main/left-heading.gif);
+ background-repeat: no-repeat;
+ padding: 9px 14px 5px 10px;
+ font-size: 16px;
+ color: #fff;
+ min-height: 11px;
+ font-weight: bold;
+
+}
+* html .left-heading {height:11px} /* IE Min-Height Hack */
+/* ------------------------ End Main Columns -----------------*/
+
+/* ------------------------- Start Headings ---------------------*/
+h1 {
+ font-size: 16px;
+ color: #72C236;
+}
+/* ------------------------- End Headings ---------------------*/
+
+input {
+ border: 1px solid /*#8ECE5F*/#c3c3c3;
+ width: 32px;
+ height: 21px;
+}
+
+select {
+ border: 1px solid /*#8ECE5F*/#c3c3c3;
+ width: 112px;
+ height: 21px;
+}
+
+#footer {
+ font-size: 12px;
+ clear: both;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ text-align:right;
+ vertical-align:middle;
+ line-height:33px;
+ background-image: url(../img/main/footer.jpg);
+ min-height: 33px;
+}
+#nav-bar li {
+ list-style: none;
+}
+
+ul#daily-links li {
+ list-style: none;
+ margin-left: 2px;
+}
+ul#nav-links li {
+ display: inline;
+ margin-left: 0px;
+ padding-left: 12px;
+}
+
+ul#daily-links li a:link{
+ color: #333;
+ text-decoration: none;
+ font-weight: bold;
+}
+ul#daily-links li a:visited{
+ color: #333;
+ text-decoration: none;
+ font-weight: bold;
+}
+ul#daily-links li a:hover{
+ color: #999;
+ text-decoration: none;
+ font-weight: bold;
+}
+
+#nav-bar a:link {
+ color: #fff;
+ text-decoration: none;
+}
+
+#nav-bar a:visited {
+ color: #fff;
+ text-decoration: none;
+}
+
+#nav-bar a:hover {
+ color: #fff;
+ text-decoration: none;
+}
+
+a:link {
+ color: /*#006600*/#000000;
+ text-decoration: underline;
+}
+a:active {
+ color: /*#006600*/#000000;
+ text-decoration: underline;
+}
+a:visited {
+ color: /*#006600*/#000000;
+ text-decoration: underline;
+}
+a:hover {
+ color: /*#006600*/#000000;
+ text-decoration: none;
+}
+
+.valid {
+ margin: 0px 0px 0px 0px;
+}
+
+/* -----------------------------addons----------------------------- */
+/**
+ *
+ */
+/*for Auth error-message div*/
+.error-message {
+	color: red;
+}
+/*for stats, the totals*/
+.totals {
+	background:/*#E6EDF5*/#a9a88c;
+	color:/*#4F76A3*/#000000;
+	font-size:100% !important;
+	font-weight:bold;
+}
+/*for search label*/
+.search-label {
+	background:/*#E6EDF5*/#a9a88c;
+	color:/*#4F76A3*/#000000;
+	font-size:100% !important;
+	font-weight:bold;
+}
+/*for jQuery floatingmessage*/
+#message_box {
+	position: absolute; 
+	top: 320px; left: 480px; 
+	z-index: 10; 
+	/*background:#ffc;*/
+	padding: 0px;
+	border: 0px solid #CCCCCC;
+	text-align: center; 
+	font-weight: bold; 
+	width: 360px;
+	display: none;
+}
+/*for login area table*/
+.login-area {
+	border: 0;
+	background-image: url(../img/login-bg.gif);
+	width: 355px;
+	height: 362px; 
+}
+/*for ExPaginator*/
+table thead tr th a.asc {
+	background: url(../img/sort_asc.png) no-repeat right; padding-right: 16px;
+}
+table thead tr th a.desc {
+	background: url(../img/sort_desc.png) no-repeat right; padding-right: 16px;
+}
+/*for CleanChattersInc ONLY*/
+.cci-textlogo {
+	float:left;vertical-align:bottom;line-height:120px;
+}
+/*for all the buttons (including submits)*/
+.button {
+	background: url(../img/btn_bg.png);
+	font-weight: bold;
+	color:	black;
+	height:	23px;
+	border-style: outset;
+	border-color: gray;
+}

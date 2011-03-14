@@ -1,0 +1,2 @@
+ALTER TABLE `trans_tmp_stats` ADD `price` DECIMAL( 8, 2 ) NULL AFTER `typename`;
+ALTER TABLE `trans_tmp_stats` ADD `payouts` DECIMAL( 8, 2 ) NULL;

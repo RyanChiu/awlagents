@@ -1,0 +1,1 @@
+ALTER TABLE `trans_stats` ADD `campaignid` VARCHAR( 64 ) NULL DEFAULT NULL AFTER `siteid`;

@@ -1,0 +1,14 @@
+ALTER TABLE `trans_sites` CHANGE `abbr` `abbr` VARCHAR( 5 ) CHARACTER SET ascii COLLATE ascii_bin NULL DEFAULT NULL COMMENT 'for admin only',
+CHANGE `url` `url` VARCHAR( 128 ) CHARACTER SET ascii COLLATE ascii_bin NOT NULL ,
+CHANGE `contactname` `contactname` VARCHAR( 64 ) CHARACTER SET ascii COLLATE ascii_bin NOT NULL ,
+CHANGE `email` `email` VARCHAR( 64 ) CHARACTER SET ascii COLLATE ascii_bin NOT NULL ,
+CHANGE `phonenums` `phonenums` VARCHAR( 64 ) CHARACTER SET ascii COLLATE ascii_bin NOT NULL ,
+CHANGE `type` `type` VARCHAR( 64 ) CHARACTER SET ascii COLLATE ascii_bin NOT NULL ,
+CHANGE `notes` `notes` TEXT CHARACTER SET ascii COLLATE ascii_bin NOT NULL
+
+DROP VIEW `trans_view_sites`
+
+CREATE VIEW `trans_view_sites` AS select `s`.*,
+(select count(`trans_links`.`id`) AS `count(id)` from `trans_links` where (`trans_links`.`siteid` = `s`.`id`)) AS `linkstotal`,
+(select count(`trans_types`.`id`) AS `count(id)` from `trans_types` where (`trans_types`.`siteid` = `s`.`id`)) AS `typestotal` 
+from `trans_sites` `s`;

@@ -1,0 +1,1 @@
+ALTER TABLE `trans_tmp_stats` ADD `earnings` DECIMAL( 8, 2 ) NULL DEFAULT NULL 

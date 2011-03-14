@@ -1,0 +1,9 @@
+# m h  dom mon dow   command
+#run stats tmp clean up every 3 days 
+30 15 * * *  /usr/bin/php /home/cleanchattersinc/www/rc/app/vendors/stats_clearup.php `date +\%Y-\%m-\%d` 5 >> /home/cleanchattersinc/www/rc/app/vendors/stats_clearup.log 2>&1
+#run update links every 1 hour, at 45 minute mark
+45 * * * *  cd /home/cleanchattersinc/www/rc/app/vendors/ && /usr/bin/php links.php >> /home/cleanchattersinc/www/rc/app/vendors/links.log 2>&1
+#run update stats every 1 hour, at 5 minut mark
+5 * * * *  /usr/bin/php /home/cleanchattersinc/www/rc/app/vendors/stats.php daily `export TZ=EST&&date +'\%Y-\%m-\%d,\%H:\%M:\%S'` >> /home/cleanchattersinc/www/rc/app/vendors/stats.log 2>&1
+#run biweekly update stats every day @ 1:30am 
+30 13 * * *  /usr/bin/php /home/cleanchattersinc/www/rc/app/vendors/stats.php biweekly `export TZ=EST&&date +'\%Y-\%m-\%d,\%H:\%M:\%S'` >> /home/cleanchattersinc/www/rc/app/vendors/biweekly_stats.log 2>&1

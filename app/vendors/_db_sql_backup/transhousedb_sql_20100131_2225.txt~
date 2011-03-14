@@ -1,0 +1,173 @@
+-- phpMyAdmin SQL Dump
+-- version 3.1.3.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jan 31, 2010 at 10:24 PM
+-- Server version: 5.1.33
+-- PHP Version: 5.2.9
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `zcakephp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trans_accounts`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_accounts` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) NOT NULL,
+  `password` varbinary(48) NOT NULL,
+  `originalpwd` varchar(48) NOT NULL,
+  `role` tinyint(4) NOT NULL COMMENT '0-admin,1-company,2-agent',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=37 ;
+
+--
+-- Dumping data for table `trans_accounts`
+--
+
+INSERT INTO `trans_accounts` (`id`, `username`, `password`, `originalpwd`, `role`) VALUES
+(29, 'y', '3f6f1cd54374559e85af79e90b3df18c907ee83f', 'y', 2),
+(27, 'cp', 'a1bf7c38c7e6a57507a3c79bb21c98bb4e7e5d50', 'cp', 1),
+(28, 'com00', '448664dde3e43ec4dde7d3f50651f3d787e1df76', 'com00', 1),
+(30, 't', '96dbfbbd7ad8d2fe84459896b14a526f6c5a0fa6', 't', 2),
+(31, 'admin', '7d2afefd81656a31b6b0631aa7df598c9fd43f0d', 'a', 0),
+(32, 'a', '7d2afefd81656a31b6b0631aa7df598c9fd43f0d', 'a', 2),
+(33, 'cp02', 'a8ec1595b163ab1e99250866ffe8a8f11c2005bf', 'cp02', 1),
+(34, 'test', 'a5d01043a101b8e4c8c6ba1902f7ed1983777b75', 'test', 1),
+(35, 'u', '3a41f1791de5c8523f0c8d2b642f080f44cf0c3f', 'u', 2),
+(36, 'nobody', '08d813e1621840344523003169a29457732a95d0', 'nobody', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trans_agents`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_agents` (
+  `id` int(11) unsigned NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `paytoname` varchar(64) NOT NULL,
+  `keystring` varchar(64) DEFAULT NULL,
+  `companyid` int(11) NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=gbk;
+
+--
+-- Dumping data for table `trans_agents`
+--
+
+INSERT INTO `trans_agents` (`id`, `name`, `paytoname`, `keystring`, `companyid`) VALUES
+(30, 'tt', 'ttt', NULL, 28),
+(29, 'y', 'y', NULL, 28),
+(32, 'aa', 'aaa', NULL, 27),
+(35, 'uu', 'uuu', NULL, 33),
+(36, 'everybody', 'whoiam', NULL, 34);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trans_clicks`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_clicks` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `agentid` int(11) NOT NULL,
+  `clicktime` datetime NOT NULL,
+  `action` tinyint(4) NOT NULL COMMENT '0-signup(join),1-click',
+  `reflink` varchar(512) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL DEFAULT 'n/a',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=15 ;
+
+--
+-- Dumping data for table `trans_clicks`
+--
+
+INSERT INTO `trans_clicks` (`id`, `agentid`, `clicktime`, `action`, `reflink`) VALUES
+(1, 29, '2010-01-19 00:00:00', 0, 'n/a'),
+(2, 29, '2010-01-08 00:00:00', 1, 'n/a'),
+(3, 29, '2010-01-11 11:16:29', 0, 'n/a'),
+(4, 30, '2009-10-12 11:17:20', 0, 'n/a'),
+(5, 30, '2009-12-23 11:17:49', 1, 'n/a'),
+(6, 32, '2010-01-08 14:27:06', 0, 'n/a'),
+(7, 32, '2010-01-06 14:27:22', 1, 'n/a'),
+(8, 35, '2010-01-01 19:50:31', 0, 'n/a'),
+(9, 35, '2010-01-15 19:50:39', 1, 'n/a'),
+(10, 35, '2009-11-25 19:50:54', 1, 'n/a'),
+(11, 35, '2010-01-12 19:51:08', 1, 'n/a'),
+(12, 35, '2010-01-23 20:10:03', 0, 'n/a'),
+(13, 36, '2010-01-15 21:41:24', 0, 'n/a'),
+(14, 36, '2010-01-15 21:41:32', 1, 'n/a');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trans_companies`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_companies` (
+  `id` int(11) unsigned NOT NULL,
+  `contactname` varchar(64) DEFAULT NULL,
+  `payeename` varchar(64) NOT NULL COMMENT 'for the company',
+  `payeeaddr1` varchar(128) DEFAULT NULL,
+  `payeeaddr2` varchar(128) DEFAULT NULL,
+  `payeecity` varchar(64) DEFAULT NULL,
+  `payeestate` varchar(64) DEFAULT NULL,
+  `payeezipcode` varchar(64) DEFAULT NULL,
+  `payeecountry` varchar(64) DEFAULT NULL,
+  `payeeemail` varchar(128) DEFAULT NULL,
+  `payouttype` tinyint(4) DEFAULT NULL COMMENT '0-pay by check, 1-pay by webstern uion, 2-pay by wire',
+  `payoutperjoin` float NOT NULL DEFAULT '10' COMMENT 'payout per join sents, USD',
+  `paymentinfo` text,
+  `agentnotes` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `payeename` (`payeename`)
+) ENGINE=MyISAM DEFAULT CHARSET=gbk;
+
+--
+-- Dumping data for table `trans_companies`
+--
+
+INSERT INTO `trans_companies` (`id`, `contactname`, `payeename`, `payeeaddr1`, `payeeaddr2`, `payeecity`, `payeestate`, `payeezipcode`, `payeecountry`, `payeeemail`, `payouttype`, `payoutperjoin`, `paymentinfo`, `agentnotes`) VALUES
+(27, 'cp', 'cp', 'cp', '2', 'c', 's', 'z', 'c', 'e', 0, 10, 'i', 'ii'),
+(28, 'com00', 'com00', 'com00', '', '', '', '', '', '', 0, 10, '', ''),
+(33, 'cp02', 'cp02', 'cp02', 'cp02', '', '', '', '', '', 2, 10, '', ''),
+(34, 'test1', 'test1', 'test', 'marilyn', 'philipine', 'ca', '20111', '', '', 0, 10, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trans_tickets`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_tickets` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `subscriptionid` int(11) NOT NULL,
+  `datesubmitted` date NOT NULL,
+  `datereplied` date NOT NULL,
+  `credited` tinyint(4) NOT NULL,
+  `curmessage` varchar(256) NOT NULL,
+  `submitted` tinyint(4) NOT NULL,
+  `datejoin` date NOT NULL,
+  `joincookieid` varchar(64) NOT NULL,
+  `clientusername` varchar(64) NOT NULL,
+  `clientpassword` varchar(64) NOT NULL,
+  `clientip` varchar(64) NOT NULL,
+  `referringurl` varchar(512) NOT NULL,
+  `agentkey` varchar(128) NOT NULL,
+  `companykey` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=gbk AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `trans_tickets`
+--
+
+

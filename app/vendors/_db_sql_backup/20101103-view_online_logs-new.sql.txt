@@ -1,0 +1,3 @@
+CREATE VIEW `view_online_logs`  AS SELECT a.id, a.accountid, b.username, a.intime, a.outtime
+FROM online_logs a, trans_accounts b
+WHERE a.accountid = b.id

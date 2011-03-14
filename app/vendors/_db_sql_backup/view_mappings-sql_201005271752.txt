@@ -1,0 +1,12 @@
+CREATE VIEW `view_mappings` AS 
+select 
+`a`.`id` AS `id`,
+`a`.`siteid` AS `siteid`,
+`a`.`agentid` AS `agentid`,
+`a`.`campaignid` AS `campaignid`,
+`b`.`hostname` AS `hostname`,
+`b`.`abbr` AS `abbr`,
+`b`.`sitename` AS `sitename`,
+`c`.`username` AS `username` 
+from `agent_site_mappings` `a`, `trans_sites` `b`, `trans_view_agents` `c`
+where ((`a`.`siteid` = `b`.`id`) and (`a`.`agentid` = `c`.`id`));

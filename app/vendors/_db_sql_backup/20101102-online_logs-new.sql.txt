@@ -1,0 +1,6 @@
+CREATE TABLE `zcleancake`.`online_logs` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`accountid` INT NOT NULL ,
+`intime` DATETIME NOT NULL ,
+`outtime` DATETIME NOT NULL
+);

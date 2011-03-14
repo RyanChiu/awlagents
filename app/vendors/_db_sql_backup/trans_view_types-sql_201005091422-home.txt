@@ -1,0 +1,1 @@
+CREATE VIEW `trans_view_types` AS select `a`.`id` AS `id`,`b`.`id` AS `siteid`,`b`.`hostname` AS `hostname`,`b`.`sitename` AS `sitename`,`a`.`typename` AS `typename`,`a`.`price` AS `price` from (`trans_types` `a` join `trans_sites` `b`) where (`a`.`siteid` = `b`.`id`);

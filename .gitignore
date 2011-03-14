@@ -1,0 +1,9 @@
+/tmp
+/cache
+/app/tmp/cache
+/app/vendors/cache
+/app/views/pages
+*.log
+.buildpath
+.project
+.settings/org.eclipse.php.core.prefs

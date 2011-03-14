@@ -1,0 +1,1 @@
+ALTER TABLE `trans_types` ADD `price` DECIMAL( 8, 2 ) NOT NULL

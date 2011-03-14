@@ -1,0 +1,5 @@
+ALTER TABLE `trans_types` ADD `url` VARCHAR( 128 ) CHARACTER SET ascii COLLATE ascii_bin NULL AFTER `typename`;
+DROP VIEW `trans_view_types`;
+create view trans_view_types as
+select `b`.`hostname` AS `hostname`,`b`.`sitename` AS `sitename`,`a`.* from (`trans_types` `a` join `trans_sites` `b`) where (`a`.`siteid` = `b`.`id`);
+ 

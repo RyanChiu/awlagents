@@ -1,0 +1,24 @@
+INSERT INTO `zcleancake`.`trans_types` (
+`id` ,
+`siteid` ,
+`typename` ,
+`url` ,
+`status`
+)
+VALUES (
+NULL , '1', 'Type 7', 'http://chatwebmasters.com', '1'
+);
+
+INSERT INTO `zcleancake`.`trans_fees` (
+`id` ,
+`typeid` ,
+`price` ,
+`earning` ,
+`start` ,
+`end`
+)
+VALUES (
+NULL , '8', '20', '30', '0000-00-00 00:00:00', '3999-01-01 00:00:00'
+);
+
+ALTER TABLE `trans_tmp_stats` ADD `sales_type4` INT NULL AFTER `sales_type3`;

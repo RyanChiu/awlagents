@@ -1,0 +1,97 @@
+<?php
+/*
+ * Only take one parameter which is like '2010-05-01'.
+ * It will checkout all agents in agent_site_mappings table and
+ * get the stats data from the link with "username", and put the
+ * data into trans_stats.
+ */
+include 'zmysqlConn.class.php';
+include 'extrakits.inc.php';
+
+if (($argc - 1) != 1) {//if there is 1 parameter and it must mean a date like '2010-04-01'
+	exit("Only 1 parameter needed like '2010-05-01'.\n");
+}
+$date = $argv[1];
+$ymd = explode("-", $date);
+if (count($ymd) != 3) {
+	exit("Illegal parameter, it should be like '2010-05-01'.\n");
+}
+if (empty($ymd[0]) || empty($ymd[1]) || empty($ymd[2])) {
+	exit("Illegal parameter, it should be like '2010-05-01'.\n");
+}
+/*
+if ($date < date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') - 4, date('Y')))) {
+	exit("It must be within 4 days.\n");
+}
+*/
+
+/*get the abbreviation of the site*/
+$abbr = __stats_get_abbr($argv[0]);
+
+$zconn = new zmysqlConn;
+/*find out the typeids and siteid from db by "swf" which is the abbreviation of the site*/
+$typeids = array();
+$siteid = null;
+__stats_get_types_site($typeids, $siteid, $abbr, $zconn->dblink);
+/*find all the agents in db and try to get the stats data one by one*/
+$sql = sprintf('select agentid, username from view_mappings where siteid = %d', $siteid);
+$rs = mysql_query($sql, $zconn->dblink)
+	or die ("Something wrong with: " . mysql_error());
+$j = $m = 0;
+while ($row = mysql_fetch_assoc($rs)) {
+	/*Try to user curl to get the data*/
+	$url = sprintf(
+		'http://www.sexywivesfinder.com/stats/stats-export.php?aff=%s&d1=%d&m1=%d&y1=%d&d2=%d&m2=%d&y2=%d',
+		$row['username'],
+		$ymd[2], $ymd[1], $ymd[0], $ymd[2], $ymd[1], $ymd[0]
+	);
+	$scrape_ch = curl_init();
+	curl_setopt($scrape_ch, CURLOPT_URL, $url);
+	curl_setopt($scrape_ch, CURLOPT_USERPWD, "cleanchatters:LKMSAL91");
+	curl_setopt($scrape_ch, CURLOPT_RETURNTRANSFER, true); 
+	$scrape = curl_exec($scrape_ch);
+	curl_close($scrape_ch);
+	//echo $row['username'] . "\n" . $scrape . "\n";
+	$lines = explode("\n", $scrape);
+	if (count($lines) < 2) {
+		echo (sprintf("It should have 2 lines at least for agent %s.\n", $row['username']));
+		continue;
+	}
+	$k = explode(",", $lines[0]);
+	for ($i = 0; $i < count($k); $i++) $k[$i] = trim($k[$i]);
+	$v = explode(",", $lines[1]);
+	for ($i = 0; $i < count($v); $i++) $v[$i] = trim($v[$i]);
+	$stats = array_combine($k, $v);
+	//echo print_r($stats, true);
+	/*Try to put data into db*/
+	for ($i = 0; $i < count($typeids); $i++) {
+		$sql = sprintf(
+			'delete from trans_stats where convert(trxtime, date) = "%s" and siteid = %d'
+			. ' and typeid = %d and agentid = %d',
+			$date, $siteid, $typeids[$i], $row['agentid']
+		);
+		mysql_query($sql, $zconn->dblink)
+			or die ("Something wrong with: " . mysql_error());
+		$m += mysql_affected_rows();
+		
+		$sql = sprintf(
+			'insert into trans_stats (agentid, raws, uniques, chargebacks, frauds, sales_number, typeid, siteid, trxtime)'
+			. ' values (%d, %d, %d, %d, %d, %d, %d, %d, "%s")',
+			$row['agentid'],
+			$i == 0 ? $stats['Click'] : 0,
+			$i == 0 ? $stats['Unique Click'] : 0,
+			$i == 0 ? $stats['Refund'] : 0,
+			$i == 0 ? $stats['Fraud'] : 0,
+			$i == 0 ? $stats['Trial'] : $stats['Bronze']/*should make sure further more.*/,
+			$typeids[$i], $siteid, $date
+		);
+		//echo $sql . "\n";
+		mysql_query($sql, $zconn->dblink)
+			or die ("Something wrong with: " . mysql_error());
+		$j += mysql_affected_rows();
+	}
+}
+echo $m . " row(s) deleted.\n";
+echo $j . "(/" . mysql_num_rows($rs) * count($typeids) . ") row(s) inserted.\n";
+echo "Processing " . $date . " OK\n";
+?>

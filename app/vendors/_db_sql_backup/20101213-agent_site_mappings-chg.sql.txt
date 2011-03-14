@@ -1,0 +1,11 @@
+update agent_site_mappings
+set flag = 0
+where agentid in (select id from trans_accounts where username like "%\_%")
+	and siteid not in (1, 2, 5)
+
+/*
+php commdrv_links.php swf_campaigns.txt 4
+php commdrv_links.php iml_campaigns.txt 6
+php commdrv_links.php imlmb_campaigns.txt 8
+php commdrv_links.php xier_campaigns.txt 7
+*/

@@ -1,0 +1,296 @@
+-- phpMyAdmin SQL Dump
+-- version 3.1.3.1
+-- http://www.phpmyadmin.net
+--
+-- 主机: localhost
+-- 生成日期: 2010 年 02 月 08 日 09:11
+-- 服务器版本: 5.1.33
+-- PHP 版本: 5.2.9
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- 数据库: `zcakephp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `trans_accounts`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_accounts` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) NOT NULL,
+  `password` varbinary(48) NOT NULL,
+  `originalpwd` varchar(48) NOT NULL,
+  `role` tinyint(4) NOT NULL COMMENT '0-admin,1-company,2-agent',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=62 ;
+
+--
+-- 导出表中的数据 `trans_accounts`
+--
+
+INSERT INTO `trans_accounts` (`id`, `username`, `password`, `originalpwd`, `role`) VALUES
+(29, 'y', '3f6f1cd54374559e85af79e90b3df18c907ee83f', 'y', 2),
+(27, 'cp', 'a1bf7c38c7e6a57507a3c79bb21c98bb4e7e5d50', 'cp', 1),
+(28, 'com00', '4171c4f58178184112920abe3c61993276b0f2df', '00', 1),
+(30, 't', '96dbfbbd7ad8d2fe84459896b14a526f6c5a0fa6', 't', 2),
+(31, 'admin', '7d2afefd81656a31b6b0631aa7df598c9fd43f0d', 'a', 0),
+(32, 'a', '7d2afefd81656a31b6b0631aa7df598c9fd43f0d', 'a', 2),
+(33, 'cp02', 'b33b46737b6ba42d2d0f867b8ac13d1acaf83a4e', '02', 1),
+(34, 'testi', '321cecf227064b5b3df7e9ad3fe616d51f049e75', 'i', 1),
+(35, 'u', '3a41f1791de5c8523f0c8d2b642f080f44cf0c3f', 'u', 2),
+(36, 'nobody', '08d813e1621840344523003169a29457732a95d0', 'nobody', 2),
+(37, 'testii', 'ca3b02e87b7695b76fb812b0b7497eeebdb95932', 'ii', 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `trans_agents`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_agents` (
+  `id` int(11) unsigned NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `paytoname` varchar(64) NOT NULL,
+  `keystring` varchar(64) DEFAULT NULL,
+  `companyid` int(11) NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=gbk;
+
+--
+-- 导出表中的数据 `trans_agents`
+--
+
+INSERT INTO `trans_agents` (`id`, `name`, `paytoname`, `keystring`, `companyid`) VALUES
+(30, 'tt', 'ttt', NULL, 28),
+(29, 'yy', 'yyy', NULL, 28),
+(32, 'aa', 'aaa', NULL, 27),
+(35, 'uu', 'uuu', NULL, 33),
+(36, 'everybody', 'whoiam', NULL, 34);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `trans_checkups`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_checkups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `agentid` int(11) NOT NULL,
+  `memcreditcard` varchar(16) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL,
+  `type` tinyint(4) NOT NULL COMMENT '0-mutiregs,1-conversion',
+  `checktime` datetime NOT NULL,
+  `mutiregtimes` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=gbk AUTO_INCREMENT=1 ;
+
+--
+-- 导出表中的数据 `trans_checkups`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `trans_clicks`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_clicks` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `agentid` int(11) NOT NULL,
+  `clicktime` datetime NOT NULL,
+  `action` tinyint(4) NOT NULL COMMENT '0-signup(join),1-click',
+  `reflink` varchar(512) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL DEFAULT 'n/a',
+  `payout` decimal(8,2) NOT NULL DEFAULT '1.00' COMMENT 'payout for every single click referring link',
+  `chargeback` decimal(8,2) NOT NULL DEFAULT '0.00' COMMENT 'chargeback for every single click referring link',
+  `memcreditcard` varchar(16) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=24 ;
+
+--
+-- 导出表中的数据 `trans_clicks`
+--
+
+INSERT INTO `trans_clicks` (`id`, `agentid`, `clicktime`, `action`, `reflink`, `payout`, `chargeback`, `memcreditcard`) VALUES
+(1, 29, '2010-01-19 00:00:00', 0, 'n/a', 1.00, 0.00, ''),
+(2, 29, '2010-01-08 00:00:00', 1, 'http://www.google.com', 2.00, 1.00, ''),
+(3, 29, '2010-01-11 11:16:29', 0, 'n/a', 1.00, 0.00, ''),
+(4, 30, '2009-10-12 11:17:20', 0, 'n/a', 1.00, 0.00, ''),
+(5, 30, '2009-12-23 11:17:49', 1, 'n/a', 1.00, 0.00, ''),
+(6, 32, '2010-01-08 14:27:06', 0, 'n/a', 1.00, 0.00, ''),
+(7, 32, '2010-01-06 14:27:22', 1, 'n/a', 1.00, 0.00, ''),
+(8, 35, '2010-01-01 19:50:31', 0, 'n/a', 1.00, 0.00, ''),
+(9, 35, '2010-01-15 19:50:39', 1, 'n/a', 1.00, 0.00, ''),
+(10, 35, '2009-11-25 19:50:54', 1, 'n/a', 1.00, 0.00, ''),
+(11, 35, '2010-01-12 19:51:08', 1, 'n/a', 1.00, 0.00, ''),
+(12, 35, '2010-01-23 20:10:03', 0, 'n/a', 1.00, 0.00, ''),
+(13, 36, '2010-01-15 21:41:24', 0, 'n/a', 1.00, 0.00, ''),
+(14, 36, '2010-01-15 21:41:32', 1, 'n/a', 1.00, 0.00, ''),
+(15, 29, '2010-01-15 21:19:53', 0, 'n/a', 1.00, 0.00, ''),
+(16, 29, '2010-01-15 21:20:09', 0, 'affiliates.com', 1.50, 0.20, ''),
+(17, 30, '2010-01-15 22:42:59', 0, 'n/a', 1.00, 0.00, ''),
+(18, 30, '2010-01-15 22:43:14', 1, 'ngc.com', 1.80, 0.60, '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `trans_companies`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_companies` (
+  `id` int(11) unsigned NOT NULL,
+  `contactname` varchar(64) DEFAULT NULL,
+  `payeename` varchar(64) NOT NULL COMMENT 'for the company',
+  `payeeaddr1` varchar(128) DEFAULT NULL,
+  `payeeaddr2` varchar(128) DEFAULT NULL,
+  `payeecity` varchar(64) DEFAULT NULL,
+  `payeestate` varchar(64) DEFAULT NULL,
+  `payeezipcode` varchar(64) DEFAULT NULL,
+  `payeecountry` varchar(64) DEFAULT NULL,
+  `payeeemail` varchar(128) DEFAULT NULL,
+  `payouttype` tinyint(4) DEFAULT NULL COMMENT '0-pay by check, 1-pay by webstern uion, 2-pay by wire',
+  `pps` decimal(8,2) NOT NULL DEFAULT '10.00',
+  `paymentinfo` text,
+  `agentnotes` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `payeename` (`payeename`)
+) ENGINE=MyISAM DEFAULT CHARSET=gbk;
+
+--
+-- 导出表中的数据 `trans_companies`
+--
+
+INSERT INTO `trans_companies` (`id`, `contactname`, `payeename`, `payeeaddr1`, `payeeaddr2`, `payeecity`, `payeestate`, `payeezipcode`, `payeecountry`, `payeeemail`, `payouttype`, `pps`, `paymentinfo`, `agentnotes`) VALUES
+(27, 'cp', 'cp', 'cp', '2', 'c', 's', 'z', 'c', 'e', 1, 10.00, 'i', 'ii'),
+(28, 'com zero zero', 'com00 to pay', 'com00 addr1', 'com00 addr2', '', '', '', '', '', 0, 10.00, '', ''),
+(33, 'cp02', 'CP 02', 'CP02 ADDR1', 'CP02 ADDR2', '', '', '', '', '', 0, 10.00, '', ''),
+(34, 'test i', 'TEST I', 'test addr 1', 'marilyn', 'philipine', 'ca', '20111', '', '', 0, 10.00, '', ''),
+(37, 'TESTII', 'Test II', 'addr1', 'addr2', 'NYC', 'NYS', '0', 'NY', 'NY@NY.C', 0, 10.00, 'Something about the payment...', 'Attentions, guys...');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `trans_tickets`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_tickets` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `subscriptionid` int(11) NOT NULL,
+  `datesubmitted` date NOT NULL,
+  `datereplied` date NOT NULL,
+  `credited` tinyint(4) NOT NULL,
+  `curmessage` varchar(256) NOT NULL,
+  `submitted` tinyint(4) NOT NULL,
+  `datejoin` date NOT NULL,
+  `joincookieid` varchar(64) NOT NULL,
+  `clientusername` varchar(64) NOT NULL,
+  `clientpassword` varchar(64) NOT NULL,
+  `clientip` varchar(64) NOT NULL,
+  `referringurl` varchar(512) NOT NULL,
+  `agentkey` varchar(128) NOT NULL,
+  `companykey` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=gbk AUTO_INCREMENT=1 ;
+
+--
+-- 导出表中的数据 `trans_tickets`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `trans_view_agents`
+--
+CREATE TABLE IF NOT EXISTS `trans_view_agents` (
+`id` int(11) unsigned
+,`username` varchar(64)
+,`originalpwd` varchar(48)
+,`companyid` int(11) unsigned
+,`payeename` varchar(64)
+,`name` varchar(64)
+,`paytoname` varchar(64)
+,`keystring` varchar(64)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `trans_view_companies`
+--
+CREATE TABLE IF NOT EXISTS `trans_view_companies` (
+`id` int(11) unsigned
+,`payeename` varchar(64)
+,`contactname` varchar(64)
+,`payeeaddr1` varchar(128)
+,`payeeaddr2` varchar(128)
+,`payeecity` varchar(64)
+,`payeestate` varchar(64)
+,`payeezipcode` varchar(64)
+,`payeecountry` varchar(64)
+,`payeeemail` varchar(128)
+,`payouttype` tinyint(4)
+,`paymentinfo` text
+,`pps` decimal(8,2)
+,`username` varchar(64)
+,`originalpwd` varchar(48)
+,`clickid` int(11) unsigned
+,`action` tinyint(4)
+,`payout` decimal(8,2)
+,`chargeback` decimal(8,2)
+,`clicktime` datetime
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `trans_view_stats`
+--
+CREATE TABLE IF NOT EXISTS `trans_view_stats` (
+`id` int(11) unsigned
+,`companyid` int(11) unsigned
+,`companycontactname` varchar(64)
+,`companyusername` varchar(64)
+,`companypwd` varchar(48)
+,`payeename` varchar(64)
+,`agentid` int(11) unsigned
+,`agentusername` varchar(64)
+,`agentpwd` varchar(48)
+,`agentname` varchar(64)
+,`agentpaytoname` varchar(64)
+,`agentkeystring` varchar(64)
+,`clicktime` datetime
+,`ajoin` int(0)
+,`action` tinyint(4)
+,`reflink` varchar(512)
+,`payout` decimal(8,2)
+,`chargeback` decimal(8,2)
+);
+-- --------------------------------------------------------
+
+--
+-- Structure for view `trans_view_agents`
+--
+DROP TABLE IF EXISTS `trans_view_agents`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `trans_view_agents` AS select `trans_agents`.`id` AS `id`,`trans_accounts`.`username` AS `username`,`trans_accounts`.`originalpwd` AS `originalpwd`,`trans_companies`.`id` AS `companyid`,`trans_companies`.`payeename` AS `payeename`,`trans_agents`.`name` AS `name`,`trans_agents`.`paytoname` AS `paytoname`,`trans_agents`.`keystring` AS `keystring` from ((`trans_agents` join `trans_companies`) join `trans_accounts`) where ((`trans_agents`.`id` = `trans_accounts`.`id`) and (`trans_agents`.`companyid` = `trans_companies`.`id`));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `trans_view_companies`
+--
+DROP TABLE IF EXISTS `trans_view_companies`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `trans_view_companies` AS select `trans_companies`.`id` AS `id`,`trans_companies`.`payeename` AS `payeename`,`trans_companies`.`contactname` AS `contactname`,`trans_companies`.`payeeaddr1` AS `payeeaddr1`,`trans_companies`.`payeeaddr2` AS `payeeaddr2`,`trans_companies`.`payeecity` AS `payeecity`,`trans_companies`.`payeestate` AS `payeestate`,`trans_companies`.`payeezipcode` AS `payeezipcode`,`trans_companies`.`payeecountry` AS `payeecountry`,`trans_companies`.`payeeemail` AS `payeeemail`,`trans_companies`.`payouttype` AS `payouttype`,`trans_companies`.`paymentinfo` AS `paymentinfo`,`trans_companies`.`pps` AS `pps`,`trans_accounts`.`username` AS `username`,`trans_accounts`.`originalpwd` AS `originalpwd`,`trans_clicks`.`id` AS `clickid`,`trans_clicks`.`action` AS `action`,`trans_clicks`.`payout` AS `payout`,`trans_clicks`.`chargeback` AS `chargeback`,`trans_clicks`.`clicktime` AS `clicktime` from (((`trans_clicks` join `trans_companies`) join `trans_accounts`) join `trans_agents`) where ((`trans_clicks`.`agentid` = `trans_agents`.`id`) and (`trans_agents`.`companyid` = `trans_companies`.`id`) and (`trans_companies`.`id` = `trans_accounts`.`id`)) union select `trans_companies`.`id` AS `id`,`trans_companies`.`payeename` AS `payeename`,`trans_companies`.`contactname` AS `contactname`,`trans_companies`.`payeeaddr1` AS `payeeaddr1`,`trans_companies`.`payeeaddr2` AS `payeeaddr2`,`trans_companies`.`payeecity` AS `payeecity`,`trans_companies`.`payeestate` AS `payeestate`,`trans_companies`.`payeezipcode` AS `payeezipcode`,`trans_companies`.`payeecountry` AS `payeecountry`,`trans_companies`.`payeeemail` AS `payeeemail`,`trans_companies`.`payouttype` AS `payouttype`,`trans_companies`.`paymentinfo` AS `paymentinfo`,`trans_companies`.`pps` AS `pps`,`trans_accounts`.`username` AS `username`,`trans_accounts`.`originalpwd` AS `originalpwd`,NULL AS `NULL`,NULL AS `NULL`,NULL AS `NULL`,NULL AS `NULL`,NULL AS `NULL` from (`trans_companies` join `trans_accounts`) where ((`trans_companies`.`id` = `trans_accounts`.`id`) and (not(`trans_companies`.`id` in (select distinct `trans_agents`.`companyid` AS `companyid` from (`trans_agents` join `trans_clicks`) where (`trans_clicks`.`agentid` = `trans_agents`.`id`)))));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `trans_view_stats`
+--
+DROP TABLE IF EXISTS `trans_view_stats`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `trans_view_stats` AS select `trans_clicks`.`id` AS `id`,`trans_companies`.`id` AS `companyid`,`trans_companies`.`contactname` AS `companycontactname`,(select `trans_accounts`.`username` AS `username` from `trans_accounts` where (`trans_accounts`.`id` = `trans_companies`.`id`)) AS `companyusername`,(select `trans_accounts`.`originalpwd` AS `originalpwd` from `trans_accounts` where (`trans_accounts`.`id` = `trans_companies`.`id`)) AS `companypwd`,`trans_companies`.`payeename` AS `payeename`,`trans_agents`.`id` AS `agentid`,(select `trans_accounts`.`username` AS `username` from `trans_accounts` where (`trans_accounts`.`id` = `trans_agents`.`id`)) AS `agentusername`,(select `trans_accounts`.`originalpwd` AS `originalpwd` from `trans_accounts` where (`trans_accounts`.`id` = `trans_agents`.`id`)) AS `agentpwd`,`trans_agents`.`name` AS `agentname`,`trans_agents`.`paytoname` AS `agentpaytoname`,`trans_agents`.`keystring` AS `agentkeystring`,`trans_clicks`.`clicktime` AS `clicktime`,(case when (`trans_clicks`.`action` = 0) then 1 else 0 end) AS `ajoin`,`trans_clicks`.`action` AS `action`,`trans_clicks`.`reflink` AS `reflink`,`trans_clicks`.`payout` AS `payout`,`trans_clicks`.`chargeback` AS `chargeback` from ((`trans_companies` join `trans_agents`) join `trans_clicks`) where ((`trans_clicks`.`agentid` = `trans_agents`.`id`) and (`trans_agents`.`companyid` = `trans_companies`.`id`));

@@ -1,0 +1,15 @@
+ALTER TABLE `trans_accounts` ADD `username4m` VARCHAR( 48 ) NULL AFTER `username`;
+DROP VIEW `trans_view_agents`;
+CREATE VIEW `trans_view_agents` AS 
+select `trans_agents`.`id` AS `id`,`trans_accounts`.`username` AS `username`, `trans_accounts`.`username4m`, `trans_accounts`.`originalpwd` AS `originalpwd`,`trans_accounts`.`regtime` AS `regtime`,`trans_accounts`.`status` AS `status`,`trans_accounts`.`online` AS `online`,`trans_companies`.`id` AS `companyid`,`trans_companies`.`officename` AS `officename`,`trans_agents`.`name` AS `name`,`trans_agents`.`paytoname` AS `paytoname`,`trans_agents`.`keystring` AS `keystring`,`trans_agents`.`ag1stname` AS `ag1stname`,`trans_agents`.`aglastname` AS `aglastname`,`trans_agents`.`email` AS `email`,`trans_agents`.`street` AS `street`,`trans_agents`.`city` AS `city`,`trans_agents`.`state` AS `state`,`trans_countries`.`fullname` AS `country`,`trans_agents`.`im` AS `im`,`trans_agents`.`cellphone` AS `cellphone` 
+from (((`trans_agents` join `trans_companies`) join `trans_accounts`) join `trans_countries`) 
+where ((`trans_agents`.`id` = `trans_accounts`.`id`) and (`trans_agents`.`companyid` = `trans_companies`.`id`) and (`trans_agents`.`country` = `trans_countries`.`abbr`));
+DROP VIEW `trans_view_companies`;
+CREATE VIEW `trans_view_companies` AS 
+select count(`a`.`id`) AS `agenttotal`,`a`.`companyid` AS `companyid`,`b`.`officename` AS `officename`,`c`.`username` AS `username`,`c`.`username4m`,`c`.`originalpwd` AS `originalpwd`,`c`.`regtime` AS `regtime`,`c`.`status` AS `status`,`c`.`online` AS `online`,`b`.`street` AS `street`,`b`.`city` AS `city`,`b`.`state` AS `state`,`d`.`fullname` AS `counrty`,`b`.`payeename` AS `payeename`,`b`.`contactname` AS `contactname`,`b`.`man1stname` AS `man1stname`,`b`.`manlastname` AS `manlastname`,`b`.`manemail` AS `manemail`,`b`.`mancellphone` AS `mancellphone` 
+from (((`trans_agents` `a` join `trans_companies` `b`) join `trans_accounts` `c`) join `trans_countries` `d`) 
+where ((`a`.`companyid` = `b`.`id`) and (`b`.`id` = `c`.`id`) and (`b`.`country` = `d`.`abbr`)) group by `a`.`companyid` 
+union 
+select 0 AS `0`,`b`.`id` AS `companyid`,`b`.`officename` AS `officename`,`c`.`username` AS `username`,`c`.`username4m`,`c`.`originalpwd` AS `originalpwd`,`c`.`regtime` AS `regtime`,`c`.`status` AS `status`,`c`.`online` AS `online`,`b`.`street` AS `street`,`b`.`city` AS `city`,`b`.`state` AS `state`,`d`.`fullname` AS `counrty`,`b`.`payeename` AS `payeename`,`b`.`contactname` AS `contactname`,`b`.`man1stname` AS `man1stname`,`b`.`manlastname` AS `manlastname`,`b`.`manemail` AS `manemail`,`b`.`mancellphone` AS `mancellphone` 
+from ((`trans_companies` `b` join `trans_accounts` `c`) join `trans_countries` `d`) 
+where ((`b`.`id` = `c`.`id`) and (`b`.`country` = `d`.`abbr`) and (not(`b`.`id` in (select distinct `trans_agents`.`companyid` AS `companyid` from `trans_agents`))));

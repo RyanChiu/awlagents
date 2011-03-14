@@ -1,0 +1,8 @@
+ALTER TABLE `trans_types` ADD `status` TINYINT NOT NULL DEFAULT '1';
+
+DROP VIEW `trans_view_types`;
+
+CREATE VIEW `trans_view_types` AS 
+select `b`.`hostname` AS `hostname`,`b`.`sitename` AS `sitename`,`a`.`id` AS `id`,`a`.`siteid` AS `siteid`,`a`.`typename` AS `typename`,`a`.`url` AS `url`,`a`.`status`,`c`.`price` AS `price`,`c`.`earning` AS `earning`,`c`.`start` AS `start`,`c`.`end` AS `end` 
+from ((`trans_types` `a` join `trans_sites` `b`) join `trans_fees` `c`) 
+where ((`a`.`siteid` = `b`.`id`) and (`a`.`id` = `c`.`typeid`));

@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS `site_excludings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `companyid` int(11) NOT NULL,
+  `agentid` int(11) NOT NULL,
+  `siteid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+)

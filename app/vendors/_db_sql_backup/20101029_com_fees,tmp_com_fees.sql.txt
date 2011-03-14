@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS `com_fees` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `feeid` int(11) NOT NULL,
+  `companyid` int(11) NOT NULL,
+  `ownprice` decimal(8,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `feeid` (`feeid`,`companyid`)
+)
+
+CREATE TABLE IF NOT EXISTS `tmp_com_fees` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `feeid` int(11) NOT NULL,
+  `companyid` int(11) NOT NULL,
+  `ownprice` decimal(8,2) NOT NULL,
+  PRIMARY KEY (`id`)
+)

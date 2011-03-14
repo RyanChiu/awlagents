@@ -1,0 +1,8 @@
+ALTER TABLE `agent_site_mappings` ADD `flag` TINYINT NOT NULL DEFAULT '1' COMMENT 'the value 0 is only useful for site "iml", and all the other sites should be 1 as default';
+drop view view_mappings;
+create view view_mappings as
+select 
+	`a`.`id` AS `id`,`a`.`siteid` AS `siteid`,`a`.`agentid` AS `agentid`,`a`.`campaignid` AS `campaignid`,a.flag,
+	`b`.`hostname` AS `hostname`,`b`.`abbr` AS `abbr`,`b`.`sitename` AS `sitename`,`c`.`username` AS `username`
+from ((`agent_site_mappings` `a` join `trans_sites` `b`) join `trans_view_agents` `c`)
+where ((`a`.`siteid` = `b`.`id`) and (`a`.`agentid` = `c`.`id`));

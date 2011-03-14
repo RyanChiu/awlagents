@@ -1,0 +1,29 @@
+ALTER TABLE `trans_stats` ADD `frauds` INT NULL AFTER `signups` ;
+DROP VIEW `trans_view_stats`;
+CREATE VIEW `trans_view_stats` AS
+select 
+	`a`.`trxtime` AS `trxtime`,
+	`b`.`companyid` AS `companyid`,
+	`c`.`officename` AS `officename`,
+	`a`.`agentid` AS `agentid`,
+	d.username,
+	`a`.`siteid` AS `siteid`,
+	e.sitename,
+	`a`.`typeid` AS `typeid`,
+	f.typename, f.price, f.earning,
+	`a`.`raws` AS `raws`,
+	`a`.`uniques` AS `uniques`,
+	`a`.`chargebacks` AS `chargebacks`,
+	`a`.`signups` AS `signups`,
+	`a`.`frauds` AS `frauds`,
+	`a`.`sales_number` AS `sales_number`,
+	(`a`.`sales_number` * f.price) AS `payouts`,
+	(`a`.`sales_number` * f.earning) AS `earnings`
+from 
+	`trans_stats` `a`, `trans_agents` `b`, `trans_companies` `c`,
+	trans_accounts d, trans_sites e, trans_types f
+where
+	((`a`.`agentid` = `b`.`id`) and (`b`.`companyid` = `c`.`id`))
+	and a.agentid = d.id and a.siteid = e.id and a.typeid = f.id;
+ALTER TABLE `trans_tmp_stats` ADD `earning` DECIMAL( 8, 2 ) NULL AFTER `price` ;
+ALTER TABLE `trans_tmp_stats` ADD `frauds` INT NULL AFTER `signups` ;

@@ -1,0 +1,10 @@
+ALTER TABLE `chat_logs` ADD `siteid` INT NOT NULL;
+DROP VIEW `view_chat_logs`;
+CREATE VIEW `view_chat_logs` AS
+select 
+	`b`.`companyid` AS `companyid`,`c`.`officename` AS `officename`,`a`.`agentid` AS `agentid`,
+	`d`.`username` AS `username`,`d`.`username4m` AS `username4m`,`a`.`clientusername` AS `clientusername`,
+	concat(left(`a`.`conversation`,500),_ascii'\r\n...') AS `conversation`,
+	`a`.`submittime` AS `submittime`, a.siteid, e.sitename
+from `chat_logs` `a`, `trans_agents` `b`, `trans_companies` `c`, `trans_accounts` `d`, `trans_sites` `e`
+where ((`a`.`agentid` = `b`.`id`) and (`b`.`companyid` = `c`.`id`) and (`b`.`id` = `d`.`id`) and (a.siteid = e.id));

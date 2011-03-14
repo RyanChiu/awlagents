@@ -1,0 +1,36 @@
+##based on 20100724_alltables_backup-sql.txt
+
+CREATE TABLE IF NOT EXISTS `trans_fees` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `typeid` int(11) NOT NULL,
+  `price` decimal(8,2) NOT NULL,
+  `earning` decimal(8,2) NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=ascii COLLATE=ascii_bin AUTO_INCREMENT=6 ;
+
+INSERT INTO `trans_fees` (`id`, `typeid`, `price`, `earning`, `start`, `end`) VALUES
+(1, 1, 20.00, 25.00, '0000-00-00 00:00:00', '3999-01-01 00:00:00'),
+(2, 2, 25.00, 35.00, '0000-00-00 00:00:00', '3999-01-01 00:00:00'),
+(3, 4, 25.00, 35.00, '0000-00-00 00:00:00', '3999-01-01 00:00:00'),
+(4, 5, 25.00, 35.00, '0000-00-00 00:00:00', '2010-06-28 23:59:59'),
+(5, 5, 30.00, 40.00, '2010-06-29 00:00:00', '3999-01-01 00:00:00');
+
+ALTER TABLE `trans_types`
+  DROP `price`,
+  DROP `earning`;
+  
+drop view `trans_view_types`;
+
+CREATE VIEW `trans_view_types` AS
+select `b`.`hostname` AS `hostname`,`b`.`sitename` AS `sitename`,`a`.`id` AS `id`,`a`.`siteid` AS `siteid`,`a`.`typename` AS `typename`,`a`.`url` AS `url`,`c`.`price` AS `price`,`c`.`earning` AS `earning`,`c`.`start` AS `start`,`c`.`end` AS `end`
+from ((`trans_types` `a` join `trans_sites` `b`) join `trans_fees` `c`)
+where ((`a`.`siteid` = `b`.`id`) and (`a`.`id` = `c`.`typeid`));
+
+drop view `trans_view_stats`;
+
+CREATE VIEW `trans_view_stats` AS
+select `a`.`trxtime` AS `trxtime`,`b`.`companyid` AS `companyid`,`c`.`officename` AS `officename`,`a`.`agentid` AS `agentid`,`d`.`username` AS `username`,`a`.`siteid` AS `siteid`,`e`.`sitename` AS `sitename`,`a`.`typeid` AS `typeid`,`f`.`typename` AS `typename`,`g`.`price` AS `price`,`g`.`earning` AS `earning`,`a`.`raws` AS `raws`,`a`.`uniques` AS `uniques`,`a`.`chargebacks` AS `chargebacks`,`a`.`signups` AS `signups`,`a`.`frauds` AS `frauds`,`a`.`sales_number` AS `sales_number`,(`a`.`sales_number` * `g`.`price`) AS `payouts`,(`a`.`sales_number` * `g`.`earning`) AS `earnings` 
+from ((((((`trans_stats` `a` join `trans_agents` `b`) join `trans_companies` `c`) join `trans_accounts` `d`) join `trans_sites` `e`) join `trans_types` `f`) join `trans_fees` `g`) 
+where ((`a`.`agentid` = `b`.`id`) and (`b`.`companyid` = `c`.`id`) and (`a`.`agentid` = `d`.`id`) and (`a`.`siteid` = `e`.`id`) and (`a`.`typeid` = `f`.`id`) and (`f`.`id` = `g`.`typeid`) and (`a`.`trxtime` >= `g`.`start`) and (`a`.`trxtime` <= `g`.`end`));

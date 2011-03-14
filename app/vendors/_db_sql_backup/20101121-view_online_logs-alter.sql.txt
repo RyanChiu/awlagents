@@ -1,0 +1,5 @@
+drop view view_online_logs;
+create view view_online_logs as
+select `a`.`id` AS `id`,`a`.`accountid` AS `accountid`,`b`.`username` AS `username`,b.username4m,`a`.`intime` AS `intime`,`a`.`outtime` AS `outtime` 
+from (`online_logs` `a` join `trans_accounts` `b`) 
+where (`a`.`accountid` = `b`.`id`);
