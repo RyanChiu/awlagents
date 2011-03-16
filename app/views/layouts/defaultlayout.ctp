@@ -59,13 +59,13 @@ $curmenuidx = 0;
 		
 	?>
 </head>
-<body bgcolor="#555b34">
+<body bgcolor="#ffffff">
 <div class="wrapper">
   <!-- Start Border-->
   <div id="border">
     <!-- Start Header -->
     <div class="header">
-		<div class="typeface-js" style="float:right;height:120px;margin-top:10px;color:#798336;font-family:Tahoma, Geneva, Matisse Itc;">
+		<div class="typeface-js" style="float:right;height:120px;margin-top:10px;color:#ffffff;font-family:Tahoma, Geneva, Matisse Itc;">
 			<div class="cci-textlogo" style="font-size:72px;">A</div>
 			<div class="cci-textlogo" style="font-size:48px;">MERICAN</div>
 			<div class="cci-textlogo" style="font-size:72px;">&nbsp;</div>
@@ -75,7 +75,7 @@ $curmenuidx = 0;
 			<div class="cci-textlogo" style="font-size:72px;">&nbsp;</div>
 			<div class="cci-textlogo" style="font-size:72px;">L</div>
 			<div class="cci-textlogo" style="font-size:48px;">i</div>
-			<div class="cci-textlogo" style="font-size:36px;">nk.</div>
+			<div class="cci-textlogo" style="font-size:36px;">nk</div>
 			<div class="cci-textlogo" style="font-size:72px;">!!!</div>
 			<div class="cci-textlogo" style="font-size:72px;">&nbsp;</div>
 		</div>
@@ -218,16 +218,20 @@ $curmenuidx = 0;
 			<?php
 			}
 			?>
+			<!--  
 			<li>
 				<?php
+				/*
 				$menuitemscount++;
 				echo $html->link('<span>LIVE MODELS</span>',
 					'#models_div',
 					array('rel' => 'dropmenu_onlinemodels', 'class' => 'iml_models'),
 					false, false
 				);
+				*/
 				?>
 			</li>
+			-->
 			<?php
 			if ($role != -1) {//menas everyone
 				$menuitemscount++;

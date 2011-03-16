@@ -8,9 +8,9 @@ $userinfo = $session->read('Auth.TransAccount');
 <?php
 if ($userinfo['role'] == 0) {
 	echo $html->link(
-		$html->image('archive.jpg',
+		/*$html->image('archive.jpg',
 			array('border' => 0, 'width' => 25, 'height' => 25, 'alt' => 'Archive this bulletin.')
-		),// . 'Archive',
+		),// . */'<font size="1">(Archive)</font>',
 		array('controller' => 'trans', 'action' => 'index', 'id' => -1),
 		null,
 		'Are you sure you wish to archive this bulletin?',
@@ -41,7 +41,7 @@ if (!empty($archdata)) {
 		$more = '<a href="#" id="linkMore">(' . (count($archdata) - $i) . ') more...</a>';
 	}
 	echo $more;
-	echo $html->image('archive_tip.jpg', array('border' => 0, 'width' => 70, 'height' => 23));
+	//echo $html->image('archive_tip.jpg', array('border' => 0, 'width' => 70, 'height' => 23));
 ?>
 	<div id="divMore" style="margin:3px 2px 3px 0px;display:none;">
 <?php
@@ -86,7 +86,8 @@ if (!empty($archdata)) {
 	<td>
 	<div style="margin:5px 20px 5px 20px;">
 	<?php
-	echo $html->image('iconTopnotes.png');
+	//echo $html->image('iconTopnotes.png');
+	echo '<b><font size="3">News</font></b>';
 	echo '<br/>' . $topnotes;
 	?>
 	<div style="height:6px"></div>
@@ -97,7 +98,8 @@ if (!empty($archdata)) {
 	<td>
 	<div style="margin:5px 20px 5px 20px;">
 	<?php
-	echo $html->image('iconAttention.png') . '<br/>' . $notes . '<br/><div style="height:6px"></div>';
+	//echo $html->image('iconAttention.png');
+	echo '<br/>' . $notes . '<br/><div style="height:6px"></div>';
 	?>
 	</div>
 	</td>
@@ -106,6 +108,7 @@ if (!empty($archdata)) {
 
 <!-- show the top selling list -->
 <br/>
+<!--  
 <table width="100%">
 <caption>Selling Top 10</caption>
 <tr>
@@ -178,6 +181,7 @@ if (!empty($archdata)) {
 	</td>
 </tr>
 </table>
+-->
 
 <!-- ## for accounts overview
 <table width="100%">
