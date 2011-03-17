@@ -513,7 +513,7 @@ $curmenuidx = 0;
 
 <!-- for "agent must read" -->
 <?php
-if (in_array($userinfo['role'], array(1, 2)) && !$session->check('switch_pass')) {
+if (in_array($userinfo['role'], array(1, 2)) && !$session->check('switch_pass') && false) { // remarked by "&& false" here
 ?>
 <div style="display:none">
 	<a id="attentions_link" href="#attentions_for_agents">show attentions</a>

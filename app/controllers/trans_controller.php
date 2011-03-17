@@ -319,7 +319,7 @@ class TransController extends AppController {
 					'conditions' => array('id' => $aginfo['TransAgent']['companyid'])
 				)
 			);
-			$this->set('notes', '<b>Company news:&nbsp;</b>' . $cominfo['TransCompany']['agentnotes']);
+			$this->set('notes', '<font size="3"><b>Company news&nbsp;&nbsp;</b></font>' . $cominfo['TransCompany']['agentnotes']);
 			
 			
 		}
