@@ -86,7 +86,7 @@ echo $form->submit('login_btn.png', array('style' => 'border:0px;width:95px;heig
 <br/>
 <?php
 echo $html->link(
-		'<em><b><font color="#0000a0" size="2">Forgot your password?</font></b></em>',
+		'<em><b><font color="#0000a0" size="2">Lost password?</font></b></em>',
 		array('controller' => 'trans', 'action' => 'forgotpwd'),
 		null, false, false
 	);

@@ -65,20 +65,8 @@ $curmenuidx = 0;
   <div id="border">
     <!-- Start Header -->
     <div class="header">
-		<div class="typeface-js" style="float:right;height:120px;margin-top:10px;color:#ffffff;font-family:Tahoma, Geneva, Matisse Itc;">
-			<div class="cci-textlogo" style="font-size:72px;">A</div>
-			<div class="cci-textlogo" style="font-size:48px;">MERICAN</div>
-			<div class="cci-textlogo" style="font-size:72px;">&nbsp;</div>
-			<div class="cci-textlogo" style="font-size:72px;">W</div>
-			<div class="cci-textlogo" style="font-size:48px;">e</div>
-			<div class="cci-textlogo" style="font-size:48px;">b</div>
-			<div class="cci-textlogo" style="font-size:72px;">&nbsp;</div>
-			<div class="cci-textlogo" style="font-size:72px;">L</div>
-			<div class="cci-textlogo" style="font-size:48px;">i</div>
-			<div class="cci-textlogo" style="font-size:36px;">nk</div>
-			<div class="cci-textlogo" style="font-size:72px;">!!!</div>
-			<div class="cci-textlogo" style="font-size:72px;">&nbsp;</div>
-		</div>
+		<br/><br/>
+		<p><span class="Apple-style-span" style="border-collapse: collapse; font-family: Arial; font-size: large; color: rgb(0, 0, 0);"><strong><font size="7"><font><font face="Arial Black"><font color="#80d5c4"><font face="Wide Latin">A</font>merican&nbsp;<font face="Wide Latin">W</font>eb<font face="Wide Latin">&nbsp; L</font>ink</font></font></font></font></strong></span></p>
     </div>
     <!-- End Header -->
     <!-- Start Navigation Bar -->
