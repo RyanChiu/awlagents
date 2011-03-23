@@ -15,7 +15,9 @@ if ($userinfo['role'] == 0) {//means an administrator
 }
 ?>
 </div>
-<small>(You're from:<?php echo __getclientip(); ?>, and you'll be <?php echo __isblocked(__getclientip()) ? 'blocked.' : 'passed.'; ?>)</small>
+<!--  
+<small>(You're from:<?php //echo __getclientip(); ?>, and you'll be <?php //echo __isblocked(__getclientip()) ? 'blocked.' : 'passed.'; ?>)</small>
+-->
 <?php
 echo $form->create(null, array('controller' => 'links', 'action' => 'lstlinks'))
 ?>
