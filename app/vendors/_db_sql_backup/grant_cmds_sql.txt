@@ -1,5 +1,0 @@
-grant all on trans_accounts.* to 'marijana'@'localhost';
-grant all on trans_agents.* to 'marijana'@'localhost';
-grant all on trans_clicks.* to 'marijana'@'localhost';
-grant all on trans_companies.* to 'marijana'@'localhost';
-grant all on trans_tickets.* to 'marijana'@'localhost';

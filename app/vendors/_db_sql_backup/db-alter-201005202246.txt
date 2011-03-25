@@ -1,4 +1,0 @@
-ALTER TABLE `trans_sites` ADD `abbr` VARCHAR( 5 ) NULL AFTER `sitename`;
-ALTER TABLE `trans_sites` ADD UNIQUE (
-`abbr` 
-)

@@ -1,3 +1,0 @@
-DROP VIEW `trans_view_types`;
-create view trans_view_types as
-select `b`.`hostname` AS `hostname`,`b`.`sitename` AS `sitename`,`a`.`id` AS `id`,`a`.`siteid` AS `siteid`,`a`.`typename` AS `typename`,`a`.`url` AS `url`,`a`.`price` AS `price`, a.earning from (`trans_types` `a` join `trans_sites` `b`) where (`a`.`siteid` = `b`.`id`);

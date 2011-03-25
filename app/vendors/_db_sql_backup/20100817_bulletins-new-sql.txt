@@ -1,8 +1,0 @@
-DROP TABLE IF EXISTS `bulletins`;
-CREATE TABLE IF NOT EXISTS `bulletins` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `archdate` datetime DEFAULT NULL,
-  `title` int(11) DEFAULT NULL,
-  `info` mediumtext COLLATE ascii_bin NOT NULL,
-  PRIMARY KEY (`id`)
-)

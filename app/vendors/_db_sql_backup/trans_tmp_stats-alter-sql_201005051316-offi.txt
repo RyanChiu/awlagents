@@ -1,1 +1,0 @@
-ALTER TABLE `trans_tmp_stats` ADD `bygroup` TINYINT NULL COMMENT '1 by date, 2 by company, 3 by agent' AFTER `runid`

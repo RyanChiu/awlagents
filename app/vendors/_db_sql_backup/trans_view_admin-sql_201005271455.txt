@@ -1,7 +1,0 @@
-CREATE VIEW `trans_view_admins` AS 
-select 
-`a`.`id` AS `id`,`a`.`username` AS `username`,`a`.`password` AS `password`,
-`a`.`originalpwd` AS `originalpwd`,`a`.`role` AS `role`,
-`a`.`regtime` AS `regtime`,`a`.`status` AS `status`,`a`.`online` AS `online`,
-`a`.`level` AS `level`,`b`.`email` AS `email`,`b`.`notes` AS `notes` 
-from (`trans_accounts` `a` join `trans_admins` `b`) where (`a`.`id` = `b`.`id`);

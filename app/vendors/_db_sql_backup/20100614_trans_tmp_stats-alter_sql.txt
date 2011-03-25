@@ -1,3 +1,0 @@
-ALTER TABLE `trans_tmp_stats` ADD `sales_type1` INT NULL AFTER `signups` ,
-ADD `sales_type2` INT NULL AFTER `sales_type1` ;
-ALTER TABLE `trans_tmp_stats` CHANGE `sales_number` `sales_type3` INT( 11 ) NULL ;

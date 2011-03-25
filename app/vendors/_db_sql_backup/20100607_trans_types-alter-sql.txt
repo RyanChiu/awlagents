@@ -1,1 +1,0 @@
-ALTER TABLE `trans_types` ADD `earning` DECIMAL( 8, 2 ) NOT NULL 

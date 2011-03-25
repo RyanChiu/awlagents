@@ -54,7 +54,7 @@ if (count($typeids) != 1) {
 
 /*try to read stats data*/
 $srclink = 'http://www.pimpmansion.com/user/view_details.php?xml=1'
-	. '&username=sales@americanweblink.com&password=Open54321A'
+	. '&username=aquablue@cleanchattersinc.com&password=cxriscross611'
 	. '&campaign_id=%s&form1_submit1=Show&form1_select2=%s&form1_select3=%s&form1_select4=%s&';
 $sql = sprintf('select * from view_mappings where siteid = %d' , $siteid);
 $rs = mysql_query($sql, $zconn->dblink)
