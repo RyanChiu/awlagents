@@ -40,7 +40,7 @@ body {
  margin: 0px 0px 0px 0px;
  background-image: url(../img/main/nav-bar.png);
  background-repeat: no-repeat;
- min-height: 28px;
+ min-height: 15px;
  padding: 4px 0px 0px 5px;
 }
 /* ------------------------ End Navigation Bar -----------------*/
@@ -98,10 +98,10 @@ img.float {
 
 
 #rightcolumn {
-/* border: 1px solid red;*/
+ border: 1px solid #d2c8c8;
  margin: 0px 0px 0px 0px;
  display: inline; /* IE Hack */
- width: 933px;/**/
+ width: 953px;/**/
  float: left;
  min-height: 200px;
 }
