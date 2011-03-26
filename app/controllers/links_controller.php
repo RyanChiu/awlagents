@@ -194,8 +194,8 @@ class LinksController extends AppController {
 			array(
 				'fields' => array('id', 'sitename'),
 				'conditions' => array(
-					'status' => 0,
-					'id !=' => 5/*hard code here, try to put test site away*/
+					'status' => 0//,
+					//'id !=' => 5/*hard code here, try to put test site away*/
 				),
 				'order' => 'sitename'
 			)
@@ -308,7 +308,7 @@ class LinksController extends AppController {
 		
 		$this->set('rs', array());
 		if (!empty($this->data)) {
-			if ($this->data['TransSite']['id'] == 1) {//site CAM4 is the 1st & special one
+			if ($this->data['TransSite']['id'] == -1) {//REMARK IT FROM CCI:site CAM4 is the 1st & special one
 				$agent = $this->TransViewAgent->find('first',
 					array(
 						'conditions' => array('id' => $this->data['TransViewAgent']['id'])

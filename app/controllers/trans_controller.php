@@ -2047,6 +2047,7 @@ class TransController extends AppController {
 		$campaignid = $r['AgentSiteMapping']['campaignid'];
 		$url = str_replace($searchstr, $campaignid, $url);
 		
+		//$this->Session->setFlash($url);//for debug
 		$this->__go($url, $agentid, date('Y-m-d H:i:s'));
 	}
 }

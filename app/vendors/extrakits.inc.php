@@ -2,7 +2,7 @@
 	/*
 	 * routines area
 	 */
-	date_default_timezone_set("Asia/Manila");
+	//date_default_timezone_set("Asia/Manila");
 
 	/*
 	 * functions area
@@ -166,21 +166,34 @@
 	/*
 	 * get the local date of the stats servers
 	 * parameters:
-	 * origin_dt	the string present date, like 2010-05-01
+	 * origin_dt	the string present date, like 2010-05-01 12:34:56
 	 * remote_tz	the time zone of the remote server, like "Europe/London"
 	 * offset_h		the offset time in hours
 	 * origin_tz	the time zone of the server which the origin_dt belongs to, , like "America/New_York"
-	 * islongf		if the return value should be as 2010-05-01 or 2010-05-01 12:00
+	 * islongf		if the return value should be as 2010-05-01 or 2010-05-01 12:00:01
 	 */
 	function __get_remote_date($origin_dt, $remote_tz = null, $offset_h = -1, $origin_tz = "America/New_York", $islongf = false) {
-		if (strpos($origin_dt, ",") === false) return false;
-		if (strtotime(str_replace(",", " ", $origin_dt)) == -1) return false;
+		$err = "Illegal parameter, it should be like '2010-05-01,12:34:56'.\n";
+		if (strpos($origin_dt, ",") === false) {
+			exit($err);
+		}
+		$datestr = trim(str_replace(",", " ", $origin_dt));
+		if (strlen($datestr) != 19) {
+			exit($err);
+		}
+		if (strtotime($datestr) == -1) {
+			exit($err);
+		}
 		$arydt = explode(",", $origin_dt);
 		$ymdhis = array();
 		$ymdhis[0] = explode("-", $arydt[0]);
-		if (count($ymdhis[0]) != 3) return false;
+		if (count($ymdhis[0]) != 3) {
+			exit($err);
+		}
 		$ymdhis[1] = explode(":", $arydt[1]);
-		if (count($ymdhis[0]) != 3) return false;
+		if (count($ymdhis[0]) != 3) {
+			exit($err);
+		}
 		if ($remote_tz == null) {
 			return $islongf ? $arydt[0] . " " . $arydt[1] : $arydt[0];
 		}
@@ -191,7 +204,10 @@
 		$_remote_dt = new DateTime("now", $_remote_dtz);
 		$offset = $_origin_dtz->getOffset($_origin_dt) - $_remote_dtz->getOffset($_remote_dt);
 		$dt = date($islongf ? "Y-m-d H:i:s" : "Y-m-d",
-			mktime($ymdhis[1][0], $ymdhis[1][1], $ymdhis[1][2] - $offset + ($offset_h * 3600), $ymdhis[0][1], $ymdhis[0][2], $ymdhis[0][0])
+			mktime(
+				$ymdhis[1][0], $ymdhis[1][1], 
+				$ymdhis[1][2] - $offset + ($offset_h * 3600), 
+				$ymdhis[0][1], $ymdhis[0][2], $ymdhis[0][0])
 		);
 		return $dt;
 	}

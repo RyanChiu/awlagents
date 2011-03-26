@@ -6,12 +6,6 @@
  * "Signups" -> "signups"
  * "Sales" -> "sales_number"
  * "Refunds" -> "chargebacks"
- * 
- * http://www.pimpmansion.com/user/main.php?xml=1&username=aquablue@cleanchattersinc.com&password=cxriscross611
- * http://www.pimpmansion.com/user/view_campaigns.php?xml=1&username=aquablue@cleanchattersinc.com&password=cxriscross611
- * http://www.pimpmansion.com/user/view_details.php?xml=1&username=aquablue@cleanchattersinc.com&password=cxriscross611&campaign_id=27478
- * 
- * No parameters for the driver
  */
 include 'zmysqlConn.class.php';
 include 'extrakits.inc.php';
@@ -33,19 +27,20 @@ $abbr = __stats_get_abbr($argv[0]);
 
 /*check out if the $date is in right format*/
 if (($argc - 1) != 1) {//if there is 1 parameter and it must mean a date like '2010-04-01,12:34:56'
-	exit("Only 1 parameter needed like '2010-05-01'.\n");
+	exit("Only 1 parameter needed like '2010-05-01,12:34:56'.\n");
 }
 
+/*
+ * the following line will make the whole script exit if date string format is wrong
+ */
 $date = __get_remote_date($argv[1], "Europe/London", -1);
-if ($date === false) {
-	exit("Illegal parameter, it should be like '2010-05-01,12:34:56'.\n");
-}
+
 $ymd = explode("-", $date);
 
-$zconn = new zmysqlConn;
 /*find out the typeids and siteid from db by "hornm" which is the abbreviation of the site*/
 $typeids = array();
 $siteid = null;
+$zconn = new zmysqlConn;
 __stats_get_types_site($typeids, $siteid, $abbr, $zconn->dblink);
 //echo print_r($typeids, true) . $siteid . "\n";
 if (count($typeids) != 1) {
@@ -53,8 +48,8 @@ if (count($typeids) != 1) {
 }
 
 /*try to read stats data*/
-$srclink = 'http://www.pimpmansion.com/user/view_details.php?xml=1'
-	. '&username=sales@americanweblink.com&password=Open54321A'
+$srclink = 'https://www.pimpmansion.com/user/view_details.php?xml=1'
+	. '&key=2641a71dbd48a7dcd9634ddd13bbb2e1'
 	. '&campaign_id=%s&form1_submit1=Show&form1_select2=%s&form1_select3=%s&form1_select4=%s&';
 $sql = sprintf('select * from view_mappings where siteid = %d' , $siteid);
 $rs = mysql_query($sql, $zconn->dblink)
@@ -66,7 +61,6 @@ while ($row = mysql_fetch_assoc($rs)) {
 		continue;
 	}
 	$url = sprintf($srclink, $row['campaignid'], $ymd[2], $ymd[1], $ymd[0]);
-	//echo $url . "\n";
 	$doc = new DOMDocument();
 	if (!$doc->load($url)) {
 		$mailinfo = __phpmail("maintainer.cci@gmail.com",
@@ -87,8 +81,9 @@ while ($row = mysql_fetch_assoc($rs)) {
 		$signups += getValueByName($item->childNodes, "signups");
 		$sales += getValueByName($item->childNodes, "sales");
 	}
-	//echo $row['agentid'] . "|" . $row['campaignid'] .  ":$uniques, $chargebacks, $signups, $sales.\n";
-	//continue;
+	//echo $url . "\n";//for debug
+	//echo $row['agentid'] . "|" . $row['campaignid'] .  ":$uniques, $chargebacks, $signups, $sales.\n";//for debug
+	//continue;//for debug
 	/*
 	 * find out if there is any data in trans_stats where trxtime equals to $date,
 	 * if there are, remove them.
