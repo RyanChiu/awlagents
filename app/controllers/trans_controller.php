@@ -297,7 +297,7 @@ class TransController extends AppController {
 		}
 		$this->set('topnotes',  empty($info) ? '...' : $info['Bulletin']['info']);
 		if ($this->Auth->user('role') == 0) {//means an administrator
-			$this->set('notes', 'No further company notes today.');//set the additional notes here
+			$this->set('notes', '');//set the additional notes here
 		} else if ($this->Auth->user('role') == 1) {//means a company
 			$cominfo = $this->TransCompany->find('first',
 				array(
@@ -305,7 +305,7 @@ class TransController extends AppController {
 					'conditions' => array('id' => $this->Auth->user('id'))
 				)
 			);
-			$this->set('notes', 'No farther company notes today.');//set the additional notes here
+			$this->set('notes', '');//set the additional notes here
 		} else {//means an agent
 			$aginfo = $this->TransAgent->find('first',
 				array(
