@@ -85,7 +85,7 @@ while ($response === false) {
 if ($response === false) {
 	$mailinfo = 
 		__phpmail("maintainer.cci@gmail.com",
-			"IML STATS GETTING ERROR, REPORT WITH DATE: " . date('Y-m-d H:i:s') . "(retried " . $retimes . " times)",
+			"XCUP STATS GETTING ERROR, REPORT WITH DATE: " . date('Y-m-d H:i:s') . "(retried " . $retimes . " times)",
 			"<b>FROM WEB02</b><br><b>--ERROR REPORT</b><br>"
 		);
 	exit(sprintf("Failed to read stats data.(%s)(%d times)\n", $mailinfo, $retimes));
