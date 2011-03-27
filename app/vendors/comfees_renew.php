@@ -30,7 +30,7 @@ while ($row = mysql_fetch_assoc($rs)) {
 		or die ("Something wrong with: " . mysql_error());
 	$ins++;
 }
-echo $coms == $ins ? "All done.\n" : $coms - $ins . " company(s) missed.\n";
+echo $coms == $ins ? "All done.($ins)\n" : $coms - $ins . " company(s) missed.\n";
 /*3.change the own price for some company that in com_fees*/
 $sql = "select * from com_fees";
 $rs = mysql_query($sql, $zconn->dblink)

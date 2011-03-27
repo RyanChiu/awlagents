@@ -25,7 +25,7 @@ if (count($typeids) != 1) {
 if (empty($siteid)) {
 	exit(sprintf("The site with abbreviation \"%s\" does not exist.\n", $abbr));
 }
-/*get all the agent usernames with the site in mappings*/
+/*get all the campaign mappings of the site*/
 $sql = sprintf("select * from view_mappings where siteid = %d", $siteid);
 $rs = mysql_query($sql, $zconn->dblink)
 	or die ("Something wrong with: " . mysql_error());
@@ -108,7 +108,7 @@ foreach ($xml as $node => $values) {
 		. "\n" . $values->uniques
 		. "\n" . $values->frees
 		. "\n" . $values->signups
-		. "\n";
+		. "\nfor debug\n";
 		
 	if (in_array($values->campaign_name, array_keys($agents))) {//compare campaign_name as campaignid
 		echo $values->campaign_name . "," . $agents['' . $values->campaign_name] . ";\n"; continue;//for debug
