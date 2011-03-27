@@ -2,7 +2,7 @@
 /*
  * it will call commdrv_links.php and import from each of every "abbr"_campaigns.txt
  * (like cam4_campaigns.txt etc.) files into the table agent_site_mappings.
- * it takes no param.
+ * it takes no parameter.
  */
 
 include 'zmysqlConn.class.php';

@@ -19,11 +19,11 @@ $typeids = array();
 $siteid = null;
 $zconn = new zmysqlConn;
 __stats_get_types_site($typeids, $siteid, $abbr, $zconn->dblink);
-if (count($typeids) != 1) {
-	exit(sprintf("The site with abbreviation \"%s\" should have 1 type at least.\n", $abbr));
-}
 if (empty($siteid)) {
 	exit(sprintf("The site with abbreviation \"%s\" does not exist.\n", $abbr));
+}
+if (count($typeids) != 1) {
+	exit(sprintf("The site with abbreviation \"%s\" should have 1 type at least.\n", $abbr));
 }
 /*get all the campaign mappings of the site*/
 $sql = sprintf("select * from view_mappings where siteid = %d", $siteid);
@@ -100,18 +100,20 @@ if ($xml === false) {
 }
 
 $i = $j = $m = 0;
-foreach ($xml as $node => $values) {
-	echo $node . " =>"
-		. "\n" . $values->date 
-		. "\n" . $values->campaign_label 
-		. "\n" . $values->campaign_name
-		. "\n" . $values->uniques
-		. "\n" . $values->frees
-		. "\n" . $values->signups
+foreach ($xml->children() as $item) {
+	$attr = $item->attributes();
+	echo 'node id ' . $attr['id'] . " => "
+		. "date: " . $item->date 
+		. ", campaign_label: " . $item->campaign_label 
+		. ", campaign_name: " . $item->campaign_name
+		. ", uniques: " . $item->uniques
+		. ", frees: " . $item->frees
+		. ", signups: " . $item->signups
 		. "\nfor debug\n";
+	continue;//for debug
 		
-	if (in_array($values->campaign_name, array_keys($agents))) {//compare campaign_name as campaignid
-		echo $values->campaign_name . "," . $agents['' . $values->campaign_name] . ";\n"; continue;//for debug
+	if (in_array($item->campaign_name, array_keys($agents))) {//compare campaign_name as campaignid
+		echo $item->campaign_name . "," . $agents['' . $item->campaign_name] . ";\n"; continue;//for debug
 		/*
 		 * try to put stats data into db
 		 * 0.see if there is any frauds data except 0 or null, if there is, remember it and save it back in step 2
@@ -121,7 +123,7 @@ foreach ($xml as $node => $values) {
 		$frauds = 0;
 		$conditions = sprintf('convert(trxtime, date) = "%s" and siteid = %d'
 			. ' and typeid = %d and agentid = %d and campaignid = "%s"',
-			$date, $siteid, $typeids[0], $agents['' . $values->campaign_name], '' . $values->campaign_name);
+			$date, $siteid, $typeids[0], $agents['' . $item->campaign_name], '' . $item->campaign_name);
 		$sql = 'select * from trans_stats where ' . $conditions;
 		$result = mysql_query($sql, $zconn->dblink)
 			or die ("Something wrong with: " . mysql_error());
@@ -142,8 +144,8 @@ foreach ($xml as $node => $values) {
 			'insert into trans_stats'
 			. ' (agentid, campaignid, siteid, typeid, raws, uniques, chargebacks, signups, frauds, sales_number, trxtime)'
 			. ' values (%d, "%s", %d, %d, 0, %d, 0, %d, %d, %d, "%s")',
-			$agents['' . $values->campaign_name], '' . $values->campaign_name, $siteid, $typeids[0],
-			$values->uniques, $values->free, $frauds, $values->signups,
+			$agents['' . $item->campaign_name], '' . $item->campaign_name, $siteid, $typeids[0],
+			$item->uniques, $item->free, $frauds, $item->signups,
 			$date
 		);
 		//echo $sql . "\n"; continue;//for debug

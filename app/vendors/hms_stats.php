@@ -43,11 +43,11 @@ $siteid = null;
 $zconn = new zmysqlConn;
 __stats_get_types_site($typeids, $siteid, $abbr, $zconn->dblink);
 //echo print_r($typeids, true) . $siteid . "\n";
-if (count($typeids) != 1) {
-	exit(sprintf("The site with abbreviation \"%s\" should have 1 type at least.\n", $abbr));
-}
 if (empty($siteid)) {
 	exit(sprintf("The site with abbreviation \"%s\" does not exist.\n", $abbr));
+}
+if (count($typeids) != 1) {
+	exit(sprintf("The site with abbreviation \"%s\" should have 1 type at least.\n", $abbr));
 }
 /*get all the campaign mappings of the site*/
 $sql = sprintf("select * from view_mappings where siteid = %d", $siteid);
