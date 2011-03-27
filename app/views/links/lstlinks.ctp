@@ -29,8 +29,7 @@ echo $form->create(null, array('controller' => 'links', 'action' => 'lstlinks'))
 	<?php
 	if (!empty($suspsites)) {
 		echo '>>Site "' . implode(",", $suspsites) . '"' . (count($suspsites) > 1 ? ' are' : ' is')
-			. ' suspended for now.<br/>'
-			. '>>So, please don\'t sale links from ' . (count($suspsites) > 1 ? 'them' : 'it') . ' any more!';
+			. ' suspended for now.';
 	}
 	?>
 	</font>
