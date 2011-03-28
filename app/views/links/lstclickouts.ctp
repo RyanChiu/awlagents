@@ -13,7 +13,7 @@ echo $form->create(null, array('controller' => 'links', 'action' => 'lstclickout
 <?php echo $html->image('iconSearch.png', array('style' => 'width:16px;height:16px;')) . 'Search'; ?>
 </caption>
 <tr>
-	<td class="search-label" style="width:105px;">Company</td>
+	<td class="search-label" style="width:105px;">Office</td>
 	<td>
 		<div style="float:left;margin-right:20px;">
 		<?php
@@ -92,11 +92,11 @@ echo $form->end();
 <table width="100%">
 <caption>
 Start Date:<?php echo $startdate; ?>&nbsp;&nbsp;End Date:<?php echo $enddate; ?>&nbsp;&nbsp;|&nbsp;&nbsp;
-Company:<?php echo $coms[$selcom]; ?>&nbsp;&nbsp;Agent:<?php echo $ags[$selagent]; ?>
+Office:<?php echo $coms[$selcom]; ?>&nbsp;&nbsp;Agent:<?php echo $ags[$selagent]; ?>
 </caption>
 <thead>
 <tr>
-	<th><b><?php echo $exPaginator->sort('Company', 'TransViewClickout.officename'); ?></b></th>
+	<th><b><?php echo $exPaginator->sort('Office', 'TransViewClickout.officename'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Agent', 'TransViewClickout.username'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Click Time', 'TransViewClickout.clicktime'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('IP Address From', 'TransViewClickout.fromip'); ?></b></th>

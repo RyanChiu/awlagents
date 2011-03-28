@@ -4,7 +4,7 @@ class TransAgent extends AppModel {
 	var $validate = array(
 		'companyid' => array(
 			'rule' => array('comparison', 'is greater', 0),
-			'message' => 'Please choose a company.'
+			'message' => 'Please choose an office.'
 		),
 		'ag1stname' => array(
 			'rule' => 'notEmpty'

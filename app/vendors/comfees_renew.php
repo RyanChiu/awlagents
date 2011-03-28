@@ -12,7 +12,7 @@ $zconn = new zmysqlConn;
 $sql = "TRUNCATE TABLE `tmp_com_fees`";
 mysql_query($sql, $zconn->dblink)
 	or die ("Something wrong with: " . mysql_error());
-/*2.rebuild all the company fees*/
+/*2.rebuild all the office fees*/
 $sql = "select id from trans_companies";
 $rs = mysql_query($sql, $zconn->dblink)
 	or die ("Something wrong with: " . mysql_error());
@@ -30,8 +30,8 @@ while ($row = mysql_fetch_assoc($rs)) {
 		or die ("Something wrong with: " . mysql_error());
 	$ins++;
 }
-echo $coms == $ins ? "All done.($ins)\n" : $coms - $ins . " company(s) missed.\n";
-/*3.change the own price for some company that in com_fees*/
+echo $coms == $ins ? "All done.($ins)\n" : $coms - $ins . " office(s) missed.\n";
+/*3.change the own price for some offices that in com_fees*/
 $sql = "select * from com_fees";
 $rs = mysql_query($sql, $zconn->dblink)
 	or die ("Something wrong with: " . mysql_error());
@@ -46,5 +46,5 @@ while ($row = mysql_fetch_assoc($rs)) {
 		or die ("Something wrong with: " . mysql_error());
 	$upts++;
 }
-echo $upts . " company fee(s) changed.\n";
+echo $upts . " office fee(s) changed.\n";
 ?>

@@ -31,7 +31,7 @@ if ($userinfo['role'] == 0) {
 			?>
 			</div>
 		</td>
-		<td class="search-label">Company:</td>
+		<td class="search-label">Office:</td>
 		<td>
 			<div style="float:left;margin-right:20px;">
 			<?php

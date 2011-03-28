@@ -18,7 +18,7 @@ echo $form->button('Add Site',
 	<thead>
 	<tr>
 		<th><?php echo $exPaginator->sort('Campaigns', 'TransViewSite.hostname') . '<br/><font size="1">(for admin only)</font>'; ?></th>
-		<th><?php echo $exPaginator->sort('Site Name', 'TransViewSite.sitename') . '<br/><font size="1">(for company or agent)</font>'; ?></th>
+		<th><?php echo $exPaginator->sort('Site Name', 'TransViewSite.sitename') . '<br/><font size="1">(for office or agent)</font>'; ?></th>
 		<?php
 		if ($userinfo['id'] == 2) {
 		?>

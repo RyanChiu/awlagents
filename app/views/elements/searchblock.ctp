@@ -24,7 +24,7 @@ echo $form->create(null, array('controller' => 'stats', 'action' => $curaction, 
 		onclick='javascript:__changeAction("frmStats", "<?php echo $html->url(array('controller' => 'stats', 'action' => 'statscompany')); ?>");return true;'
 		<?php echo $bywhat == 1 ? 'checked' : ''; ?>
 		/>
-		<label for="viewbycompany">View By Company</label>
+		<label for="viewbycompany">View By Office</label>
 		</div>
 		<div style="float:left;margin-right:50px;">
 		<input type="radio" name="viewby" id="viewbyagent" style="width:10px;border:0px;"
@@ -100,7 +100,7 @@ echo $form->create(null, array('controller' => 'stats', 'action' => $curaction, 
 		if ($userinfo['role'] == 0) {//means an administrator
 		?>
 		<div style="float:left;width:90px;">
-			<b>Company:</b>
+			<b>Office:</b>
 		</div>
 		<div style="float:left;margin-right:20px;">
 			<input id="iptComs" type="text"
@@ -193,7 +193,7 @@ echo $form->create(null, array('controller' => 'stats', 'action' => $curaction, 
 		</div>
 		<?php
 		}
-		else if ($userinfo['role'] == 1) {//means a company
+		else if ($userinfo['role'] == 1) {//means an office
 			echo $form->input('Stats.companyid', array('type' => 'hidden', 'value' => $userinfo['id']));
 		?>
 		<div style="float:left;width:60px;">

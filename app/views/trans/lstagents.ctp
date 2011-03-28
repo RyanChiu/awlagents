@@ -29,7 +29,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'lstagents',
 		<?php
 		if ($userinfo['role'] == 0) {
 		?>
-		<td class="search-label" style="width:145px;">Company:</td>
+		<td class="search-label" style="width:145px;">Office:</td>
 		<?php
 		} else {
 		?>
@@ -114,7 +114,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'lstagents',
 </table>
 <?php
 $companyid = 0;
-if ($userinfo['role'] == 1) {//means a company
+if ($userinfo['role'] == 1) {//means an office
 	$companyid = $userinfo['id'];
 }
 echo $form->input('TransViewAgent.companyid', array('type' => 'hidden', 'value' => $companyid));
@@ -169,7 +169,7 @@ function __checkAll() {
 
 <div style="margin-bottom:3px">
 <?php
-if (in_array($userinfo['role'], array(0, 1))) {//means an administrator or a company
+if (in_array($userinfo['role'], array(0, 1))) {//means an administrator or an office
 	//echo $form->button($userinfo['role'] == 0 ? 'Add Agent' : 'Request New Agent',
 	echo $form->button('Add Agent',
 		array(

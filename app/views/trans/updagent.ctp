@@ -29,7 +29,7 @@ if ($userinfo['role'] == 1) {
 		<?php
 		if ($userinfo['role'] == 0) {// means an administrator
 			echo $form->select('TransAgent.companyid', $cps, null, array('style' => 'width:390px;'));
-		} else if ($userinfo['role'] == 1 ) {// means a company
+		} else if ($userinfo['role'] == 1 ) {// means an office
 			echo $form->input('TransAgent.companyshadow',
 				array(
 					'label' => '',
@@ -220,7 +220,7 @@ if ($userinfo['role'] == 1) {
 		?>
 			<div id="msgbox_nochange" style="display:none;float:left;background-color:#ffffcc;">
 			<font color="red">
-			Sorry, you can't do this.If you want to, please contact your company or administrator.
+			Sorry, you can't do this.If you want to, please contact your office or administrator.
 			</font>
 			</div>
 			<script type="text/javascript" language="javascript">

@@ -32,7 +32,7 @@ if ($userinfo['role'] == 1) {
 					'label' => '', 'style' => 'width:390px;'
 				)
 			);
-		} else if ($userinfo['role'] == 1) {// means a company
+		} else if ($userinfo['role'] == 1) {// means an office
 			echo $form->input('TransAgent.companyshadow',
 				array(
 					'label' => '',
@@ -211,7 +211,7 @@ if ($userinfo['role'] == 1) {
 		<td></td>
 		<td>
 		<?php
-		if ($userinfo['role'] == 0 || $userinfo['role'] == 1) {//means an administrator or a company
+		if ($userinfo['role'] == 0 || $userinfo['role'] == 1) {//means an administrator or an office
 			echo $form->submit('Add & New',
 				array(
 					'default' => 'default',

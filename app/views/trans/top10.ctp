@@ -39,7 +39,7 @@ if (!empty($weekrs)) {
 		<thead>
 		<tr>
 			<th>Top NO.</th>
-			<th>Company</th>
+			<th>Office</th>
 			<th>Agent</th>
 			<th>Total Sales</th>
 		</tr>

@@ -212,7 +212,7 @@ class StatsController extends AppController {
 					'order' => 'username4m'
 				)
 			);
-		} else if ($this->curuser['role'] == 1) {//means a company
+		} else if ($this->curuser['role'] == 1) {//means an office
 			$ags = $this->TransViewAgent->find('list',
 				array(
 					'fields' => array('id', 'username'),
@@ -381,7 +381,7 @@ class StatsController extends AppController {
 					if ($seltype != 0) $conditions['typeid'] = $seltype;
 					if (!empty($selcoms) && !in_array('0', $selcoms)) $conditions['companyid'] = $selcoms;
 					if ($selagent != 0) $conditions['agentid'] = $selagent;
-					if ($this->curuser['role'] == 1) {//if it's a company
+					if ($this->curuser['role'] == 1) {//if it's an office
 						$conditions['companyid'] = $this->curuser['id'];
 					}
 					if ($this->curuser['role'] == 2) {//if it's an agent
@@ -486,7 +486,7 @@ class StatsController extends AppController {
 							$i++;
 						}
 						if (!$isin) {
-							$crumbs[$group == 1 ? 'Day' : ($group == 2 ? 'Company' : ($group == 3 ? 'Agent' : ''))] = $cururl;
+							$crumbs[$group == 1 ? 'Day' : ($group == 2 ? 'Office' : ($group == 3 ? 'Agent' : ''))] = $cururl;
 						}
 						$this->Session->write('crumbs_stats', $crumbs);
 					} else {
@@ -584,7 +584,7 @@ class StatsController extends AppController {
 			);
 			$this->Session->write('crumbs_stats',
 				array(
-					$group == 1 ? 'Day' : ($group == 2 ? 'Company' : ($group == 3 ? 'Agent' : '')) => array(
+					$group == 1 ? 'Day' : ($group == 2 ? 'Office' : ($group == 3 ? 'Agent' : '')) => array(
 						'controller' => 'stats',
 						'action' => $group == 1 ? 'statsdate' : ($group == 2 ? 'statscompany' : ($group == 3 ? 'statsagent' : '')),
 						'startdate' => $startdate, 'enddate' => $enddate,

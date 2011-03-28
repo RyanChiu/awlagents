@@ -19,7 +19,7 @@ echo $form->create(null, array('controller' => 'links', 'action' => 'updsite'));
 		</td>
 	</tr>
 	<tr>
-		<td>Site Name:<font size="1">(for company or agent)</font></td>
+		<td>Site Name:<font size="1">(for office or agent)</font></td>
 		<td>
 		<div style="float:left">
 		<?php

@@ -118,7 +118,7 @@ if (!empty($archdata)) {
 		<thead>
 		<tr>
 			<th>Top NO.</th>
-			<th>Company</th>
+			<th>Office</th>
 			<th>Agent</th>
 			<th>Total Sales</th>
 		</tr>
@@ -158,7 +158,7 @@ if (!empty($archdata)) {
 		<thead>
 		<tr>
 			<th>Top NO.</th>
-			<th>Company</th>
+			<th>Office</th>
 			<th>Agent</th>
 			<th>Total Sales</th>
 		</tr>
@@ -189,7 +189,7 @@ if (!empty($archdata)) {
 <thead>
 <tr>
 	<th width="20%"><b></b></th>
-	<th width="40%"><b>Company</b></th>
+	<th width="40%"><b>Office</b></th>
 	<th width="40%"><b>Agent</b></th>
 </tr>
 </thead>
@@ -220,7 +220,7 @@ if (!empty($archdata)) {
 <thead>
 <tr>
 	<th width="15%"><b>Online Username</b></th>
-	<th width="25%"><b>Company Name</b></th>
+	<th width="25%"><b>Office Name</b></th>
 	<th width="25%"><b>Contact Name</b></th>
 	<th width="20%"><b>Registered</b></th>
 </tr>

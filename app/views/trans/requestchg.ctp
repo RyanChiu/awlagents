@@ -10,7 +10,7 @@ echo "<b>(Attention! Fields marked with an asterisk (*) are required! Otherwise,
 </div>
 <div style="margin-left:3px;margin-bottom:3px;">
 <?php
-if ($userinfo['role'] == 1) {//means that only a company could do this
+if ($userinfo['role'] == 1) {//means that only an office could do this
 	echo $form->button('Request Another New Agent',
 		array(
 			'style' => 'width:230px;',

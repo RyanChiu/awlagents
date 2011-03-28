@@ -127,7 +127,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>COMPANY</span>',
+			echo $html->link('<span>OFFICE</span>',
 				array('controller' => 'trans', 'action' => 'lstcompanies', 'id' => -1),
 				array('rel' => 'dropmenu_admin_company'),
 				false, false);
@@ -160,7 +160,7 @@ $curmenuidx = 0;
 			}
 			?>
 			<?php
-			if ($role == 1) {//means a company
+			if ($role == 1) {//means an office
 				$menuitemscount++;
 				//if cur route matches this menu item, then set the number to inform the js code
 				if (strpos($this->here, 'lstagents') === false && strpos($this->here, 'updagent') === false
@@ -262,7 +262,7 @@ $curmenuidx = 0;
 			}
 			?>
 			<?php
-			if ($role == 1 || $role == 2) {//means a company or an agent
+			if ($role == 1 || $role == 2) {//means an office or an agent
 				$menuitemscount++;
 				//if cur route matches this menu item, then set the number to inform the js code
 				if (strpos($this->here, 'contactus') === false) {
@@ -300,7 +300,7 @@ $curmenuidx = 0;
 			}
 			?>
 			<?php
-			if ($role == 1) {//means a company
+			if ($role == 1) {//means an office
 				$menuitemscount++;
 				//if cur route matches this menu item, then set the number to inform the js code
 				if (strpos($this->here, 'updcompany') === false) {
@@ -392,7 +392,7 @@ $curmenuidx = 0;
 		</div>
 		<div id="dropmenu_admin_company" class="dropmenudiv_e" style="width:135px;">
 			<?php
-			echo $html->link('<font color="black"><b>Manage Company</b></font>',
+			echo $html->link('<font color="black"><b>Manage Office</b></font>',
 				array('controller' => 'trans', 'action' => 'lstcompanies', 'id' => -1),
 				null, false, false
 			);
@@ -401,9 +401,9 @@ $curmenuidx = 0;
 		<?php
 		}
 		?>
-		<!--company drop down menu -->
+		<!--office drop down menu -->
 		<?php
-		if ($role == 1) {// means a company
+		if ($role == 1) {// means an office
 		?>
 		<div id="dropmenu_com_agent" class="dropmenudiv_e" style="width:130px;">
 			<?php

@@ -1,4 +1,4 @@
-<h1>A New Company</h1>
+<h1>A New Office</h1>
 <?php
 echo $form->create(null, array('controller' => 'trans', 'action' => 'regcompany', 'id' => 'frmReg'));
 ?>
@@ -195,7 +195,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'regcompany'
 jQuery(":checkbox").attr({style: "border:0px;width:16px;vertical-align:middle;"});
 </script>
 <?php
-echo $form->input('TransAccount.role', array('type' => 'hidden', 'value' => '1'));//the value 1 as being a company
+echo $form->input('TransAccount.role', array('type' => 'hidden', 'value' => '1'));//the value 1 as being an office
 echo $form->input('TransAccount.regtime', array('type' => 'hidden', 'value' => ''));//should be set to current time when saving into the DB
 echo $form->input('TransAccount.online', array('type' => 'hidden', 'value' => '0'));// the value 0 means "offline"
 echo $form->input('TransCompany.id', array('type' => 'hidden'));

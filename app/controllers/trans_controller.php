@@ -56,7 +56,7 @@ class TransController extends AppController {
 		if ($this->Auth->user('role') == 0) {//means an administrator
 			return;
 		}
-		if ($this->Auth->user('role') == 1) {//means a company
+		if ($this->Auth->user('role') == 1) {//means an office
 			switch ($this->params['action']) {
 				case 'updadmin':
 				case 'addnews':
@@ -297,15 +297,15 @@ class TransController extends AppController {
 		}
 		$this->set('topnotes',  empty($info) ? '...' : $info['Bulletin']['info']);
 		if ($this->Auth->user('role') == 0) {//means an administrator
-			$this->set('notes', 'No further company notes today.');//set the additional notes here
-		} else if ($this->Auth->user('role') == 1) {//means a company
+			$this->set('notes', 'No further office notes today.');//set the additional notes here
+		} else if ($this->Auth->user('role') == 1) {//means an office
 			$cominfo = $this->TransCompany->find('first',
 				array(
 					'fields' => array('agentnotes'),
 					'conditions' => array('id' => $this->Auth->user('id'))
 				)
 			);
-			$this->set('notes', 'No farther company notes today.');//set the additional notes here
+			$this->set('notes', 'No farther office notes today.');//set the additional notes here
 		} else {//means an agent
 			$aginfo = $this->TransAgent->find('first',
 				array(
@@ -319,7 +319,7 @@ class TransController extends AppController {
 					'conditions' => array('id' => $aginfo['TransAgent']['companyid'])
 				)
 			);
-			$this->set('notes', '<font size="3"><b>Company news&nbsp;&nbsp;</b></font>' . $cominfo['TransCompany']['agentnotes']);
+			$this->set('notes', '<font size="3"><b>Office news&nbsp;&nbsp;</b></font>' . $cominfo['TransCompany']['agentnotes']);
 			
 			
 		}
@@ -431,7 +431,7 @@ class TransController extends AppController {
 				}
 				/*the up block codes are just in case of "agent name changed" situation-end*/
 				
-				/*try to judge if the company which the agent belongs to is suspended*/
+				/*try to judge if the office which the agent belongs to is suspended*/
 				if ($userinfo['TransAccount']['role'] == 2) {
 					$aginfo = $this->TransAgent->find('first',
 						array('conditions' => array('id' => $userinfo['TransAccount']['id']))
@@ -441,7 +441,7 @@ class TransController extends AppController {
 					);
 					if ($cpinfo['TransAccount']['status'] == 0) {
 						$this->Session->setFlash(
-							"(Your company is suspended right now, please contact your administrator.)",
+							"(Your office is suspended right now, please contact your administrator.)",
 							'default',
 							array('class' => 'suspended-warning')
 						);
@@ -574,7 +574,7 @@ class TransController extends AppController {
 				if ($r['TransAccount']['role'] == 0) {//means an administrator
 					$this->Session->setFlash('Sorry, we can\'t supply password-sending for you.');
 					$this->redirect(array('controller' => 'trans', 'action' => 'forgotpwd'));
-				} else if ($r['TransAccount']['role'] == 1) {//means a company
+				} else if ($r['TransAccount']['role'] == 1) {//means an office
 					$_r = $this->TransCompany->find('first',
 						array(
 							'conditions' => array(
@@ -847,7 +847,7 @@ class TransController extends AppController {
 				$this->data['TransCompany']['id'] = $this->TransAccount->id;
 				$this->TransCompany->create();
 				if ($this->TransCompany->save($this->data)) {//2ndly, save the data into 'trans_companies'
-					/*after company added, update the site_excluding data, then*/
+					/*after an office added, update the site_excluding data, then*/
 					$__sites = $this->data['SiteExcluding']['siteid'];
 					if (is_array($__sites)) {
 						$__sites = array_diff(array_keys($sites), $__sites);
@@ -876,7 +876,7 @@ class TransController extends AppController {
 					
 					/*redirect to some page*/
 					$this->Session->setFlash(
-						'Company "'
+						'Office "'
 						. $this->data['TransAccount']['username']
 						. '" added.'
 						. ($exdone ? '' : '<br><i>(Site associating failed.)</i>')
@@ -907,7 +907,7 @@ class TransController extends AppController {
 			)
 		);
 		$this->set('cps', $cps);
-		/*prepare the email of the current company*/
+		/*prepare the email of the current office*/
 		if ($this->Auth->user('role') == 1) {
 			$this->TransCompany->id = $this->Auth->user('id');
 			$curcom = $this->TransCompany->read();
@@ -1060,7 +1060,7 @@ class TransController extends AppController {
 		$this->TransAccount->id = $id;
 		$this->TransCompany->id = $id;
 		if (empty($this->data)) {
-			/*read the company into the update page*/
+			/*read the office into the update page*/
 			$account = $this->TransAccount->read();
 			//$account['TransAccount']['password'] = '';
 			//$account['TransAccount']['originalpwd'] = '';
@@ -1103,7 +1103,7 @@ class TransController extends AppController {
 				$this->data['TransCompany']['id'] = $this->TransAccount->id;
 				$this->TransCompany->create();
 				if ($this->TransCompany->save($this->data)) {//2ndly, save the data into 'trans_companies'
-					/*after company saved, update the site_excluding data, then*/
+					/*after the office saved, update the site_excluding data, then*/
 					$exdone = true;
 					if ($this->Auth->user('role') == 0) {//only when it's an admin
 						$__sites = $this->data['SiteExcluding']['siteid'];
@@ -1133,13 +1133,13 @@ class TransController extends AppController {
 					}
 					
 					/*redirect to some page*/
-					$this->Session->setFlash('Company "'
+					$this->Session->setFlash('Office "'
 						. $this->data['TransAccount']['username'] . '" updated.'
 						. ($exdone ? '' : '<br><i>(Site associating failed.)</i>')
 					);
 					if ($this->Auth->user('role') == 0) {// means an administrator
 						$this->redirect(array('controller' => 'trans', 'action' => 'lstcompanies'));
-					} else if ($this->Auth->user('role') == 1) {// means a company
+					} else if ($this->Auth->user('role') == 1) {// means an office
 						$this->redirect(array('controller' => 'trans', 'action' => 'index'));
 					}
 					$this->redirect(array('controller' => 'trans', 'action' => 'lstcompanies'));
@@ -1164,7 +1164,7 @@ class TransController extends AppController {
 			)
 		);
 		$this->set('cps', $cps);
-		/*prepare the email of the current company*/
+		/*prepare the email of the current office*/
 		if ($this->Auth->user('role') == 1) {
 			$this->TransCompany->id = $this->Auth->user('id');
 			$curcom = $this->TransCompany->read();
@@ -1247,7 +1247,7 @@ class TransController extends AppController {
 				if ($this->TransAgent->save($this->data)) {//2ndly, save the data into 'trans_agents'
 					/*after agent saved, update the site_excluding data, then*/ 
 					$exdone = true;
-					if (in_array($this->Auth->user('role'), array(0, 1))) {//if it's an admin or a company
+					if (in_array($this->Auth->user('role'), array(0, 1))) {//if it's an admin or an office
 						$__sites = $this->data['SiteExcluding']['siteid']; 
 						if (is_array($__sites)) { 
 						  $__sites = array_diff(array_keys($sites), $__sites); 
@@ -1333,7 +1333,7 @@ class TransController extends AppController {
 					);
 					if ($this->Auth->user('role') == 0) {// means an administrator
 						$this->redirect(array('controller' => 'trans', 'action' => 'lstagents'));
-					} else if ($this->Auth->user('role') == 1) {// means a company
+					} else if ($this->Auth->user('role') == 1) {// means an office
 						$this->redirect(
 							array('controller' => 'trans', 'action' => 'lstagents',
 								'id' => $this->Auth->user('id')
@@ -1722,7 +1722,7 @@ class TransController extends AppController {
 						'conditions' => array('id' => $this->data['ChatLog']['siteid'])
 					)
 				);
-				$subject = 'Company:' . $r['TransViewAgent']['officename']
+				$subject = 'Office:' . $r['TransViewAgent']['officename']
 					. ' Agent:' . $r['TransViewAgent']['username']
 					. ' -- Chat Log';
 				$content = "Client:" . $this->data['ChatLog']['clientusername'] . "\n"
@@ -1766,7 +1766,7 @@ class TransController extends AppController {
 		$startdate = date('Y-m-d', mktime (0,0,0,date("m"), date("d") - 6 ,date("Y")));
 		$enddate = date('Y-m-d');
 		$selcom = $selagent = $selsite = 0;
-		if ($this->Auth->user('role') == 1) {// means a company
+		if ($this->Auth->user('role') == 1) {// means an office
 			$selcom = $this->Auth->user('id');
 			if ($id != -1) {
 				$selagent = $id;

@@ -1,4 +1,4 @@
-<h1>Update Company</h1>
+<h1>Update Office</h1>
 <?php
 $userinfo = $session->read('Auth.TransAccount');
 echo $form->create(null, array('controller' => 'trans', 'action' => 'updcompany'));
@@ -205,7 +205,7 @@ jQuery(":checkbox").attr({style: "border:0px;width:16px;vertical-align:middle;"}
 </script>
 <?php
 echo $form->input('TransAccount.id', array('type' => 'hidden'));
-echo $form->input('TransAccount.role', array('type' => 'hidden', 'value' => '1'));//the value 1 as being a company
+echo $form->input('TransAccount.role', array('type' => 'hidden', 'value' => '1'));//the value 1 as being an office
 echo $form->input('TransCompany.id', array('type' => 'hidden'));
 echo $form->end();
 ?>

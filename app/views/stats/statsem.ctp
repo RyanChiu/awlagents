@@ -4,7 +4,7 @@ switch ($bywhat) {
 		echo '<h1>Stats (By Date)</h1>';
 		break;
 	case 1:
-		echo '<h1>Stats (By Company)</h1>';
+		echo '<h1>Stats (By Office)</h1>';
 		break;
 	case 2:
 		echo '<h1>Stats (By Agent)</h1>';
@@ -74,14 +74,14 @@ if (!empty($rs)) {
 	echo 'Site:' . $sites[$selsite];
 	echo ', Type:' . $types[$seltype];
 	if ($userinfo['role'] == 0) {//means an administrator
-		echo ', Company:';
+		echo ', Office:';
 		if (!empty($selcoms)) {
 			foreach ($selcoms as $selcom) {echo $coms[$selcom] . ' ';};
 		} else {
 			echo 'All';
 		}
 		echo ', Agent:' . $ags[$selagent];
-	} else if ($userinfo['role'] == 1) {//means a company
+	} else if ($userinfo['role'] == 1) {//means an office
 		echo ', Agent:' . $ags[$selagent];
 	} else if ($userinfo['role'] == 2) {//means an agent
 	}

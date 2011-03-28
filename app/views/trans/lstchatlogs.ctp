@@ -35,7 +35,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'lstchatlogs
 	</td>
 </tr>
 <tr>
-	<td class="search-label">Company:</td>
+	<td class="search-label">Office:</td>
 	<td>
 		<div style="float:left;margin-right:20px;">
 		<?php

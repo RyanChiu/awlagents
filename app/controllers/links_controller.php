@@ -56,7 +56,7 @@ class LinksController extends AppController {
 		if ($this->curuser['role'] == 0) {//means an administrator
 			return;
 		}
-		if ($this->curuser['role'] != 0) {//means a company or an agent
+		if ($this->curuser['role'] != 0) {//means an office or an agent
 			switch ($this->params['action']) {
 				case 'lstsites':
 				case 'addsite':
@@ -216,7 +216,7 @@ class LinksController extends AppController {
 					'order' => 'id'
 				)
 			);
-		} else if ($this->curuser['role'] == 1) {//means a company
+		} else if ($this->curuser['role'] == 1) {//means an office
 			$ags = $this->TransViewAgent->find('list',
 				array(
 					'fields' =>	array(
