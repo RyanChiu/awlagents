@@ -29,7 +29,7 @@
     <!-- Start Header -->
     <div class="header">
     	<br/><br/>
-		<p><span class="Apple-style-span" style="border-collapse: collapse; font-family: Arial; font-size: large; color: rgb(0, 0, 0);"><strong><font size="7"><font><font face="Arial Black"><font color="#80d5c4"><font face="Wide Latin">A</font>merican&nbsp;<font face="Wide Latin">W</font>eb<font face="Wide Latin">&nbsp; L</font>ink</font></font></font></font></strong></span></p>
+		<p><font color="#000000" face="Arial" size="4"><span style="font-size: 72px;"><span style="border-collapse: collapse; font-family: Arial; color: rgb(0, 0, 0);"><font color="#d82101" face="Mistral"><strong>American&nbsp;Web&nbsp; Link</strong></font></span></span></font></p>
     </div>
     <!-- End Header -->
    <!-- Start Right Column -->
