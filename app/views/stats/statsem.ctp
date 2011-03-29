@@ -155,17 +155,17 @@ if (!empty($rs)) {
 		<?php //echo $exPaginator->sort('Frauds', 'TransTmpStats.frauds'); ?>
 		<?php
 			echo '<font size="1">';
-			echo $exPaginator->sort('CORRECT', 'TransTmpStats.frauds');
+			echo $exPaginator->sort('Chargebacks', 'TransTmpStats.frauds');
 			echo '</font>';
-			echo '<br/><font size="1">(Chargebacks)</font>';
+			echo '<br/><font size="1">(CORRECT)</font>';
 		?>
 		</th>
 		<th <?php echo $userinfo['role'] == 0 ? '' : 'class="naClassHide"'; ?>>
 		<?php
 			echo '<font size="1">'; 
-			echo $exPaginator->sort('CAMPAIGN', 'TransTmpStats.chargebacks');
+			echo $exPaginator->sort('Chargebacks', 'TransTmpStats.chargebacks');
 			echo '</font>';
-			echo '<br/><font size="1">(Chargebacks)</font>';
+			echo '<br/><font size="1">(ORIGINAL)</font>';
 		?>
 		</th>
 		<?php
