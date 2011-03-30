@@ -157,7 +157,7 @@ if (!empty($rs)) {
 			echo '<font size="1">';
 			echo $exPaginator->sort('Chargebacks', 'TransTmpStats.frauds');
 			echo '</font>';
-			echo '<br/><font size="1">(CORRECT)</font>';
+			echo '<br/><font size="1">(CORRECTED)</font>';
 		?>
 		</th>
 		<th <?php echo $userinfo['role'] == 0 ? '' : 'class="naClassHide"'; ?>>
