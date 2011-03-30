@@ -93,6 +93,7 @@ class StatsController extends AppController {
 			=> 'YESTERDAY'
 		);
 		
+		/*
 		$halfmons = array();
 		for ($i = 0; $i < 12; $i++) {
 			$halfmon = mktime(0, 0, 0, date('m') - 1 - $i, date('d'), date('Y'));
@@ -114,6 +115,7 @@ class StatsController extends AppController {
 			$halfmons = array(date('Y-m-01,Y-m-15') => date('M 1-15, Y')) + $halfmons;
 		}
 		$periods += $halfmons;
+		*/
 		
 		$lastday = date("Y-m-d", strtotime(date('Y-m-d') . " Sunday"));
 		$periods += array(
@@ -132,6 +134,17 @@ class StatsController extends AppController {
 			. date("Y-m-d", strtotime($lastday . " - 14 days"))
 			=> 'TWO WEEKS AGO'
 		);
+		for ($i = 3; $i < 24; $i++) {
+			$m = 7 * ($i + 1) -1;
+			$n = 7 * $i;
+			$tmpstart = date("Y-m-d", strtotime($lastday . " - $m days"));
+			$tmpend = date("Y-m-d", strtotime($lastday . " - $n days"));
+			$periods += array(
+				$tmpstart . ',' . $tmpend
+				=> $tmpstart . '~' .$tmpend
+			);
+		}
+		
 		$periods += array(
 			date('Y-m', mktime(0,0,0,date("m"), date("d"), date("Y"))) . '-01'
 			. ','
