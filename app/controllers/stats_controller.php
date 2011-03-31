@@ -306,7 +306,10 @@ class StatsController extends AppController {
 				$selagent = $conds['selagent'];
 			}
 		}
-		$startdate = $enddate = date('Y-m-d');
+		$startdate = $enddate = date("Y-m-d", strtotime(date('Y-m-d') . " Sunday"));
+		$startdate = date("Y-m-d", strtotime($enddate . " - 7 days"));
+		$enddate = date("Y-m-d", strtotime($startdate . " + 6 days"));
+		/*
 		if (date('Y-m-d') <= date('Y-m-15')) {
 			$startdate = date('Y-m-01');
 			$enddate = date('Y-m-' . date('d'));
@@ -315,6 +318,7 @@ class StatsController extends AppController {
 			$startdate = date('Y-m-16');
 			$enddate = date('Y-m-' . $lastday);
 		}
+		*/
 		if (!empty($this->data)) {
 			$startdate = $this->data['Stats']['startdate'];
 		} else if (array_key_exists('startdate', $this->passedArgs)) {
