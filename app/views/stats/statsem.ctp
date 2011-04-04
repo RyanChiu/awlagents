@@ -145,7 +145,7 @@ if (!empty($rs)) {
 		</th>
 		<!--
 		<th <?php //echo !in_array($selsite, array(6, 7, 8)) ? '' : 'class="naClassHide"'; ?>>
-		<?php //echo $exPaginator->sort('Chargebacks', 'TransTmpStats.chargebacks'); ?>
+		<?php //echo $exPaginator->sort('Fraud', 'TransTmpStats.chargebacks'); ?>
 		</th>
 		-->
 		<th <?php echo $selsite != 1 ? '' : 'class="naClassHide"'; ?>>
@@ -154,16 +154,13 @@ if (!empty($rs)) {
 		<th <?php echo $userinfo['role'] == 0 ? '' : 'class="naClassHide"'; ?>>
 		<?php //echo $exPaginator->sort('Frauds', 'TransTmpStats.frauds'); ?>
 		<?php
-			echo '<font size="1">';
-			echo $exPaginator->sort('Chargebacks', 'TransTmpStats.frauds');
-			echo '</font>';
-			echo '<br/><font size="1">(CORRECTED)</font>';
+			echo $exPaginator->sort('Fraud', 'TransTmpStats.frauds');
 		?>
 		</th>
 		<th <?php echo $userinfo['role'] == 0 ? '' : 'class="naClassHide"'; ?>>
 		<?php
 			echo '<font size="1">'; 
-			echo $exPaginator->sort('Chargebacks', 'TransTmpStats.chargebacks');
+			echo $exPaginator->sort('Fraud', 'TransTmpStats.chargebacks');
 			echo '</font>';
 			echo '<br/><font size="1">(ORIGINAL)</font>';
 		?>
