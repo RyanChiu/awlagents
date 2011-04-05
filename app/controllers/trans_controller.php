@@ -116,8 +116,8 @@ class TransController extends AppController {
 	
 	function __sendemail($subject = 'empty', $content = 'empty',
 		$from = 'info@cleanchattersinc.com',
-		$mailto = 'support@cleanchattersinc.com',
-		$replyto = 'support@cleanchattersinc.com') {
+		$mailto = 'support@americanweblink.com',
+		$replyto = 'support@americanweblink.com') {
 		/* SMTP Options */
 		$this->Email->smtpOptions = array(
 			'request' => array('uri' => array('scheme' => 'https')),
@@ -665,7 +665,7 @@ class TransController extends AppController {
 				$this->data['FakeContactUs']['subject'],
 				"From:" . $this->data['FakeContactUs']['email'] . "\n\n" . $this->data['FakeContactUs']['message'],
 				$this->data['FakeContactUs']['email'],
-				"Support@cleanchattersinc.com",
+				"support@americanweblink.com",
 				$this->data['FakeContactUs']['email']
 			);
 			$redirecturl = '';
@@ -1730,7 +1730,8 @@ class TransController extends AppController {
 					. $this->data['ChatLog']['conversation'] . "\n"
 					. "-" . $submittime->format("Y-m-d H:i:s") . " " . $this->__svrtz;
 				$mailto = ''
-					. strtolower($r['TransViewAgent']['officename']) . '_qa@cleanchattersinc.com';
+					//. strtolower($r['TransViewAgent']['officename']) . '_qa@cleanchattersinc.com';
+					. 'support@americanweblink.com';
 				$fmsg = '';
 				if ($this->__sendemail(
 						$subject, $content,
@@ -1742,7 +1743,8 @@ class TransController extends AppController {
 				if ($this->__sendemail(
 						$subject, $content,
 						'info@cleanchattersinc.com',
-						'qa@cleanchattersinc.com'
+						//'qa@cleanchattersinc.com'
+						'support@americanweblink.com'
 					) != true) {
 					$fmsg = '(Failed to email out.<1>)';
 				};

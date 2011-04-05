@@ -546,9 +546,9 @@ if (in_array($userinfo['role'], array(1, 2)) && !$session->check('switch_pass') 
 			<p style="font-weight:bold;font-size:14px;color:red;">
 			YOUR <?php echo '"' . implode("\", \"", $excludedsites) . '"'; ?>
 			LINKS HAVE BEEN SUSPENDED, PLEASE CONTACT
-			<a href="mailto:support@cleanchattersinc.com"><font color="red">CCI SUPPORT</font></a>
+			<a href="mailto:support@americanweblink.com"><font color="red">CCI SUPPORT</font></a>
 			FOR MORE INFO.<br/>
-			<a href="mailto:support@cleanchattersinc.com"><font color="red">support@cleanchattersinc.com</font></a>
+			<a href="mailto:support@americanweblink.com"><font color="red">support@americanweblink.com</font></a>
 			</p>
 			<div style="margin:12px 2px 2px 2px;font-weight:bolder;">
 			REASONS FOR TEMPORARY SUSPENSION

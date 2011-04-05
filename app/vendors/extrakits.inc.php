@@ -149,7 +149,7 @@
 		$mail->From = "info@cleanchattersinc.com";
 		$mail->FromName = "info@cleanchattersinc.com";
 		$mail->AddAddress($mailto, "Maintainer CCI");// the second param "name" is optional                
-		$mail->AddReplyTo("info@cleanchattersinc.com", "Information");
+		$mail->AddReplyTo("support@americanweblink.com", "Information");
 		$mail->IsHTML(true);
 		$mail->Subject = $subject;
 		$mail->Body    = $content;
