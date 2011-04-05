@@ -57,6 +57,7 @@ if (!empty($rs)) {
 ?>
 <table width="100%">
 	<caption>
+	<font style="color:red;">
 	<?php
 	if ($startdate != $enddate) {
 	?>
@@ -95,6 +96,7 @@ if (!empty($rs)) {
     <?php
 	}
     ?>
+    </font>
     <br/>
     <font style="font-size:12px;font-weight:lighter;">
     <?php
