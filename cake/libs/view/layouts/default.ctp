@@ -60,7 +60,7 @@
 				);
 			*/
 			?>
-			Copyright &copy; 2010 CLEANCHATTERSINC.COM. All Rights Reserved.&nbsp;&nbsp;
+			Copyright &copy; 2010 AMERICANWEBLINK.COM. All Rights Reserved.&nbsp;&nbsp;
 		</div>
 	</div>
 	<?php echo $cakeDebug; ?>

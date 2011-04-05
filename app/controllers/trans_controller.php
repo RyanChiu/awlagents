@@ -115,17 +115,17 @@ class TransController extends AppController {
 	}
 	
 	function __sendemail($subject = 'empty', $content = 'empty',
-		$from = 'info@cleanchattersinc.com',
+		$from = 'support@americanweblink.com',
 		$mailto = 'support@americanweblink.com',
 		$replyto = 'support@americanweblink.com') {
 		/* SMTP Options */
 		$this->Email->smtpOptions = array(
-			'request' => array('uri' => array('scheme' => 'https')),
-			'port'=>'465',
+			//'request' => array('uri' => array('scheme' => 'https')),
+			'port'=>'25',
 			'timeout'=>'60',
-			'host' => 'smtp.gmail.com',
-			'username'=>'info@cleanchattersinc.com',
-			'password'=>'info123qwe'
+			'host' => 'smtpout.secureserver.net',
+			'username'=>'support@americanweblink.com',
+			'password'=>'Otvori54321A'
 		);
 		$this->Email->from = '<' . $from . '>';
 		$this->Email->to = '<' . $mailto . '>';
@@ -594,10 +594,10 @@ class TransController extends AppController {
 					 * then we can use the email logic send the password with $_r['TransCompany']['manemail']
 					 */
 					$issent = $this->__sendemail(
-						'Your Cleanchattersinc Password',
-						"Hi,\nYour Cleanchattersinc password is:" . $r['TransAccount']['originalpwd'] . "\n"
-						. "\nThanks,\nCleanchattersinc webmaster.",//must use " instead of ' at this $content parameter
-						'info@cleanchattersinc.com',
+						'Your Americanweblink Password',
+						"Hi,\nYour Americanweblink password is:" . $r['TransAccount']['originalpwd'] . "\n"
+						. "\nThanks,\nAmericanweblink webmaster.",//must use " instead of ' at this $content parameter
+						'support@americanweblink.com',
 						$_r['TransCompany']['manemail']
 					);
 					if ($issent) {
@@ -627,10 +627,10 @@ class TransController extends AppController {
 					 * then we can use the email logic send the password with $_r['TransAgent']['email']
 					 */
 					$issent = $this->__sendemail(
-						'Your Cleanchattersinc Password',
-						"Hi,\nYour Cleanchattersinc password is:" . $r['TransAccount']['originalpwd'] . "\n"
-						. "\nThanks,\nCleanchattersinc webmaster.",//must use " instead of ' at this $content parameter
-						'info@cleanchattersinc.com',
+						'Your Americanweblink Password',
+						"Hi,\nYour Americanweblink password is:" . $r['TransAccount']['originalpwd'] . "\n"
+						. "\nThanks,\nAmericanweblink webmaster.",//must use " instead of ' at this $content parameter
+						'support@americanweblink.com',
 						$_r['TransAgent']['email']
 					);
 					if ($issent) {
@@ -1735,14 +1735,14 @@ class TransController extends AppController {
 				$fmsg = '';
 				if ($this->__sendemail(
 						$subject, $content,
-						'info@cleanchattersinc.com',
+						'support@americanweblink.com',
 						$mailto
 					) != true) {
 					$fmsg = '(Failed to email out.<0>)';
 				};
 				if ($this->__sendemail(
 						$subject, $content,
-						'info@cleanchattersinc.com',
+						'support@americanweblink.com',
 						//'qa@cleanchattersinc.com'
 						'support@americanweblink.com'
 					) != true) {

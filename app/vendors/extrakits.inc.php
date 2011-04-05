@@ -139,16 +139,14 @@
 		$mailinfo = 'no email sent';
 		$mail = new PHPMailer();
 		$mail->IsSMTP();  // set mailer to use SMTP
-		$mail->Host = "smtp.gmail.com";  // specify main and backup server
-		$mail->Port = 465;
+		$mail->Host = "smtpout.secureserver.net";  // specify main and backup server
+		$mail->Port = 25;
 		$mail->Timeout = 60;
-		$mail->SMTPSecure ="ssl";// gmail require the way ssl
-		$mail->SMTPAuth = true;     // turn on SMTP authentication
-		$mail->Username = "info@cleanchattersinc.com";  // SMTP username
-		$mail->Password = "info123qwe"; // SMTP password
-		$mail->From = "info@cleanchattersinc.com";
-		$mail->FromName = "info@cleanchattersinc.com";
-		$mail->AddAddress($mailto, "Maintainer CCI");// the second param "name" is optional                
+		$mail->Username = "support@americanweblink.com";  // SMTP username
+		$mail->Password = "Otvori54321A"; // SMTP password
+		$mail->From = "support@americanweblink.com";
+		$mail->FromName = "support@americanweblink.com";
+		$mail->AddAddress($mailto, "Maintainer AWL");// the second param "name" is optional                
 		$mail->AddReplyTo("support@americanweblink.com", "Information");
 		$mail->IsHTML(true);
 		$mail->Subject = $subject;
