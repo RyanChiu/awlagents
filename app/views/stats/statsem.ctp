@@ -151,7 +151,7 @@ if (!empty($rs)) {
 		<th <?php echo $selsite != 1 ? '' : 'class="naClassHide"'; ?>>
 		<?php echo $exPaginator->sort(in_array($selsite, array(6, 7, 8)) ? 'Free*' : 'Free Signups*', 'TransTmpStats.signups'); ?>
 		</th>
-		<th <?php echo $userinfo['role'] == 0 ? '' : 'class="naClassHide"'; ?>>
+		<th <?php echo $userinfo['role'] == 0 ? '' : ''; ?>>
 		<?php //echo $exPaginator->sort('Frauds', 'TransTmpStats.frauds'); ?>
 		<?php
 			echo $exPaginator->sort('Fraud', 'TransTmpStats.frauds');
@@ -301,11 +301,11 @@ if (!empty($rs)) {
 			. $ajax->divEnd($divID);
 		/*
 		 * the following "if" paragraph means that:
-		 * only if it's a view by details and the site is h2m, xier or iml
+		 * only if it's a view by details and the site is hms (or others in the future)
 		 * which has only one type (only one type is very important here),
-		 * and then the frauds could be modified manually.
+		 * and then the frauds could be modified manually only by admins.
 		 */
-		if ($userinfo['role'] == 0 && $bywhat == 3 && in_array($selsite, array(2, 6, 7))) {
+		if ($userinfo['role'] == 0 && $bywhat == 3 && in_array($selsite, array(2, 0, 0))) {
 			echo '<div style="float:right;margin:0px 3px 0px 3px">'
 				. $html->link(
 					$html->image('iconEdit.png', array('style' => 'width:16px;height:16px;border:0px;')),
