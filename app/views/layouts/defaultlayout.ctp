@@ -66,7 +66,7 @@ $curmenuidx = 0;
     <!-- Start Header -->
     <div class="header">
 		<br/><br/>
-		<p><font color="#000000" face="Arial" size="4"><span style="font-size: 72px;"><span style="border-collapse: collapse; font-family: Arial; color: rgb(0, 0, 0);"><font color="#d82101" face="Mistral"><strong>American&nbsp;Web&nbsp; Link</strong></font></span></span></font></p>
+		<p><font color="#000000" face="Arial" size="4"><span style="font-size: 72px;"><span style="border-collapse: collapse; font-family: Arial; color: rgb(0, 0, 0);"><font color="#d82101" face="Mistral"><strong>American&nbsp;Web&nbsp;Link</strong></font></span></span></font></p>
     </div>
     <!-- End Header -->
     <!-- Start Navigation Bar -->
