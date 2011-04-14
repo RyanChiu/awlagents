@@ -278,7 +278,7 @@ class TransController extends AppController {
 			)
 		);
 		$this->set(compact('archdata'));
-		/*prepare the bulletin board for the current logged-in user*/
+		/*prepare the ALERTS for the current logged-in user*/
 		$info = array();
 		if ($id == null) {
 			$info = $this->Bulletin->find('first',
@@ -699,7 +699,7 @@ class TransController extends AppController {
 		} else {
 			$this->Bulletin->id = $this->data['Bulletin']['id'];
 			if ($this->Bulletin->saveField('info', $this->data['Bulletin']['info'])) {
-				$this->Session->setFlash('Bulletin board updated.');
+				$this->Session->setFlash('ALERTS updated.');
 				$this->redirect(array('controller' => 'trans', 'action' => 'index'));
 			} else {
 				$this->Session->setFlash("Something wrong, please contact your administrator.");

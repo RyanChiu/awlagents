@@ -197,7 +197,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>LINK CODE</span>',
+			echo $html->link('<span>LINKS</span>',
 				array('controller' => 'links', 'action' => 'lstlinks'),
 				array('rel' => ($role == 0 ? 'dropmenu_links' : '')),
 				false, false);
@@ -291,7 +291,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>PROFILE</span>',
+			echo $html->link('<span>ADMIN</span>',
 				array('controller' => 'trans', 'action' => 'updadmin'),
 				null, false, false);
 			?>
@@ -310,7 +310,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>PROFILE</span>',
+			echo $html->link('<span>ADMIN</span>',
 				array('controller' => 'trans', 'action' => 'updcompany', 'id' => $userinfo['id']),
 				null, false, false);
 			?>
@@ -329,7 +329,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>PROFILE</span>',
+			echo $html->link('<span>ADMIN</span>',
 				array('controller' => 'trans', 'action' => 'updagent', 'id' => $userinfo['id']),
 				null, false, false);
 			?>

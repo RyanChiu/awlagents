@@ -20,9 +20,10 @@ switch ($bywhat) {
 
 <div style="width:800px;margin:3px 0px 0px 3px;">
 	<b><font size="1">
-    *Timezone used to show these stats:<br/>
-    GMT +0 TIME IN "LONDON GREAT BRITAIN".<br/>
-    FOR PHILIPPINES ADD PLUS + 8 HOURS<br/>
+    Timezone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GMT +0<br/>
+    Philippines:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 8 hours<br/>
+    USA:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 8 hours<br/>
+    World Clock:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.timeanddate.com/worldclock/">http://www.timeanddate.com/worldclock/</a>
   	</font></b>
 </div>
 

@@ -3,7 +3,7 @@
 $userinfo = $session->read('Auth.TransAccount');
 ?>
 <div>
-<div style="float:left;"><h1><font color="red">Bulletin Board</font></h1></div>
+<div style="float:left;"><h1><font color="red">ALERTS</font></h1></div>
 <div style="float:left;margin-left:10px;">
 <?php
 if ($userinfo['role'] == 0) {

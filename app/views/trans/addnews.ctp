@@ -1,4 +1,4 @@
-<h1>Update Bulletin Board</h1>
+<h1>Update ALERTS</h1>
 <?php
 //echo print_r($results, true);
 $userinfo = $session->read('Auth.TransAccount');
@@ -7,7 +7,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'addnews'));
 <table width="100%">
 	<tr>
 		<td align="center">
-		Bulletin Board
+		ALERTS
 		</td>
 		<td>
 		<div style="float:left">
