@@ -85,7 +85,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>HOME</span>',
+			echo $html->link('<span><font color="darkred">HOME</font></span>',
 				array('controller' => 'trans', 'action' => 'index'),
 				null, false, false);
 			?>
@@ -105,7 +105,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>NEWS</span>',
+			echo $html->link('<span><font color="darkred">NEWS</font></span>',
 				array('controller' => 'trans', 'action' => 'addnews'),
 				array('rel' => 'dropmenu_admin_news'),
 				false, false);
@@ -127,7 +127,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>OFFICE</span>',
+			echo $html->link('<span><font color="darkred">OFFICE</font></span>',
 				array('controller' => 'trans', 'action' => 'lstcompanies', 'id' => -1),
 				array('rel' => 'dropmenu_admin_company'),
 				false, false);
@@ -150,7 +150,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>AGENT</span>',
+			echo $html->link('<span><font color="darkred">AGENT</font></span>',
 				array('controller' => 'trans', 'action' => 'lstagents', 'id' => -1),
 				array('rel' => 'dropmenu_admin_agent'),
 				false, false);
@@ -173,7 +173,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>AGENT</span>',
+			echo $html->link('<span><font color="darkred">AGENT</font></span>',
 				array('controller' => 'trans', 'action' => 'lstagents', 'id' => $userinfo['id']),
 				array('rel' => 'dropmenu_com_agent'),
 				false, false);
@@ -197,7 +197,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>LINKS</span>',
+			echo $html->link('<span><font color="darkred">LINKS</font></span>',
 				array('controller' => 'links', 'action' => 'lstlinks'),
 				array('rel' => ($role == 0 ? 'dropmenu_links' : '')),
 				false, false);
@@ -231,7 +231,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 				<?php
-				echo $html->link('<span>STATS</span>',
+				echo $html->link('<span><font color="darkred">STATS</font></span>',
 					array('controller' => 'stats', 'action' => 'statsdate', 'clear' => -1),
 					null, false, false
 				);
@@ -252,7 +252,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>CHAT LOG</span>',
+			echo $html->link('<span><font color="darkred">CHAT LOG</font></span>',
 				array('controller' => 'trans', 'action' => 'lstchatlogs', 'id' => -1),
 				array('rel' => 'dropmenu_chatlogs'),
 				false, false);
@@ -272,7 +272,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>GET HELP</span>',
+			echo $html->link('<span><font color="darkred">GET HELP</font></span>',
 				array('controller' => 'trans', 'action' => 'contactus'),
 				null, false, false);
 			?>
@@ -291,7 +291,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>ADMIN</span>',
+			echo $html->link('<span><font color="darkred">ADMIN</font></span>',
 				array('controller' => 'trans', 'action' => 'updadmin'),
 				null, false, false);
 			?>
@@ -310,7 +310,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>ADMIN</span>',
+			echo $html->link('<span><font color="darkred">ADMIN</font></span>',
 				array('controller' => 'trans', 'action' => 'updcompany', 'id' => $userinfo['id']),
 				null, false, false);
 			?>
@@ -329,7 +329,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>ADMIN</span>',
+			echo $html->link('<span><font color="darkred">ADMIN</font></span>',
 				array('controller' => 'trans', 'action' => 'updagent', 'id' => $userinfo['id']),
 				null, false, false);
 			?>
@@ -339,7 +339,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span>LOGOUT</span>',
+			echo $html->link('<span><font color="darkred">LOGOUT</font></span>',
 				array('controller' => 'trans', 'action' => 'logout'),
 				null, false, false);
 			?>
@@ -494,7 +494,7 @@ $curmenuidx = 0;
   <!-- End Border -->
   <!-- Start Footer -->
   <div id="footer">
-  	<font size="2" color="white">Copyright &copy; 2010 American Web Link All Rights Reserved.&nbsp;&nbsp;</font>
+  	<font size="2" color="black">Copyright &copy; 2010 American Web Link All Rights Reserved.&nbsp;&nbsp;</font>
   </div>
   <!-- End Footer -->
 </div>

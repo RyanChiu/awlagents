@@ -38,8 +38,9 @@ body {
  color: #fff;
  font-weight: bold;
  margin: 0px 0px 0px 0px;
- background-image: url(../img/main/nav-bar.png);
+ background-image: /*url(../img/main/nav-bar.png)*/;
  background-repeat: no-repeat;
+ background-color: #ebde81;
  min-height: 15px;
  padding: 4px 0px 0px 5px;
 }
@@ -98,7 +99,7 @@ img.float {
 
 
 #rightcolumn {
- border: 1px solid #d2c8c8;
+ border: 1px solid #ebde81;
  margin: 0px 0px 0px 0px;
  display: inline; /* IE Hack */
  width: 953px;/**/
@@ -337,4 +338,8 @@ table thead tr th a.desc {
 	height:	23px;
 	border-style: outset;
 	border-color: gray;
+}
+/*for main menu item*/
+#maimmenu {
+	color: red;
 }

@@ -54,7 +54,7 @@
   <!-- End Border -->
   <!-- Start Footer -->
   <div id="footer">
-  	<font size="2" color="white">Copyright &copy; 2010 American Web Link All Rights Reserved.&nbsp;&nbsp;</font>
+  	<font size="2" color="black">Copyright &copy; 2010 American Web Link All Rights Reserved.&nbsp;&nbsp;</font>
   </div>
   <!-- End Footer -->
 </div>

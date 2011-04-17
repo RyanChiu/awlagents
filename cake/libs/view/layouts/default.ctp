@@ -60,7 +60,9 @@
 				);
 			*/
 			?>
+			<font size="2" color="black">
 			Copyright &copy; 2010 American Web Link All Rights Reserved.&nbsp;&nbsp;
+			</font>
 		</div>
 	</div>
 	<?php echo $cakeDebug; ?>
