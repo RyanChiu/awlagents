@@ -22,7 +22,7 @@ td, th {
 
 thead th {
 	text-align: center;
-	background: /*#E6EDF5*/#a9a88c;
+	background: /*#E6EDF5*/#ebde81;
 	color: /*#4F76A3*/#000000;
 	font-size: 100% !important;
 }
@@ -33,7 +33,7 @@ tbody th {
 
 tbody tr { background: #FCFDFE; }
 
-tbody tr.odd { background: #e1e1cb; }
+tbody tr.odd { background: #f2f1c2; }
 
 table a:link {
 	color: /*#718ABE*/#000000;

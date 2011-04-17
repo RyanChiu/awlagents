@@ -287,14 +287,14 @@ a:hover {
 }
 /*for stats, the totals*/
 .totals {
-	background:/*#E6EDF5*/#a9a88c;
+	background:/*#E6EDF5*/#e3d156;
 	color:/*#4F76A3*/#000000;
 	font-size:100% !important;
 	font-weight:bold;
 }
 /*for search label*/
 .search-label {
-	background:/*#E6EDF5*/#a9a88c;
+	background:/*#E6EDF5*/#ebde81;
 	color:/*#4F76A3*/#000000;
 	font-size:100% !important;
 	font-weight:bold;
