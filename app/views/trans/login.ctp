@@ -13,7 +13,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'login'));
 	?>
 	</td>
 	<td colspan="2" align="center">
-	<b><font size="4" color="#008ed2">Please Login</font></b>
+	<b><font size="4" color="darkred">Welcome</font></b>
 	<br/><br/>
 	</td>
 	<td rowspan="10" align="right" width="185px">
@@ -23,7 +23,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'login'));
 	</td>
 </tr>
 <tr>
-	<td align="right"><em><b><font color="black" size="2">Username :</font></b></em></td>
+	<td align="right"><b><font color="black" size="2">Username :</font></b></td>
 	<td align="left">
 	<?php
 	echo $form->input('TransAccount.username', array('label' => '', 'style' => 'width:112px;'));
@@ -35,7 +35,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'login'));
 </tr>
 <tr><td>&nbsp;</td><td></td></tr>
 <tr>
-	<td align="right"><em><b><font color="black" size="2">Password :</font></b></em></td>
+	<td align="right"><b><font color="black" size="2">Password :</font></b></td>
 	<td align="left">
 	<?php
 	echo $form->input('TransAccount.password', array('label' => '', 'style' => 'width:112px;', 'type' => 'password'));
@@ -44,7 +44,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'login'));
 </tr>
 <tr><td>&nbsp;</td><td></td></tr>
 <tr>
-	<td align="right"><em><b><font color="black" size="2">Code verification :</font></b></em></td>
+	<td align="right"><b><font color="black" size="2">Code verification :</font></b></td>
 	<td align="left">
 	<div style="float:left;margin-right:10px;">
 	<?php
@@ -95,7 +95,7 @@ echo $html->link(
 <br/>
 <?php
 echo $html->link(
-		'<em><b><font color="#0000a0" size="2">Need help?</font></b></em>',
+		'<em><b><font color="#0000a0" size="2">Help?</font></b></em>',
 		array('controller' => 'trans', 'action' => 'contactus'),
 		null, false, false
 	);
