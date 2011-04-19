@@ -699,7 +699,7 @@ class TransController extends AppController {
 		} else {
 			$this->Bulletin->id = $this->data['Bulletin']['id'];
 			if ($this->Bulletin->saveField('info', $this->data['Bulletin']['info'])) {
-				$this->Session->setFlash('ALERTS updated.');
+				//$this->Session->setFlash('ALERTS updated.');
 				$this->redirect(array('controller' => 'trans', 'action' => 'index'));
 			} else {
 				$this->Session->setFlash("Something wrong, please contact your administrator.");
