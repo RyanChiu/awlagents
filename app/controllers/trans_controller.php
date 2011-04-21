@@ -572,7 +572,7 @@ class TransController extends AppController {
 				$this->redirect(array('controller' => 'trans', 'action' => 'forgotpwd'));
 			} else {
 				if ($r['TransAccount']['role'] == 0) {//means an administrator
-					$this->Session->setFlash('Sorry, we are unable to retrieve you password.');
+					$this->Session->setFlash('Sorry, we are unable to retrieve your password.');
 					$this->redirect(array('controller' => 'trans', 'action' => 'forgotpwd'));
 				} else if ($r['TransAccount']['role'] == 1) {//means an office
 					$_r = $this->TransCompany->find('first',
