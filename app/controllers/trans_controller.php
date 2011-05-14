@@ -572,7 +572,7 @@ class TransController extends AppController {
 				$this->redirect(array('controller' => 'trans', 'action' => 'forgotpwd'));
 			} else {
 				if ($r['TransAccount']['role'] == 0) {//means an administrator
-					$this->Session->setFlash('Sorry, we can\'t supply password-sending for you.');
+					$this->Session->setFlash('Sorry, we are unable to retrieve your password.');
 					$this->redirect(array('controller' => 'trans', 'action' => 'forgotpwd'));
 				} else if ($r['TransAccount']['role'] == 1) {//means an office
 					$_r = $this->TransCompany->find('first',
@@ -664,7 +664,7 @@ class TransController extends AppController {
 			$issent = $this->__sendemail(
 				$this->data['FakeContactUs']['subject'],
 				"From:" . $this->data['FakeContactUs']['email'] . "\n\n" . $this->data['FakeContactUs']['message'],
-				$this->data['FakeContactUs']['email'],
+				"support@americanweblink.com",
 				"help@americanweblink.com",
 				$this->data['FakeContactUs']['email']
 			);
@@ -699,7 +699,7 @@ class TransController extends AppController {
 		} else {
 			$this->Bulletin->id = $this->data['Bulletin']['id'];
 			if ($this->Bulletin->saveField('info', $this->data['Bulletin']['info'])) {
-				$this->Session->setFlash('ALERTS updated.');
+				//$this->Session->setFlash('ALERTS updated.');
 				$this->redirect(array('controller' => 'trans', 'action' => 'index'));
 			} else {
 				$this->Session->setFlash("Something wrong, please contact your administrator.");

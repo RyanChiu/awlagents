@@ -86,7 +86,7 @@ echo $form->submit('login_btn.png', array('style' => 'border:0px;width:95px;heig
 <br/>
 <?php
 echo $html->link(
-		'<em><b><font color="#0000a0" size="2">Lost password?</font></b></em>',
+		'<b><font color="#0000a0" size="2">Lost password?</font></b>',
 		array('controller' => 'trans', 'action' => 'forgotpwd'),
 		null, false, false
 	);
@@ -95,12 +95,11 @@ echo $html->link(
 <br/>
 <?php
 echo $html->link(
-		'<em><b><font color="#0000a0" size="2">Help?</font></b></em>',
+		'<b><font color="#0000a0" size="2">Help?</font></b>',
 		array('controller' => 'trans', 'action' => 'contactus'),
 		null, false, false
 	);
 ?>
-<font color="#006600" size="2">.</font>
 </td>
 </tr>
 <tr><td>&nbsp;</td><td></td></tr>
