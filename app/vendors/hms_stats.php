@@ -61,10 +61,10 @@ if (empty($agents)) {
 	exit(sprintf("The site with abbreviation \"%s\" does not have any campaign ids asigned for agents.\n", $abbr));
 }
 /*try to read stats data*/
-//to get link, we use 34431 for campaign_id, but here to get stats data, we use 33430
+//to get link, we used to use 34431 for campaign_id, and to get stats data, we used 34430, but now we just only use 37692 for both
 $srclink = 'https://www.pimpmansion.com/user/keywords.php?xml=1'
 	. '&key=2641a71dbd48a7dcd9634ddd13bbb2e1'
-	. '&campaign_id=34430&form1_submit4=Show&form1_select1=custom_interval'
+	. '&campaign_id=37692&form1_submit4=Show&form1_select1=custom_interval'
 	. '&form1_select8=%s&form1_select9=%s&form1_select10=%s'
 	. '&form1_select11=%s&form1_select12=%s&form1_select13=%s';
 $url = sprintf($srclink, $ymd[2], $ymd[1], $ymd[0], $ymd[2], $ymd[1], $ymd[0]);
