@@ -99,21 +99,35 @@ if ($xml === false) {
 	exit(sprintf("\nFailed to parse stats data.\n"));
 }
 
-$i = $j = $m = 0;
+$i = $j = $m = $f = 0;
 foreach ($xml->children() as $item) {
 	$attr = $item->attributes();
+	
+	/*
 	echo 'node id ' . $attr['id'] . " => "
 		. "date: " . $item->date 
-		. ", campaign_label: " . $item->campaign_label 
-		. ", campaign_name: " . $item->campaign_name
+		. ", campaign_label: " . $item->campaign_label //which is actually the campaign id
+		. ", campaign_name: " . $item->campaign_name //which is only the alias name for campaign id
 		. ", uniques: " . $item->uniques
 		. ", frees: " . $item->frees
 		. ", signups: " . $item->signups
 		. "\nfor debug\n";
 	continue;//for debug
-		
-	if (in_array($item->campaign_name, array_keys($agents))) {//compare campaign_name as campaignid
-		echo $item->campaign_name . "," . $agents['' . $item->campaign_name] . ";\n"; continue;//for debug
+	*/
+	
+	/**
+	 * slice the campaign id from $item->campaign_label
+	 */
+	$campaignlabel = "" . $item->campaign_label;
+	$prefix = "a" . $aid . "_";
+	if (strpos($campaignlabel, $prefix) === false) {
+		$f++;
+		continue;
+	}
+	$campaignid = substr($campaignlabel, strlen($prefix));
+	
+	if (in_array($campaignid, array_keys($agents))) {
+		//echo $campaignid . "," . $agents[$campaignid] . ";\n"; continue;//for debug
 		/*
 		 * try to put stats data into db
 		 * 0.see if there is any frauds data except 0 or null, if there is, remember it and save it back in step 2
@@ -123,7 +137,7 @@ foreach ($xml->children() as $item) {
 		$frauds = 0;
 		$conditions = sprintf('convert(trxtime, date) = "%s" and siteid = %d'
 			. ' and typeid = %d and agentid = %d and campaignid = "%s"',
-			$date, $siteid, $typeids[0], $agents['' . $item->campaign_name], '' . $item->campaign_name);
+			$date, $siteid, $typeids[0], $agents[$campaignid], $campaignid);
 		$sql = 'select * from trans_stats where ' . $conditions;
 		$result = mysql_query($sql, $zconn->dblink)
 			or die ("Something wrong with: " . mysql_error());
@@ -144,8 +158,8 @@ foreach ($xml->children() as $item) {
 			'insert into trans_stats'
 			. ' (agentid, campaignid, siteid, typeid, raws, uniques, chargebacks, signups, frauds, sales_number, trxtime)'
 			. ' values (%d, "%s", %d, %d, 0, %d, 0, %d, %d, %d, "%s")',
-			$agents['' . $item->campaign_name], '' . $item->campaign_name, $siteid, $typeids[0],
-			$item->uniques, $item->free, $frauds, $item->signups,
+			$agents[$campaignid], $campaignid, $siteid, $typeids[0],
+			$item->uniques, $item->frees, $frauds, $item->signups,
 			$date
 		);
 		//echo $sql . "\n"; continue;//for debug
@@ -158,8 +172,8 @@ foreach ($xml->children() as $item) {
 if ($i == 0) {
 	echo "No stats data exist by now.\n";
 }
-echo $m . " row(s) deleted.\n";
+echo $m . " row(s) deleted...$f...\n";
 echo $j . "(/" . $i . ") row(s) inserted.\n";
-echo "retried " . $retimes . " times.\n";
+echo "retried " . $retimes . " time(s).\n";
 echo "Processing " . $date . " OK\n";
 ?>
