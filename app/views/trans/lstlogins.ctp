@@ -4,8 +4,7 @@ $userinfo = $session->read('Auth.TransAccount');
 ?>
 
 <?php
-if ($userinfo['role'] == 0) {
-	echo $form->create(null, array('controller' => 'trans', 'action' => 'lstlogins'));
+echo $form->create(null, array('controller' => 'trans', 'action' => 'lstlogins'));
 ?>
 	<div style="width:100%;margin-top:5px;">
 	<table width="100%">
@@ -84,8 +83,7 @@ if ($userinfo['role'] == 0) {
 	</table>
 	</div>
 <?php
-	echo $form->end();
-}
+echo $form->end();
 ?>
 
 <br/>

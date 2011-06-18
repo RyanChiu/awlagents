@@ -6,7 +6,6 @@ $userinfo = $session->read('Auth.TransAccount');
 <h1>Chat Logs</h1>
 
 <?php
-if ($userinfo['role'] != 2) {
 echo $form->create(null, array('controller' => 'trans', 'action' => 'lstchatlogs'));
 ?>
 <div style="width:100%;margin-top:5px;">
@@ -39,22 +38,32 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'lstchatlogs
 	<td>
 		<div style="float:left;margin-right:20px;">
 		<?php
-			echo $form->input('Stats.companyid',
-				array('label' => '',
-					'options' => $coms, 'type' => 'select',
-					'value' => $selcom,
-					'style' => 'width:110px;'
-				)
-			);
-			echo $ajax->observeField('StatsCompanyid',
-				array(
-					'url' => array('controller' => 'stats', 'action' => 'switchagent'),
-					'update' => 'ViewChatLogAgentid',
-					'loading' => 'Element.hide(\'divAgentid\');Element.show(\'divAgentidLoading\');',
-					'complete' => 'Element.show(\'divAgentid\');Element.hide(\'divAgentidLoading\');',
-					'frequency' => 0.2
-				)
-			);
+			if ($userinfo['role'] != 2) {
+				echo $form->input('Stats.companyid',
+					array('label' => '',
+						'options' => $coms, 'type' => 'select',
+						'value' => $selcom,
+						'style' => 'width:110px;'
+					)
+				);
+				echo $ajax->observeField('StatsCompanyid',
+					array(
+						'url' => array('controller' => 'stats', 'action' => 'switchagent'),
+						'update' => 'ViewChatLogAgentid',
+						'loading' => 'Element.hide(\'divAgentid\');Element.show(\'divAgentidLoading\');',
+						'complete' => 'Element.show(\'divAgentid\');Element.hide(\'divAgentidLoading\');',
+						'frequency' => 0.2
+					)
+				);
+			} else {
+				echo $form->input('Stats.companyid',
+					array('label' => '',
+						'type' => 'hidden',
+						'value' => $selcom
+					)
+				);
+				echo $coms[$selcom];
+			}
 		?>
 		</div>
 	</td>
@@ -62,14 +71,24 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'lstchatlogs
 	<td>
 		<div style="float:left;margin-right:20px;">
 		<?php
-			echo $form->input('ViewChatLog.agentid',
-				array('label' => '',
-					'options' => $ags, 'type' => 'select',
-					'value' => $selagent,
-					'style' => 'width:110px;',
-					'div' => array('id' => 'divAgentid')
-				)
-			);
+			if ($userinfo['role'] != 2) {
+				echo $form->input('ViewChatLog.agentid',
+					array('label' => '',
+						'options' => $ags, 'type' => 'select',
+						'value' => $selagent,
+						'style' => 'width:110px;',
+						'div' => array('id' => 'divAgentid')
+					)
+				);
+			} else {
+				echo $form->input('ViewChatLog.agentid',
+					array('label' => '',
+						'type' => 'hidden',
+						'value' => $selagent
+					)
+				);
+				echo $ags[$selagent];
+			}
 		?>
 		</div>
 		<div id="divAgentidLoading" style="float:left;width:100px;margin-right:20px;display:none;">
@@ -103,7 +122,6 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'lstchatlogs
 </div>
 <?php
 echo $form->end();
-}
 ?>
 
 <br/>

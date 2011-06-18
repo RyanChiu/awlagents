@@ -17,21 +17,32 @@ echo $form->create(null, array('controller' => 'links', 'action' => 'lstclickout
 	<td>
 		<div style="float:left;margin-right:20px;">
 		<?php
-			echo $form->input('Stats.companyid',
-				array('label' => '',
-					'options' => $coms, 'type' => 'select',
-					'style' => 'width:110px;'
-				)
-			);
-			echo $ajax->observeField('StatsCompanyid',
-				array(
-					'url' => array('controller' => 'stats', 'action' => 'switchagent'),
-					'update' => 'StatsAgentid',
-					'loading' => 'Element.hide(\'divAgentid\');Element.show(\'divAgentidLoading\');',
-					'complete' => 'Element.show(\'divAgentid\');Element.hide(\'divAgentidLoading\');',
-					'frequency' => 0.2
-				)
-			);
+			if ($userinfo['role'] != 2) {
+				echo $form->input('Stats.companyid',
+					array('label' => '',
+						'options' => $coms, 'type' => 'select',
+						'value' => $selcom,
+						'style' => 'width:110px;'
+					)
+				);
+				echo $ajax->observeField('StatsCompanyid',
+					array(
+						'url' => array('controller' => 'stats', 'action' => 'switchagent'),
+						'update' => 'StatsAgentid',
+						'loading' => 'Element.hide(\'divAgentid\');Element.show(\'divAgentidLoading\');',
+						'complete' => 'Element.show(\'divAgentid\');Element.hide(\'divAgentidLoading\');',
+						'frequency' => 0.2
+					)
+				);
+			} else {
+				echo $form->input('Stats.companyid',
+					array('label' => '',
+						'type' => 'hidden',
+						'value' => $selcom
+					)
+				);
+				echo $coms[$selcom];
+			}
 		?>
 		</div>
 	</td>
@@ -39,13 +50,24 @@ echo $form->create(null, array('controller' => 'links', 'action' => 'lstclickout
 	<td>
 		<div style="float:left;margin-right:20px;">
 		<?php
-			echo $form->input('Stats.agentid',
-				array('label' => '',
-					'options' => $ags, 'type' => 'select',
-					'style' => 'width:110px;',
-					'div' => array('id' => 'divAgentid')
-				)
-			);
+			if ($userinfo['role'] != 2) {
+				echo $form->input('Stats.agentid',
+					array('label' => '',
+						'options' => $ags, 'type' => 'select',
+						'value' => $selagent,
+						'style' => 'width:110px;',
+						'div' => array('id' => 'divAgentid')
+					)
+				);
+			} else {
+				echo $form->input('Stats.agentid',
+					array('label' => '',
+						'type' => 'hidden',
+						'value' => $selagent
+					)
+				);
+				echo $ags[$selagent];
+			}
 		?>
 		</div>
 		<div id="divAgentidLoading" style="float:left;width:100px;margin-right:20px;display:none;">
@@ -110,7 +132,11 @@ foreach ($rs as $r):
 	<td><?php echo $r['TransViewClickout']['officename']; ?></td>
 	<td><?php echo $r['TransViewClickout']['username']; ?></td>
 	<td><?php echo $r['TransViewClickout']['clicktime']; ?></td>
-	<td><?php echo $r['TransViewClickout']['fromip']; ?></td>
+	<td>
+		<a href="http://whatismyipaddress.com/ip/<?php echo $r['TransViewClickout']['fromip']; ?>" target="findip_window">
+			<?php echo $r['TransViewClickout']['fromip']; ?>
+		</a>
+	</td>
 </tr>
 <?php
 $i++;

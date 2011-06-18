@@ -7,7 +7,7 @@ class LinksController extends AppController {
 	/*properties*/
 	var $name = 'Links';
 	var $uses = array(
-		'TransLink', 'TransSite', 'TransType', 'TransFee', 'TransClickout',
+		'TransLink', 'TransSite', 'TransType', 'TransFee', 'TransClickout', 'TransCompany',
 		'TransViewLink', 'TransViewSite', 'TransViewType', 'TransViewClickout',
 		'TransViewCompany', 'TransViewAgent',
 		'AgentSiteMapping', 'ViewMapping',
@@ -66,7 +66,6 @@ class LinksController extends AppController {
 				case 'lsttypes':
 				case 'updtype':
 				case 'lstcampaigns':
-				case 'lstclickouts':
 					$this->__accessDenied();
 					return;
 			}
@@ -456,22 +455,39 @@ class LinksController extends AppController {
 		
 		$startdate = date('Y-m-d', mktime (0,0,0,date("m"), date("d") - 6 ,date("Y")));
 		$enddate = date('Y-m-d');
-		$coms = $this->TransViewCompany->find('list',
+
+		$selcom = $selagent = 0;
+		if ($this->curuser['role'] == 1) {
+			$selcom = $this->curuser['id'];
+		} else if ($this->curuser['role'] == 2) {
+			$selagent = $this->curuser['id'];
+			$rs = $this->TransAgent->find('first',
+				array(
+					'fields' => array('companyid'),
+					'conditions' => array('id' => $selagent)
+				)
+			);
+			if (!empty($rs)) {
+				$selcom = $rs['TransAgent']['companyid'];
+			}
+		}
+		
+		$coms = $this->TransCompany->find('list',
 			array(
-				'fields' => array('companyid', 'officename'),
+				'fields' => array('id', 'officename'),
+				'conditions' => ($selcom == 0 ? array('1' => '1') : array('id' => $selcom)),
 				'order' => array('officename')
 			)
 		);
 		$coms = array('0' => 'All') + $coms;
-		$selcom = 0;
 		$ags = $this->TransViewAgent->find('list',
 			array(
 				'fields' => array('id', 'username'),
+				'conditions' => ($selcom == 0 ? array('1' => '1') : array('companyid' => $selcom)),
 				'order' => array('username4m')
 			)
 		);
 		$ags = array('0' => 'All') + $ags;
-		$selagent = 0;
 		
 		if (empty($this->data)) {
 			if ($this->Session->check('conditions_clickouts')) {
@@ -497,13 +513,23 @@ class LinksController extends AppController {
 				'convert(clicktime, date) <=' => $enddate
 			);
 			if ($selcom != 0) {
-				$conditions += array('companyid' => array(0, $selcom));//!!!Very important!!!If not put this way "array(0, $selcom)", the paginating will show wrong with officename.
+				$conditions['companyid'] = array(0, $selcom);//!!!Very important!!!If not put this way "array(0, $selcom)", the paginating will show wrong with officename.
 			}
 			if ($selagent != 0) {
-				$conditions += array('agentid' => $selagent);
+				$conditions['agentid'] = $selagent;
 			}
 			$this->Session->write('conditions_clickouts', $conditions);
 		}
+		
+		if ($selcom != 0) $conditions['companyid'] = array(-1, $selcom);
+		if ($selagent != 0) $conditions['agentid'] = array(-1, $selagent);
+		
+		$this->set(compact('startdate'));
+		$this->set(compact('enddate'));
+		$this->set(compact('coms'));
+		$this->set(compact('selcom'));
+		$this->set(compact('selagent'));
+		$this->set(compact('ags'));
 		
 		$this->paginate = array(
 			'TransViewClickout' => array(
@@ -513,12 +539,6 @@ class LinksController extends AppController {
 			)
 		);
 		$this->set('rs', $this->paginate('TransViewClickout'));
-		$this->set(compact('startdate'));
-		$this->set(compact('enddate'));
-		$this->set(compact('coms'));
-		$this->set(compact('selcom'));
-		$this->set(compact('selagent'));
-		$this->set(compact('ags'));
 	}
 }
 ?>

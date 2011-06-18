@@ -1537,7 +1537,23 @@ class TransController extends AppController {
 			}
 		}
 		
+		if ($this->Auth->user('role') == 1) {
+			$selcom = $this->Auth->user('id');
+		} else if ($this->Auth->user('role') == 2) {
+			$selagent = $this->Auth->user('id');
+			$rs = $this->TransAgent->find('first',
+				array(
+					'fields' => array('companyid'),
+					'conditions' => array('id' => $selagent)
+				)
+			);
+			$selcom = $rs['TransAgent']['companyid'];
+		}
+		
 		$conditions = array('1' => '1');
+		if ($this->Auth->user('role') == 1) {
+			$conditions = array('id' => $this->Auth->user("id"));
+		}
 		$coms = $this->TransCompany->find('list',
 			array(
 				'fields' => array('id', 'officename'),
@@ -1589,7 +1605,18 @@ class TransController extends AppController {
 				$agentcond = array('accountid' => array(-1, $selagent));
 			}
 			$conditions['AND'] = array($comcond, $agentcond);
-		}	
+		}
+		
+		if ($selcom != 0) $conditions['accountid'] = array(-1, $selcom);
+		if ($selagent != 0) {
+			if (array_key_exists("accountid", $conditions))
+				array_push($conditions['accountid'], $selagent);
+			else $conditions['accountid'] = array(-1, $selagent);
+		} else {
+			if (array_key_exists("accountid", $conditions)) {
+				$conditions['accountid'] += array_keys($ags);
+			}
+		}
 		
 		$this->set(compact('startdate'));
 		$this->set(compact('enddate'));
@@ -1775,6 +1802,14 @@ class TransController extends AppController {
 			}
 		} else if ($this->Auth->user('role') == 2) {// means an agent
 			$selagent = $this->Auth->user('id');
+			$rs = $this->TransAgent->find('first',
+				array(
+					'fields' => array('companyid'),
+					'conditions' => array('id' => $selagent)
+				)
+			);
+			if (empty($rs)) $selcom = 0;
+			else $selcom = $rs['TransAgent']['companyid'];
 		} else if ($this->Auth->user('role') == 0) {// means an admin
 			if ($id != -1) {
 				$selagent = $id;
@@ -1854,7 +1889,13 @@ class TransController extends AppController {
 			'convert(submittime, date) <=' => $enddate
 		);
 		if ($selcom != 0) $conditions['companyid'] = array(-1, $selcom);
+		if ($this->Auth->user('role') == 1) {
+			$conditions['companyid'] = array(-1, $this->Auth->user('id'));
+		}
 		if ($selagent != 0) $conditions['agentid'] = array(-1, $selagent);
+		if ($this->Auth->user('role') == 2) {
+			$conditions['agentid'] = array(-1, $this->Auth->user('id'));
+		}
 		if ($selsite != 0) $conditions['siteid'] = array(-1, $selsite);
 		
 		$this->set(compact('startdate'));

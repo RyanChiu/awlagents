@@ -8,7 +8,7 @@ $userinfo = $session->read('Auth.TransAccount');
 echo $form->create(null, array('controller' => 'trans', 'action' => 'addchatlogs'));
 ?>
 <table width="100%">
-<caption>Fields marked with an asterisk (*) are required.</caption>
+<caption>Fields marked with an asterisk (*) are required.<br/><font color="red"><b>(Please  include  full chats only.)</b></font></caption>
 	<tr>
 		<td>Client Name:</td>
 		<td align="left">

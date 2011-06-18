@@ -141,9 +141,7 @@ $curmenuidx = 0;
 				$menuitemscount++;
 				//if cur route matches this menu item, then set the number to inform the js code
 				if (strpos($this->here, 'lstagents') === false && strpos($this->here, 'updagent') === false
-					&& strpos($this->here, 'regagent') === false
-					&& strpos($this->here, 'lstchatlogs') === false
-					&& strpos($this->here, 'lstlogins') === false) {
+					&& strpos($this->here, 'regagent') === false) {
 				} else {
 					$curmenuidx = $menuitemscount - 1;
 				}
@@ -189,8 +187,7 @@ $curmenuidx = 0;
 				if (strpos($this->here, 'lstlinks') === false
 					&& strpos($this->here, 'lstsites') === false && strpos($this->here, 'addsite') === false
 					&& strpos($this->here, 'updsite') === false
-					&& strpos($this->here, 'lsttypes') === false && strpos($this->here, 'updtype') === false
-					&& strpos($this->here, 'lstclickouts') === false) {
+					&& strpos($this->here, 'lsttypes') === false && strpos($this->here, 'updtype') === false) {
 				} else {
 					$curmenuidx = $menuitemscount - 1;
 				}
@@ -240,27 +237,31 @@ $curmenuidx = 0;
 			<?php
 			}
 			?>
+			
 			<?php
-			if ($role == 2) {//means an agent
+			if ($role != -1) {//menas everyone
 				$menuitemscount++;
 				//if cur route matches this menu item, then set the number to inform the js code
-				if (strpos($this->here, 'lstchatlogs') === false
-					&&strpos($this->here, 'addchatlogs') === false) {
+				if (strpos($this->here, 'addchatlogs') === false
+					&& strpos($this->here, 'lstchatlogs') === false
+					&& strpos($this->here, 'lstlogins') === false
+					&& strpos($this->here, 'lstclickouts') === false) {
 				} else {
 					$curmenuidx = $menuitemscount - 1;
 				}
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">CHAT LOG</font></span>',
-				array('controller' => 'trans', 'action' => 'lstchatlogs', 'id' => -1),
-				array('rel' => 'dropmenu_chatlogs'),
+			echo $html->link('<span><font color="darkred">LOGS</font></span>',
+				"#",
+				array('rel' => 'dropmenu_logs'),
 				false, false);
 			?>
 			</li>
 			<?php
 			}
 			?>
+			
 			<?php
 			if ($role == 1 || $role == 2) {//means an office or an agent
 				$menuitemscount++;
@@ -364,10 +365,6 @@ $curmenuidx = 0;
 				array('controller' => 'links', 'action' => 'lstlinks'),
 				null, false, false
 			);
-			echo $html->link('<font color="black"><b>Click Log</b></font>',
-				array('controller' => 'links', 'action' => 'lstclickouts'),
-				null, false, false
-			);
 			echo $html->link('<font color="black"><b>Configure Site</b></font>',
 				array('controller' => 'links', 'action' => 'lstsites'),
 				null, false, false
@@ -378,14 +375,6 @@ $curmenuidx = 0;
 			<?php
 			echo $html->link('<font color="black"><b>Manage Agent</b></font>',
 				array('controller' => 'trans', 'action' => 'lstagents', 'id' => -1),
-				null, false, false
-			);
-			echo $html->link('<font color="black"><b>Chat Log</b></font>',
-				array('controller' => 'trans', 'action' => 'lstchatlogs', 'id' => -1),
-				null, false, false
-			);
-			echo $html->link('<font color="black"><b>Login Log</b></font>',
-				array('controller' => 'trans', 'action' => 'lstlogins', 'id' => -1),
 				null, false, false
 			);
 			?>
@@ -417,29 +406,36 @@ $curmenuidx = 0;
 		}
 		?>
 		<!--agent drop down menu -->
-		<?php
-		if ($role == 2) {// means an agent
-		?>
-		<div id="dropmenu_chatlogs" class="dropmenudiv_e" style="width:100px;">
-			<?php
-			echo $html->link('<font color="black"><b>Submit Log</b></font>',
-				array('controller' => 'trans', 'action' => 'addchatlogs'),
-				null, false, false
-			);
-			echo $html->link('<font color="black"><b>View Log</b></font>',
-				array('controller' => 'trans', 'action' => 'lstchatlogs', 'id' => -1),
-				null, false, false
-			);
-			?>
-		</div>
-		<?php
-		}
-		?>
+		
 		<!--everyone drop down menu -->
 		<div id="dropmenu_onlinemodels" class="dropmenudiv_e" style="width:110px;">
 			<a class="iml_models" href="#models_div">
 				<font color="black"><b>IMLIVE</b></font>
 			</a>
+		</div>
+		<div id="dropmenu_logs" class="dropmenudiv_e" style="width:135px;">
+			<?php
+			if ($role == 2) {
+				echo $html->link('<font color="black"><b>Submit Chat Log</b></font>',
+					array('controller' => 'trans', 'action' => 'addchatlogs'),
+					null, false, false
+				);
+			}
+			echo $html->link('<font color="black"><b>Chat Log</b></font>',
+				array('controller' => 'trans', 'action' => 'lstchatlogs', 'id' => -1),
+				null, false, false
+			);
+			echo $html->link('<font color="black"><b>Click Log</b></font>',
+				array('controller' => 'links', 'action' => 'lstclickouts', 'id' => -1),
+				null, false, false
+			);
+			if ($role != 2) {
+				echo $html->link('<font color="black"><b>Login Log</b></font>',
+					array('controller' => 'trans', 'action' => 'lstlogins', 'id' => -1),
+					null, false, false
+				);
+			}
+			?>
 		</div>
 		<!--5th drop down menu -->
     </div>
