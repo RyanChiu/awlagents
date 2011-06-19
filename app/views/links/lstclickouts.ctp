@@ -115,6 +115,8 @@ echo $form->end();
 <caption>
 Start Date:<?php echo $startdate; ?>&nbsp;&nbsp;End Date:<?php echo $enddate; ?>&nbsp;&nbsp;|&nbsp;&nbsp;
 Office:<?php echo $coms[$selcom]; ?>&nbsp;&nbsp;Agent:<?php echo $ags[$selagent]; ?>
+<br/>
+<font color="red" size="2"><b>(Click on IP to see a address for a world map, where your link was opened.)</b></font>
 </caption>
 <thead>
 <tr>
