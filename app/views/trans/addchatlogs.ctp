@@ -46,7 +46,7 @@ echo $form->create(null, array('controller' => 'trans', 'action' => 'addchatlogs
 		echo $form->input('ChatLog.agentid', array('label' => '', 'type' => 'hidden', 'value' => $userinfo['id']));
 		?>
 		</td>
-		<td colspan="3"><?php echo $form->submit('Submit');?></td>
+		<td colspan="3"><?php echo $form->submit('Submit', array('style' => 'width:120px;'));?></td>
 	</tr>
 </table>
 <?php
