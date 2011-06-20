@@ -1778,15 +1778,15 @@ class TransController extends AppController {
 				$this->Session->setFlash('Chat log submitted.' . $fmsg);
 				$this->redirect(array('controller' => 'trans', 'action' => 'lstchatlogs'));
 			}
-		} else {
-			$sites = $this->TransSite->find('list',
-				array(
-					'fields' => array('id', 'sitename'),
-					'conditions' => array('status' => 1)
-				)
-			);
-			$this->set(compact("sites"));
 		}
+		
+		$sites = $this->TransSite->find('list',
+			array(
+				'fields' => array('id', 'sitename'),
+				'conditions' => array('status' => 1)
+			)
+		);
+		$this->set(compact("sites"));
 	}
 	
 	function lstchatlogs($id = -1) {
