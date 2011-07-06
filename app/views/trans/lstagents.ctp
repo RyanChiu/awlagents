@@ -197,6 +197,7 @@ if (in_array($userinfo['role'], array(0, 1))) {//means an administrator or an of
 	<th><b><?php echo $exPaginator->sort('Username', 'TransViewAgent.username4m'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Password', 'TransViewAgent.originalpwd'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Office', 'TransViewAgent.officename'); ?></b></th>
+	<th><b><?php echo $exPaginator->sort('Registered', 'TransViewAgent.regtime'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Last Login', 'TransViewAgent.lastlogintime'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Login Times', 'TransViewAgent.logintimes'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Status', 'TransViewAgent.status'); ?></b></th>
@@ -233,6 +234,7 @@ foreach ($rs as $r):
 	<td><?php echo $r['TransViewAgent']['username']; ?></td>
 	<td><?php echo $r['TransViewAgent']['originalpwd']; ?></td>
 	<td><?php echo $r['TransViewAgent']['officename']; ?></td>
+	<td><?php echo $r['TransViewAgent']['regtime']; ?></td>
 	<td>
 	<?php
 	$lastintm = $r['TransViewAgent']['lastlogintime'];
