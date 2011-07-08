@@ -353,16 +353,6 @@ class StatsController extends AppController {
 		$this->___prepconstparms_4statsby_only($sites, $types, $coms, $ags, $periods);
 		$this->___prepparms_4statsby_only($startdate, $enddate, $selsite, $seltype, $selcoms, $selagent);
 
-		if (array_key_exists('clear', $this->passedArgs)) {
-			$this->set(compact("startdate"));
-			$this->set(compact("enddate"));
-			$this->set(compact('selsite'));
-			$this->set(compact('seltype'));
-			$this->set(compact('selcoms'));
-			$this->set(compact('selagent'));
-			return;
-		}
-				
 		/*prepare addons for the conditions & group by*/
 		$gbaddons = '';
 		$order = 'trxtime desc';
@@ -392,13 +382,36 @@ class StatsController extends AppController {
 			/*prepare the data*/
 			if (!array_key_exists('page', $this->passedArgs)) {
 				//if it's not paginating, then it should be drilling down
-				if ($this->Session->check('conditions_stats')) {
-					$conditions['trxtime >='] = $startdate . ' 00:00:00';
-					$conditions['trxtime <='] = $enddate . ' 23:59:59';
-					if ($selsite != -1) $conditions['siteid'] = $selsite;
-					if ($seltype != 0) $conditions['typeid'] = $seltype;
-					if (!empty($selcoms) && !in_array('0', $selcoms)) $conditions['companyid'] = $selcoms;
-					if ($selagent != 0) $conditions['agentid'] = $selagent;
+				if ($this->Session->check('conditions_stats')
+					|| (array_key_exists('clear', $this->passedArgs) && $this->passedArgs['clear'] == -2)) {
+					
+					if (array_key_exists('clear', $this->passedArgs) && $this->passedArgs['clear'] == -2) {
+						$tmp_periods = array_keys($periods);
+						$tmp = explode(",", $tmp_periods[3]);
+						$startdate = $tmp[0];
+						$enddate = $tmp[1];
+						$conditions['trxtime >='] = $startdate . ' 00:00:00';
+						$conditions['trxtime <='] = $enddate . ' 23:59:59';
+						$selsite = 2; // HARD CODE HERE: means site "HMS" ---start
+						$types = $this->TransType->find('list',
+							array(
+								'fields' => array('id', 'typename'),
+								'conditions' => array('siteid' => $selsite)
+							)
+						);
+						$types = array('0' => 'All') + $types;
+						$this->set(compact('types'));
+						$seltype = 0;
+						$conditions['siteid'] = $selsite; // HARD CODE HERE: means site "HMS" ---end
+					} else {
+						$conditions['trxtime >='] = $startdate . ' 00:00:00';
+						$conditions['trxtime <='] = $enddate . ' 23:59:59';
+						if ($selsite != -1) $conditions['siteid'] = $selsite;
+						if ($seltype != 0) $conditions['typeid'] = $seltype;
+						if (!empty($selcoms) && !in_array('0', $selcoms)) $conditions['companyid'] = $selcoms;
+						if ($selagent != 0) $conditions['agentid'] = $selagent;
+					}
+					
 					if ($this->curuser['role'] == 1) {//if it's an office
 						$conditions['companyid'] = $this->curuser['id'];
 					}
@@ -482,35 +495,33 @@ class StatsController extends AppController {
 						)
 					);
 					
+					$crumbs = array();
 					if ($this->Session->check('crumbs_stats')) {
 						$crumbs = $this->Session->read('crumbs_stats'); 
-						$cururl = array(
-							'controller' => 'stats',
-							'action' => $group == 1 ? 'statsdate' : ($group == 2 ? 'statscompany' : ($group == 3 ? 'statsagent' : '')),
-							'startdate' => $startdate, 'enddate' => $enddate,
-							'siteid' => $selsite, 'typeid' => $seltype,
-							'companyid' => empty($selcoms) || in_array('0', $selcoms) ? implode(',', array_keys($coms)) : implode(',', $selcoms),
-							'agentid' => $selagent
-						);
-						$isin = false;
-						$i = 0;
-						foreach ($crumbs as $k => $v) {
-							$diff = array_diff_assoc($v, $cururl);
-							if (empty($diff)) {
-								$isin = true;
-								array_splice($crumbs, $i + 1);
-								break;
-							}
-							$i++;
-						}
-						if (!$isin) {
-							$crumbs[$group == 1 ? 'Day' : ($group == 2 ? 'Office' : ($group == 3 ? 'Agent' : ''))] = $cururl;
-						}
-						$this->Session->write('crumbs_stats', $crumbs);
-					} else {
-						$this->Session->setFlash('Illegal drilldown(1).');
-						$this->redirect(array('controller' => 'trans', 'action' => 'index'));
 					}
+					$cururl = array(
+						'controller' => 'stats',
+						'action' => $group == 1 ? 'statsdate' : ($group == 2 ? 'statscompany' : ($group == 3 ? 'statsagent' : '')),
+						'startdate' => $startdate, 'enddate' => $enddate,
+						'siteid' => $selsite, 'typeid' => $seltype,
+						'companyid' => empty($selcoms) || in_array('0', $selcoms) ? implode(',', array_keys($coms)) : implode(',', $selcoms),
+						'agentid' => $selagent
+					);
+					$isin = false;
+					$i = 0;
+					foreach ($crumbs as $k => $v) {
+						$diff = array_diff_assoc($v, $cururl);
+						if (empty($diff)) {
+							$isin = true;
+							array_splice($crumbs, $i + 1);
+							break;
+						}
+						$i++;
+					}
+					if (!$isin) {
+						$crumbs[$group == 1 ? 'Day' : ($group == 2 ? 'Office' : ($group == 3 ? 'Agent' : ''))] = $cururl;
+					}
+					$this->Session->write('crumbs_stats', $crumbs);
 				} else {
 					$this->Session->setFlash('Illegal drilldown(2).');
 					$this->redirect(array('controller' => 'trans', 'action' => 'index'));

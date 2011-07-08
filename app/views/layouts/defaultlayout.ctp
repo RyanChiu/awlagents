@@ -229,7 +229,7 @@ $curmenuidx = 0;
 			<li>
 				<?php
 				echo $html->link('<span><font color="darkred">STATS</font></span>',
-					array('controller' => 'stats', 'action' => 'statsdate', 'clear' => -1),
+					array('controller' => 'stats', 'action' => 'statscompany', 'clear' => -2),
 					null, false, false
 				);
 				?>

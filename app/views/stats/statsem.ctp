@@ -77,7 +77,7 @@ if (!empty($rs)) {
 	echo ', Type:' . $types[$seltype];
 	if ($userinfo['role'] == 0) {//means an administrator
 		echo ', Office:';
-		if (!empty($selcoms)) {
+		if (!empty($selcoms) && $selcoms[0] != 0) {
 			foreach ($selcoms as $selcom) {echo $coms[$selcom] . ' ';};
 		} else {
 			echo 'All';
