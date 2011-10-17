@@ -122,8 +122,14 @@ Office:<?php echo $coms[$selcom]; ?>&nbsp;&nbsp;Agent:<?php echo $ags[$selagent]
 <tr>
 	<th><b><?php echo $exPaginator->sort('Office', 'TransViewClickout.officename'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Agent', 'TransViewClickout.username'); ?></b></th>
+	<th><b><?php echo $exPaginator->sort('Site', 'TransViewClickout.sitename'); ?></b></th>
+	<th><b><?php echo $exPaginator->sort('Type', 'TransViewClickout.typename'); ?></b></th>
+	<th><b><?php echo $exPaginator->sort('Link', 'TransViewClickout.link'); ?></b></th>
+	<?php if ($userinfo['role'] == 0) {?>
+	<th><b><?php echo $exPaginator->sort('URL', 'TransViewClickout.url'); ?></b></th>
+	<?php }?>
 	<th><b><?php echo $exPaginator->sort('Click Time', 'TransViewClickout.clicktime'); ?></b></th>
-	<th><b><?php echo $exPaginator->sort('IP Address From', 'TransViewClickout.fromip'); ?></b></th>
+	<th><b><?php echo $exPaginator->sort('IP From', 'TransViewClickout.fromip'); ?></b></th>
 </tr>
 </thead>
 <?php
@@ -133,6 +139,12 @@ foreach ($rs as $r):
 <tr <?php echo $i % 2 == 0 ? '' : 'class="odd"'; ?>>
 	<td><?php echo $r['TransViewClickout']['officename']; ?></td>
 	<td><?php echo $r['TransViewClickout']['username']; ?></td>
+	<td><?php echo $r['TransViewClickout']['sitename']; ?></td>
+	<td><?php echo $r['TransViewClickout']['typename']; ?></td>
+	<td><?php echo $r['TransViewClickout']['link']; ?></td>
+	<?php if ($userinfo['role'] == 0) {?>
+	<td><?php echo $r['TransViewClickout']['url']; ?></td>
+	<?php }?>
 	<td><?php echo $r['TransViewClickout']['clicktime']; ?></td>
 	<td>
 		<a href="http://whatismyipaddress.com/ip/<?php echo $r['TransViewClickout']['fromip']; ?>" target="findip_window">
