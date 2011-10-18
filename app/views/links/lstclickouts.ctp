@@ -124,7 +124,7 @@ Office:<?php echo $coms[$selcom]; ?>&nbsp;&nbsp;Agent:<?php echo $ags[$selagent]
 	<th><b><?php echo $exPaginator->sort('Agent', 'TransViewClickout.username'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Site', 'TransViewClickout.sitename'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Type', 'TransViewClickout.typename'); ?></b></th>
-	<th><b><?php echo $exPaginator->sort('Link', 'TransViewClickout.link'); ?></b></th>
+	<th><b>Link</b></th>
 	<?php if ($userinfo['role'] == 0) {?>
 	<th><b><?php echo $exPaginator->sort('URL', 'TransViewClickout.url'); ?></b></th>
 	<?php }?>
@@ -141,7 +141,19 @@ foreach ($rs as $r):
 	<td><?php echo $r['TransViewClickout']['username']; ?></td>
 	<td><?php echo $r['TransViewClickout']['sitename']; ?></td>
 	<td><?php echo $r['TransViewClickout']['typename']; ?></td>
-	<td><?php echo $r['TransViewClickout']['link']; ?></td>
+	<td>
+	<?php
+		if ($r['TransViewClickout']['typename'] != '') {
+			echo 'http://'. $_SERVER['HTTP_HOST']
+				. $html->url(array('controller' => 'trans', 'action' => 'go'))
+				. '/' . $r['TransViewClickout']['siteid']
+				. '/' . $r['TransViewClickout']['typeid']
+				. '/' . $r['TransViewClickout']['username'];
+		} else {
+			echo '-';
+		}
+	?>
+	</td>
 	<?php if ($userinfo['role'] == 0) {?>
 	<td><?php echo $r['TransViewClickout']['url']; ?></td>
 	<?php }?>

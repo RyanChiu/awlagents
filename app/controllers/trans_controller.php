@@ -1914,7 +1914,7 @@ class TransController extends AppController {
 		$this->set('rs', $this->paginate('ViewChatLog'));
 	}
 		
-	function __go($siteid, $typeid, $link, $url, $agentid, $clicktime, $linkid = null) {
+	function __go($siteid, $typeid, $url, $agentid, $clicktime, $linkid = null) {
 		//if (__isblocked(__getclientip())) {
 		if (false) {
 			$this->Session->setFlash('Sorry, you\'re not allowed to check the link.');
@@ -1928,7 +1928,6 @@ class TransController extends AppController {
 			$this->data['TransClickout']['fromip'] = __getclientip();
 			$this->data['TransClickout']['siteid'] = $siteid;
 			$this->data['TransClickout']['typeid'] = $typeid;
-			$this->data['TransClickout']['link'] = $link;
 			$this->data['TransClickout']['url'] = $url;
 			$this->TransClickout->save($this->data);
 			/*and redirect to the real url*/
@@ -1998,7 +1997,7 @@ class TransController extends AppController {
 		}
 		*/
 		
-		$this->__go($siteid, -1, '', '', $this->data['TransLink']['url'], $agentid, date('Y-m-d H:i:s'), $linkid);
+		$this->__go($siteid, -1, '', $this->data['TransLink']['url'], $agentid, date('Y-m-d H:i:s'), $linkid);
 	}
 	
 	function go() {
@@ -2095,8 +2094,6 @@ class TransController extends AppController {
 		$url = str_replace($searchstr, $campaignid, $url);
 		
 		//$this->Session->setFlash($url);//for debug
-		$link = 'http://'. $_SERVER['HTTP_HOST'] . '/act/'
-			. 'trans/go/' . $siteid . '/' . $typeid . '/' . $agentusername;
-		$this->__go($siteid, $typeid, $link, $url, $agentid, date('Y-m-d H:i:s'));
+		$this->__go($siteid, $typeid, $url, $agentid, date('Y-m-d H:i:s'));
 	}
 }
