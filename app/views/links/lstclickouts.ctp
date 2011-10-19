@@ -74,8 +74,23 @@ echo $form->create(null, array('controller' => 'links', 'action' => 'lstclickout
 		<?php echo $html->image('iconAttention.gif') . '&nbsp;Loading...'; ?>
 		</div>
 	</td>
-	<td class="search-label" style="width:65px;">Date</td>
+	<td class="search-label" style="width:65px;">Site</td>
 	<td>
+		<?php
+		echo $form->input('Stats.siteid',
+			array('label' => '',
+				'options' => $sites, 'type' => 'select',
+				'value' => $selsite,
+				'style' => 'width:110px;',
+				'div' => array('id' => 'divSited')
+			)
+		);
+		?>
+	</td>
+</tr>
+<tr>
+	<td class="search-label" style="width:65px;">Date</td>
+	<td colspan="3">
 		<div style="float:left;width:50px;">
 			<b>Start:</b>
 		</div>
@@ -95,14 +110,12 @@ echo $form->create(null, array('controller' => 'links', 'action' => 'lstclickout
 		?>
 		</div>
 	</td>
-</tr>
-<tr>
-	<td></td>
-	<td colspan="5">
+	<td colspan="2">
 	<?php
 	echo $form->submit('Search', array('style' => 'width:110px;'));
 	?>
 	</td>
+	
 </tr>
 </table>
 <?php

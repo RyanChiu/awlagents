@@ -456,7 +456,7 @@ class LinksController extends AppController {
 		$startdate = date('Y-m-d', mktime (0,0,0,date("m"), date("d") - 6 ,date("Y")));
 		$enddate = date('Y-m-d');
 
-		$selcom = $selagent = 0;
+		$selcom = $selagent = $selsite = 0;
 		if ($this->curuser['role'] == 1) {
 			$selcom = $this->curuser['id'];
 		} else if ($this->curuser['role'] == 2) {
@@ -488,6 +488,14 @@ class LinksController extends AppController {
 			)
 		);
 		$ags = array('0' => 'All') + $ags;
+		$sites = $this->TransViewSite->find('list',
+			array(
+				'fields' => array('id', 'sitename'),
+				'conditions' => ($this->curuser['role'] == 0) ? array('1' => '1') : array('status' => '1'),
+				'order' => array('sitename')
+			)
+		);
+		$sites = array('0' => 'All') + $sites;
 		
 		if (empty($this->data)) {
 			if ($this->Session->check('conditions_clickouts')) {
@@ -497,6 +505,7 @@ class LinksController extends AppController {
 				$enddate = $condv[1];
 				$selcom = count($condv) > 2 ? $condv[2][1] : 0;
 				$selagent = count($condv) > 3 ? $condv[3] : 0;
+				$selsite = count($condv) > 4 ? $condv[4] : 0;
 			} else {
 				$conditions = array(
 					'convert(clicktime, date) >=' => $startdate,
@@ -508,6 +517,7 @@ class LinksController extends AppController {
 			$enddate = $this->data['TransViewClickout']['enddate'];
 			$selcom = $this->data['Stats']['companyid'];
 			$selagent = $this->data['Stats']['agentid'];
+			$selsite = $this->data['Stats']['siteid'];
 			$conditions = array(
 				'convert(clicktime, date) >=' => $startdate,
 				'convert(clicktime, date) <=' => $enddate
@@ -518,18 +528,24 @@ class LinksController extends AppController {
 			if ($selagent != 0) {
 				$conditions['agentid'] = $selagent;
 			}
+			if ($selsite != 0) {
+				$conditions['siteid'] = $selsite;
+			}
 			$this->Session->write('conditions_clickouts', $conditions);
 		}
 		
 		if ($selcom != 0) $conditions['companyid'] = array(-1, $selcom);
 		if ($selagent != 0) $conditions['agentid'] = array(-1, $selagent);
+		if ($selsite != 0) $conditions['siteid'] = array(-1, $selsite);
 		
 		$this->set(compact('startdate'));
 		$this->set(compact('enddate'));
 		$this->set(compact('coms'));
+		$this->set(compact('ags'));
+		$this->set(compact('sites'));
 		$this->set(compact('selcom'));
 		$this->set(compact('selagent'));
-		$this->set(compact('ags'));
+		$this->set(compact('selsite'));
 		
 		$this->paginate = array(
 			'TransViewClickout' => array(
