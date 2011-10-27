@@ -65,20 +65,19 @@ $curmenuidx = 0;
   <div id="border">
     <!-- Start Header -->
     <div class="header">
-		<div style="float:left; font-size:24px; font-color:black; font-weight:bold; padding: 60px 0px 0px 24px;">
-    		Boss Lee
+		<div style="float:left; font-size:24px; font-color:black; font-weight:bold; padding: 36px 0px 0px 12px;">
+    		Boss Lee's...
     	</div>
-    	<div style="float:left; padding: 42px 0px 0px 6px;">
+    	<div style="float:left; padding: 12px 0px 0px 6px;">
     		<?php
-    		echo $html->image('main/Bentley.jpg', array('style' => 'width:84px; border: 0px;'));
+    		echo $html->image('main/Bentley.jpg', array('style' => 'height:84px; border: 0px;'));
     		?>
     	</div>
-    	<br/><br/>
-		<p>
-			<span style="font-size: 60px; border-collapse: collapse; font-family: Stencil; color: white;">
+		<div style="float: right; padding: 54px 12px 0px 0px;">
+			<span style="font-size: 62px; border-collapse: collapse; font-family: Stencil; color: white;">
 				American&nbsp;Web&nbsp;Link
 			</span>
-		</p>
+		</div>
     </div>
     <!-- End Header -->
     <!-- Start Navigation Bar -->
