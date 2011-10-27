@@ -37,14 +37,10 @@
     		?>
     	</div>
     	<br/><br/>
-		<p><font color="#000000" face="Arial" size="4">
-				<span style="font-size: 60px;">
-					<span style="border-collapse: collapse; font-family: Stencil; color: rgb(0, 0, 0);">
-						<font color="white">American&nbsp;Web&nbsp;Link
-						</font>
-					</span>
-				</span>
-			</font>
+		<p>
+			<span style="font-size: 60px; border-collapse: collapse; font-family: Stencil; color: white;">
+				American&nbsp;Web&nbsp;Link
+			</span>
 		</p>
     </div>
     <!-- End Header -->
