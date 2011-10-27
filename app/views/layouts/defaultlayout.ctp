@@ -65,8 +65,10 @@ $curmenuidx = 0;
   <div id="border">
     <!-- Start Header -->
     <div class="header">
-		<div style="float:left; font-size:24px; font-color:black; font-weight:bold; padding: 36px 0px 0px 12px;">
+		<div style="float:left; padding: 36px 0px 0px 12px;">
+    		<span style="font-size:24px; color:black; font-weight:bold;">
     		Boss Lee's...
+    		</span>
     	</div>
     	<div style="float:left; padding: 12px 0px 0px 6px;">
     		<?php
