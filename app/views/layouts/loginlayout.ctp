@@ -28,8 +28,24 @@
   <div id="border">
     <!-- Start Header -->
     <div class="header">
+    	<div style="float:left; font-size:24px; font-color:black; font-weight:bold; padding: 60px 0px 0px 24px;">
+    		Boss Lee
+    	</div>
+    	<div style="float:left; padding: 42px 0px 0px 6px;">
+    		<?php
+    		echo $html->image('main/Bentley.jpg', array('style' => 'width:84px; border: 0px;'));
+    		?>
+    	</div>
     	<br/><br/>
-		<p><font color="#000000" face="Arial" size="4"><span style="font-size: 72px;"><span style="border-collapse: collapse; font-family: Arial; color: rgb(0, 0, 0);"><font color="#d82101" face="Mistral"><strong>American&nbsp;Web&nbsp;Link</strong></font></span></span></font></p>
+		<p><font color="#000000" face="Arial" size="4">
+				<span style="font-size: 60px;">
+					<span style="border-collapse: collapse; font-family: Stencil; color: rgb(0, 0, 0);">
+						<font color="white">American&nbsp;Web&nbsp;Link
+						</font>
+					</span>
+				</span>
+			</font>
+		</p>
     </div>
     <!-- End Header -->
    <!-- Start Right Column -->
@@ -54,7 +70,7 @@
   <!-- End Border -->
   <!-- Start Footer -->
   <div id="footer">
-  	<font size="2" color="black">Copyright &copy; 2010 American Web Link All Rights Reserved.&nbsp;&nbsp;</font>
+  	<font size="2" color="white"><b>Copyright &copy; 2010 American Web Link All Rights Reserved.&nbsp;&nbsp;</b></font>
   </div>
   <!-- End Footer -->
 </div>

@@ -22,8 +22,8 @@ td, th {
 
 thead th {
 	text-align: center;
-	background: /*#E6EDF5*/#ebde81;
-	color: /*#4F76A3*/#000000;
+	background: /*#E6EDF5*/#b22222;
+	color: /*#4F76A3*/white;
 	font-size: 100% !important;
 }
 
@@ -31,22 +31,22 @@ tbody th {
 	font-weight: bold;
 }
 
-tbody tr { background: #FCFDFE; }
+tbody tr { background: #fffffe; }
 
-tbody tr.odd { background: #f2f1c2; }
+tbody tr.odd { background: #e6eced; }
 
-table a:link {
-	color: /*#718ABE*/#000000;
+table th a:link {
+	color: /*#718ABE*/white;
 	text-decoration: underline;
 }
 
-table a:visited {
-	color: /*#718ABE*/#000000;
+table th a:visited {
+	color: /*#718ABE*/white;
 	text-decoration: underline;
 }
 
-table a:hover {
-	color: /*#718ABE*/#000000;
+table th a:hover {
+	color: /*#718ABE*/white;
 	text-decoration: none !important;
 }
 

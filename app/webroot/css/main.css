@@ -25,8 +25,9 @@ body {
 * html #border {height:123px} /* IE Min-Height Hack */ 
 /* ------------------------ Start Header -----------------*/
 .header {
- text-align: center;
+ text-align: right;
  margin: 0px 0px 0px 0px;
+ padding: 0px 24px 0px 0px;
  background-image: url(../img/main/header.png);
  min-height:140px;
 }
@@ -40,7 +41,7 @@ body {
  margin: 0px 0px 0px 0px;
  background-image: /*url(../img/main/nav-bar.png)*/;
  background-repeat: no-repeat;
- background-color: #ebde81;
+ background-color: #b22222;
  min-height: 15px;
  padding: 4px 0px 0px 5px;
 }
@@ -99,7 +100,7 @@ img.float {
 
 
 #rightcolumn {
- border: 1px solid #ebde81;
+ border: 1px solid #b22222;
  margin: 0px 0px 0px 0px;
  display: inline; /* IE Hack */
  width: 953px;/**/
@@ -287,15 +288,15 @@ a:hover {
 }
 /*for stats, the totals*/
 .totals {
-	background:/*#E6EDF5*/#e3d156;
-	color:/*#4F76A3*/#000000;
+	background:/*#E6EDF5*/#b22222;
+	color:/*#4F76A3*/white;
 	font-size:100% !important;
 	font-weight:bold;
 }
 /*for search label*/
 .search-label {
-	background:/*#E6EDF5*/#ebde81;
-	color:/*#4F76A3*/#000000;
+	background:/*#E6EDF5*/#b22222;
+	color:/*#4F76A3*/white;
 	font-size:100% !important;
 	font-weight:bold;
 }

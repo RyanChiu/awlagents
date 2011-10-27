@@ -24,9 +24,9 @@ padding: 3px 9px 2px 5px;
 margin: 0;
 margin-right: 1px; /*distance between each tab*/
 border-left: 1px solid gray;
-color: #ebde81;
+color: #b22222;
 font-size: 13px;
-background: /*#808040*/#ebde81 url(../../img/DropDownTabs/halfmoontab.png) top right no-repeat;
+background: /*#808040*/#b22222 url(../../img/DropDownTabs/halfmoontab.png) top right no-repeat;
 }
 
 .halfmoon li a:visited{
@@ -34,7 +34,7 @@ color: black;
 }
 
 .halfmoon li a:hover, .halfmoon li.selected a{
-background-color: /*#464F26*/#fbde1f;
+background-color: /*#464F26*/#ea2e2e;
 }
 
 
@@ -48,7 +48,7 @@ border-width: 0 1px;
 font:normal 12px Verdana;
 line-height:18px;
 z-index:100;
-background-color: /*#eff8d2*/#f6ea96;
+background-color: /*#eff8d2*/#b22222;
 width: 200px;
 visibility: hidden;
 }
@@ -58,11 +58,11 @@ visibility: hidden;
 width: auto;
 display: block;
 text-indent: 5px;
-border: 0 solid #657f27; /*THEME CHANGE HERE*/
+border: 0 solid #ea2e2e; /*THEME CHANGE HERE*/
 border-bottom-width: 1px;
 padding: 2px 0;
 text-decoration: none;
-color: black;
+color: white;
 }
 
 * html .dropmenudiv_e a{ /*IE only hack*/
@@ -70,5 +70,5 @@ width: 100%;
 }
 
 .dropmenudiv_e a:hover{ /*THEME CHANGE HERE*/
-background-color: /*#c8e181*/#f3db58;
+background-color: /*#c8e181*/#ea2e2e;
 }

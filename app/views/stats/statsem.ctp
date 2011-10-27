@@ -228,7 +228,7 @@ if (!empty($rs)) {
 		$pagetotals['payouts'] += $r['TransTmpStats']['payouts'];
 		$pagetotals['earnings'] += $r['TransTmpStats']['earnings'];
 	?>
-	<tr>
+	<tr<?php echo ($i % 2 == 0 ? '' : ' class="odd"'); ?>>
 		<?php
 		switch ($bywhat) {
 			case 0:

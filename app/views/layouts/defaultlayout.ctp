@@ -65,8 +65,24 @@ $curmenuidx = 0;
   <div id="border">
     <!-- Start Header -->
     <div class="header">
-		<br/><br/>
-		<p><font color="#000000" face="Arial" size="4"><span style="font-size: 72px;"><span style="border-collapse: collapse; font-family: Arial; color: rgb(0, 0, 0);"><font color="#d82101" face="Mistral"><strong>American&nbsp;Web&nbsp;Link</strong></font></span></span></font></p>
+		<div style="float:left; font-size:24px; font-color:black; font-weight:bold; padding: 60px 0px 0px 24px;">
+    		Boss Lee
+    	</div>
+    	<div style="float:left; padding: 42px 0px 0px 6px;">
+    		<?php
+    		echo $html->image('main/Bentley.jpg', array('style' => 'width:84px; border: 0px;'));
+    		?>
+    	</div>
+    	<br/><br/>
+		<p><font color="#000000" face="Arial" size="4">
+				<span style="font-size: 60px;">
+					<span style="border-collapse: collapse; font-family: Stencil; color: rgb(0, 0, 0);">
+						<font color="white">American&nbsp;Web&nbsp;Link
+						</font>
+					</span>
+				</span>
+			</font>
+		</p>
     </div>
     <!-- End Header -->
     <!-- Start Navigation Bar -->
@@ -85,7 +101,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">HOME</font></span>',
+			echo $html->link('<span><font color="white">HOME</font></span>',
 				array('controller' => 'trans', 'action' => 'index'),
 				null, false, false);
 			?>
@@ -105,7 +121,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">NEWS</font></span>',
+			echo $html->link('<span><font color="white">NEWS</font></span>',
 				array('controller' => 'trans', 'action' => 'addnews'),
 				array('rel' => 'dropmenu_admin_news'),
 				false, false);
@@ -127,7 +143,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">OFFICE</font></span>',
+			echo $html->link('<span><font color="white">OFFICE</font></span>',
 				array('controller' => 'trans', 'action' => 'lstcompanies', 'id' => -1),
 				array('rel' => 'dropmenu_admin_company'),
 				false, false);
@@ -148,7 +164,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">AGENT</font></span>',
+			echo $html->link('<span><font color="white">AGENT</font></span>',
 				array('controller' => 'trans', 'action' => 'lstagents', 'id' => -1),
 				array('rel' => 'dropmenu_admin_agent'),
 				false, false);
@@ -171,7 +187,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">AGENT</font></span>',
+			echo $html->link('<span><font color="white">AGENT</font></span>',
 				array('controller' => 'trans', 'action' => 'lstagents', 'id' => $userinfo['id']),
 				array('rel' => 'dropmenu_com_agent'),
 				false, false);
@@ -194,7 +210,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">LINKS</font></span>',
+			echo $html->link('<span><font color="white">LINKS</font></span>',
 				array('controller' => 'links', 'action' => 'lstlinks'),
 				array('rel' => ($role == 0 ? 'dropmenu_links' : '')),
 				false, false);
@@ -228,7 +244,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 				<?php
-				echo $html->link('<span><font color="darkred">STATS</font></span>',
+				echo $html->link('<span><font color="white">STATS</font></span>',
 					array('controller' => 'stats', 'action' => 'statscompany', 'clear' => -2),
 					null, false, false
 				);
@@ -252,7 +268,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">LOGS</font></span>',
+			echo $html->link('<span><font color="white">LOGS</font></span>',
 				"#",
 				array('rel' => 'dropmenu_logs'),
 				false, false);
@@ -273,7 +289,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">GET HELP</font></span>',
+			echo $html->link('<span><font color="white">GET HELP</font></span>',
 				array('controller' => 'trans', 'action' => 'contactus'),
 				null, false, false);
 			?>
@@ -292,7 +308,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">ADMIN</font></span>',
+			echo $html->link('<span><font color="white">ADMIN</font></span>',
 				array('controller' => 'trans', 'action' => 'updadmin'),
 				null, false, false);
 			?>
@@ -311,7 +327,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">ADMIN</font></span>',
+			echo $html->link('<span><font color="white">ADMIN</font></span>',
 				array('controller' => 'trans', 'action' => 'updcompany', 'id' => $userinfo['id']),
 				null, false, false);
 			?>
@@ -330,7 +346,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">ADMIN</font></span>',
+			echo $html->link('<span><font color="white">ADMIN</font></span>',
 				array('controller' => 'trans', 'action' => 'updagent', 'id' => $userinfo['id']),
 				null, false, false);
 			?>
@@ -340,7 +356,7 @@ $curmenuidx = 0;
 			?>
 			<li>
 			<?php
-			echo $html->link('<span><font color="darkred">LOGOUT</font></span>',
+			echo $html->link('<span><font color="white">LOGOUT</font></span>',
 				array('controller' => 'trans', 'action' => 'logout'),
 				null, false, false);
 			?>
@@ -353,7 +369,7 @@ $curmenuidx = 0;
 		?>
 		<div id="dropmenu_admin_news" class="dropmenudiv_e" style="width:120px;">
 			<?php
-			echo $html->link('<font color="black"><b>Popup Message</b></font>',
+			echo $html->link('<font color="white"><b>Popup Message</b></font>',
 				array('controller' => 'trans', 'action' => 'updpopupmsg'),
 				null, false, false
 			);
@@ -361,11 +377,11 @@ $curmenuidx = 0;
 		</div>
 		<div id="dropmenu_links" class="dropmenudiv_e" style="width:120px;">
 			<?php
-			echo $html->link('<font color="black"><b>Link</b></font>',
+			echo $html->link('<font color="white"><b>Link</b></font>',
 				array('controller' => 'links', 'action' => 'lstlinks'),
 				null, false, false
 			);
-			echo $html->link('<font color="black"><b>Configure Site</b></font>',
+			echo $html->link('<font color="white"><b>Configure Site</b></font>',
 				array('controller' => 'links', 'action' => 'lstsites'),
 				null, false, false
 			);
@@ -373,7 +389,7 @@ $curmenuidx = 0;
 		</div>
 		<div id="dropmenu_admin_agent" class="dropmenudiv_e" style="width:130px;">
 			<?php
-			echo $html->link('<font color="black"><b>Manage Agent</b></font>',
+			echo $html->link('<font color="white"><b>Manage Agent</b></font>',
 				array('controller' => 'trans', 'action' => 'lstagents', 'id' => -1),
 				null, false, false
 			);
@@ -381,7 +397,7 @@ $curmenuidx = 0;
 		</div>
 		<div id="dropmenu_admin_company" class="dropmenudiv_e" style="width:135px;">
 			<?php
-			echo $html->link('<font color="black"><b>Manage Office</b></font>',
+			echo $html->link('<font color="white"><b>Manage Office</b></font>',
 				array('controller' => 'trans', 'action' => 'lstcompanies', 'id' => -1),
 				null, false, false
 			);
@@ -396,7 +412,7 @@ $curmenuidx = 0;
 		?>
 		<div id="dropmenu_com_agent" class="dropmenudiv_e" style="width:130px;">
 			<?php
-			echo $html->link('<font color="black"><b>Manage Agent</b></font>',
+			echo $html->link('<font color="white"><b>Manage Agent</b></font>',
 				array('controller' => 'trans', 'action' => 'lstagents', 'id' => $userinfo['id']),
 				null, false, false
 			);
@@ -410,27 +426,27 @@ $curmenuidx = 0;
 		<!--everyone drop down menu -->
 		<div id="dropmenu_onlinemodels" class="dropmenudiv_e" style="width:110px;">
 			<a class="iml_models" href="#models_div">
-				<font color="black"><b>IMLIVE</b></font>
+				<font color="white"><b>IMLIVE</b></font>
 			</a>
 		</div>
 		<div id="dropmenu_logs" class="dropmenudiv_e" style="width:135px;">
 			<?php
 			if ($role == 2) {
-				echo $html->link('<font color="black"><b>Submit Chat Log</b></font>',
+				echo $html->link('<font color="white"><b>Submit Chat Log</b></font>',
 					array('controller' => 'trans', 'action' => 'addchatlogs'),
 					null, false, false
 				);
 			}
-			echo $html->link('<font color="black"><b>Chat Log</b></font>',
+			echo $html->link('<font color="white"><b>Chat Log</b></font>',
 				array('controller' => 'trans', 'action' => 'lstchatlogs', 'id' => -1),
 				null, false, false
 			);
-			echo $html->link('<font color="black"><b>Click Log</b></font>',
+			echo $html->link('<font color="white"><b>Click Log</b></font>',
 				array('controller' => 'links', 'action' => 'lstclickouts', 'id' => -1),
 				null, false, false
 			);
 			if ($role != 2) {
-				echo $html->link('<font color="black"><b>Login Log</b></font>',
+				echo $html->link('<font color="white"><b>Login Log</b></font>',
 					array('controller' => 'trans', 'action' => 'lstlogins', 'id' => -1),
 					null, false, false
 				);
@@ -490,7 +506,7 @@ $curmenuidx = 0;
   <!-- End Border -->
   <!-- Start Footer -->
   <div id="footer">
-  	<font size="2" color="black">Copyright &copy; 2010 American Web Link All Rights Reserved.&nbsp;&nbsp;</font>
+  	<font size="2" color="white"><b>Copyright &copy; 2010 American Web Link All Rights Reserved.&nbsp;&nbsp;</b></font>
   </div>
   <!-- End Footer -->
 </div>
