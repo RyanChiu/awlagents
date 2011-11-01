@@ -80,35 +80,9 @@ if (!empty($archdata)) {
 	</script>
 </div>
 </div>
-<table width="100%">
-<!-- <tr class="odd"> -->
-<tr>
-	<td>
-	<div style="margin:5px 20px 5px 20px;">
-	<?php
-	//echo $html->image('iconTopnotes.png');
-	echo '<b><font size="3">News</font></b>';
-	echo '<br/>' . $topnotes;
-	?>
-	<div style="height:6px"></div>
-	</div>
-	</td>
-</tr>
-<tr>
-	<td>
-	<div style="margin:5px 20px 5px 20px;">
-	<?php
-	//echo $html->image('iconAttention.png');
-	echo '<br/>' . $notes . '<br/><div style="height:6px"></div>';
-	?>
-	</div>
-	</td>
-</tr>
-</table>
 
 <!-- show the top selling list -->
 <br/>
-<!--  
 <table width="100%">
 <caption>Selling Top 10</caption>
 <tr>
@@ -181,7 +155,32 @@ if (!empty($archdata)) {
 	</td>
 </tr>
 </table>
--->
+
+<table width="100%">
+<!-- <tr class="odd"> -->
+<tr>
+	<td>
+	<div style="margin:5px 20px 5px 20px;">
+	<?php
+	//echo $html->image('iconTopnotes.png');
+	echo '<b><font size="3">News</font></b>';
+	echo '<br/>' . $topnotes;
+	?>
+	<div style="height:6px"></div>
+	</div>
+	</td>
+</tr>
+<tr>
+	<td>
+	<div style="margin:5px 20px 5px 20px;">
+	<?php
+	//echo $html->image('iconAttention.png');
+	echo '<br/>' . $notes . '<br/><div style="height:6px"></div>';
+	?>
+	</div>
+	</td>
+</tr>
+</table>
 
 <!-- ## for accounts overview
 <table width="100%">
