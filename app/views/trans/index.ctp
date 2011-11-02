@@ -84,14 +84,14 @@ if (!empty($archdata)) {
 <!-- show the top selling list -->
 <br/>
 <table width="100%">
-<caption>Selling Top 10</caption>
+<caption><font size="5" color="#bb2222">TOP 10 SELLERS</font></caption>
 <tr>
 	<td width="50%">
 		<table width="100%" style="font-size:90%;">
 		<caption style="font-style:italic;">Till Today</caption>
 		<thead>
 		<tr>
-			<th>Top NO.</th>
+			<th>Place #.</th>
 			<th>Office</th>
 			<th>Agent</th>
 			<th>Total Sales</th>
@@ -131,7 +131,7 @@ if (!empty($archdata)) {
 		</caption>
 		<thead>
 		<tr>
-			<th>Top NO.</th>
+			<th>Place #.</th>
 			<th>Office</th>
 			<th>Agent</th>
 			<th>Total Sales</th>
