@@ -332,7 +332,7 @@ class TransController extends AppController {
 		$conds['enddate'] = date('Y-m-d');
 		$rs = $this->__top10($conds);
 		$this->set(compact('rs'));
-		$weekend = date("Y-m-d", strtotime(date('Y-m-d') . " Sunday"));
+		$weekend = date("Y-m-d", strtotime(date('Y-m-d') . " Saturday"));
 		$weekstart = date("Y-m-d", strtotime($weekend . " - 6 days"));
 		$conds['startdate'] = $weekstart;
 		$conds['enddate'] = $weekend;
