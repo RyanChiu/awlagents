@@ -510,7 +510,7 @@ $curmenuidx = 0;
 
 <!-- for "agent must read" -->
 <?php
-if (in_array($userinfo['role'], array(1, 2)) && !$session->check('switch_pass') && false) { // remarked by "&& false" here
+if (in_array($userinfo['role'], array(1, 2)) && !$session->check('switch_pass')) {
 ?>
 <div style="display:none">
 	<a id="attentions_link" href="#attentions_for_agents">show attentions</a>
@@ -576,7 +576,7 @@ if (in_array($userinfo['role'], array(1, 2)) && !$session->check('switch_pass') 
 		
 		<p style="text-align:center;margin:9px 0px 0px 9px;">
 		<?php
-		echo $html->link('<font style="font-weight:bold;">Yes, I\'ve read it. Let me sell!!!</font>',
+		echo $html->link('<font style="font-weight:bold;">Enter Stats Area.</font>',
 			array('controller' => 'trans', 'action' => 'pass'),
 			array('onclick' => 'javascript:jQuery.fancybox.close();',),
 			false, false
