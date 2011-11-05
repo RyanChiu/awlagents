@@ -138,9 +138,6 @@ Office:<?php echo $coms[$selcom]; ?>&nbsp;&nbsp;Agent:<?php echo $ags[$selagent]
 	<th><b><?php echo $exPaginator->sort('Site', 'TransViewClickout.sitename'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Type', 'TransViewClickout.typename'); ?></b></th>
 	<th><b>Link</b></th>
-	<?php if ($userinfo['role'] == 0) {?>
-	<th><b><?php echo $exPaginator->sort('URL', 'TransViewClickout.url'); ?></b></th>
-	<?php }?>
 	<th><b><?php echo $exPaginator->sort('Click Time', 'TransViewClickout.clicktime'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('IP From', 'TransViewClickout.fromip'); ?></b></th>
 </tr>
@@ -167,9 +164,6 @@ foreach ($rs as $r):
 		}
 	?>
 	</td>
-	<?php if ($userinfo['role'] == 0) {?>
-	<td><?php echo $r['TransViewClickout']['url']; ?></td>
-	<?php }?>
 	<td><?php echo $r['TransViewClickout']['clicktime']; ?></td>
 	<td>
 		<a href="http://whatismyipaddress.com/ip/<?php echo $r['TransViewClickout']['fromip']; ?>" target="findip_window">
