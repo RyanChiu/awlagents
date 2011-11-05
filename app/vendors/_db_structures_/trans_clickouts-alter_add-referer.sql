@@ -1,0 +1,1 @@
+ALTER TABLE `trans_clickouts` ADD `referer` VARCHAR( 128 ) NULL;

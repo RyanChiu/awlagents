@@ -1914,7 +1914,7 @@ class TransController extends AppController {
 		$this->set('rs', $this->paginate('ViewChatLog'));
 	}
 		
-	function __go($siteid, $typeid, $url, $agentid, $clicktime, $linkid = null) {
+	function __go($siteid, $typeid, $url, $referer, $agentid, $clicktime, $linkid = null) {
 		//if (__isblocked(__getclientip())) {
 		if (false) {
 			$this->Session->setFlash('Sorry, you\'re not allowed to check the link.');
@@ -1929,6 +1929,7 @@ class TransController extends AppController {
 			$this->data['TransClickout']['siteid'] = $siteid;
 			$this->data['TransClickout']['typeid'] = $typeid;
 			$this->data['TransClickout']['url'] = $url;
+			$this->data['TransClickout']['referer'] = $referer;
 			$this->TransClickout->save($this->data);
 			/*and redirect to the real url*/
 			$this->redirect($url);
@@ -1997,11 +1998,21 @@ class TransController extends AppController {
 		}
 		*/
 		
-		$this->__go($siteid, -1, '', $this->data['TransLink']['url'], $agentid, date('Y-m-d H:i:s'), $linkid);
+		$this->__go($siteid, -1, '', $this->data['TransLink']['url'], '', $agentid, date('Y-m-d H:i:s'), $linkid);
 	}
 	
 	function go() {
 		$this->layout = 'errorlayout';
+		
+		/*
+		 * get referer URL and parse it
+		 */
+		$referer = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
+		$purl = parse_url($referer);
+		$phost = '';
+		if ($purl !== false && array_key_exists("host", $purl)) {
+			$phost = $purl['host'];
+		}
 		
 		if (count($this->passedArgs) != 3) {//if there are illegal args passed
 			$this->Session->setFlash("Undefined link, please try another one.");
@@ -2094,6 +2105,6 @@ class TransController extends AppController {
 		$url = str_replace($searchstr, $campaignid, $url);
 		
 		//$this->Session->setFlash($url);//for debug
-		$this->__go($siteid, $typeid, $url, $agentid, date('Y-m-d H:i:s'));
+		$this->__go($siteid, $typeid, $url, $phost, $agentid, date('Y-m-d H:i:s'));
 	}
 }

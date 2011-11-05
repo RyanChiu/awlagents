@@ -140,6 +140,7 @@ Office:<?php echo $coms[$selcom]; ?>&nbsp;&nbsp;Agent:<?php echo $ags[$selagent]
 	<th><b>Link</b></th>
 	<th><b><?php echo $exPaginator->sort('Click Time', 'TransViewClickout.clicktime'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('IP From', 'TransViewClickout.fromip'); ?></b></th>
+	<th><b><?php echo $exPaginator->sort('Referer', 'TransViewClickout.referer'); ?></b></th>
 </tr>
 </thead>
 <?php
@@ -170,6 +171,7 @@ foreach ($rs as $r):
 			<?php echo $r['TransViewClickout']['fromip']; ?>
 		</a>
 	</td>
+	<td><?php echo $r['TransViewClickout']['referer']; ?></td>
 </tr>
 <?php
 $i++;
