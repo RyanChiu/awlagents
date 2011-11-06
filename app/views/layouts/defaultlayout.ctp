@@ -521,6 +521,7 @@ if (in_array($userinfo['role'], array(0, 1, 2)) && !$session->check('switch_pass
 		ATTENTION, EVERYONES: 
 		</p>
 		<script type="text/javascript" language="javascript">
+		/*//we just don't blink the title of the popup message here
 		colors = new Array(6);
 		colors[0] = "#ff0000";
 		colors[1] = "#ff2020";
@@ -540,6 +541,7 @@ if (in_array($userinfo['role'], array(0, 1, 2)) && !$session->check('switch_pass
 			}
 		}
 		__blinkIt();
+		*/
 		</script>
 		<p style="padding:3px 3px 3px 3px;">
 		<?php
