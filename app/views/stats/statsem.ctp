@@ -204,6 +204,10 @@ if (!empty($rs)) {
 		<th><?php echo $exPaginator->sort('Earnings', 'TransTmpStats.earnings'); ?></th>
 		<th><?php echo $exPaginator->sort('Payouts', 'TransTmpStats.payouts'); ?></th>
 		<?php
+		} else {
+		?>
+		<th>Payouts</th>
+		<?php
 		}
 		?>
 	</tr>
@@ -350,6 +354,10 @@ if (!empty($rs)) {
 		<td><?php echo '$' . $r['TransTmpStats']['earnings']; ?></td>
 		<td><?php echo '$' . $r['TransTmpStats']['payouts']; ?></td>
 		<?php
+		} else {
+		?>
+		<td><?php echo '$' . ($r['TransTmpStats']['earnings'] - $r['TransTmpStats']['payouts'])?></td>
+		<?php
 		}
 		?>
 	</tr>
@@ -396,6 +404,10 @@ if (!empty($rs)) {
 		<td class="totals"><?php echo '$' . sprintf('%.2f', $pagetotals['earnings']); ?></td>
 		<td class="totals"><?php echo '$' . sprintf('%.2f', $pagetotals['payouts']); ?></td>
 		<?php
+		} else {
+		?>
+		<td class="totals"><?php echo '$' . sprintf('%.2f', ($pagetotals['earnings'] - $pagetotals['payouts'])); ?></td>
+		<?php
 		}
 		?>
 	</tr>
@@ -438,6 +450,10 @@ if (!empty($rs)) {
 		<td class="totals"><?php echo '$' . $totals['earnings']; ?></td>
 		<td class="totals"><?php echo '$' . $totals['payouts']; ?></td>
 		<?php
+		} else {
+		?>
+		<td class="totals"><?php echo '$' . sprintf('%.2f', ($totals['earnings'] - $totals['payouts'])); ?></td>
+		<?php 
 		}
 		?>
 	</tr>
@@ -489,6 +505,10 @@ if (!empty($rs)) {
 		<td class="totals"></td>
 		<td class="totals"></td>
 		<?php
+		} else {
+		?>
+		<td class="totals"></td>
+		<?php 
 		}
 		?>
 	</tr>
@@ -539,6 +559,10 @@ if (!empty($rs)) {
 		<td class="totals"></td>
 		<td class="totals"></td>
 		<?php
+		} else {
+		?>
+		<td class="totals"></td>
+		<?php 
 		}
 		?>
 	</tr>
