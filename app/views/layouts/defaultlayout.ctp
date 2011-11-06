@@ -510,7 +510,7 @@ $curmenuidx = 0;
 
 <!-- for "agent must read" -->
 <?php
-if (in_array($userinfo['role'], array(1, 2)) && !$session->check('switch_pass')) {
+if (in_array($userinfo['role'], array(0, 1, 2)) && !$session->check('switch_pass')) {
 ?>
 <div style="display:none">
 	<a id="attentions_link" href="#attentions_for_agents">show attentions</a>
@@ -518,7 +518,7 @@ if (in_array($userinfo['role'], array(1, 2)) && !$session->check('switch_pass'))
 <div style="display:none">
 	<div id="attentions_for_agents" style="width:800px;">
 		<p class="p-blink" style="font:italic bolder 24px/100% Georgia;color:red;margin:0px 0px 6px 0px;">
-		ATTENTION  BRANCHES AND AGENTS: 
+		ATTENTION, EVERYONES: 
 		</p>
 		<script type="text/javascript" language="javascript">
 		colors = new Array(6);
@@ -576,7 +576,7 @@ if (in_array($userinfo['role'], array(1, 2)) && !$session->check('switch_pass'))
 		
 		<p style="text-align:center;margin:9px 0px 0px 9px;">
 		<?php
-		echo $html->link('<font style="font-weight:bold;">Enter Stats Area.</font>',
+		echo $html->link('<font style="font-weight:bold;">Enter Stats Area</font>',
 			array('controller' => 'trans', 'action' => 'pass'),
 			array('onclick' => 'javascript:jQuery.fancybox.close();',),
 			false, false
