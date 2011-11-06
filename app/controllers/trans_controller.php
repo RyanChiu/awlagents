@@ -476,6 +476,7 @@ class TransController extends AppController {
 						$ollog = array('OnlineLog' => array());
 						$ollog['OnlineLog'] += array('accountid' => $this->Auth->user('id'));
 						$ollog['OnlineLog'] += array('intime' => $now->format('Y-m-d H:i:s'));
+						$ollog['OnlineLog'] += array('inip' => __getclientip());
 						$ollog['OnlineLog'] += array(
 							'outtime' => date(
 								'Y-m-d H:i:s',

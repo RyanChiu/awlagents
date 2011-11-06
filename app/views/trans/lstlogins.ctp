@@ -91,6 +91,7 @@ echo $form->end();
 <thead>
 <tr>
 	<th><b><?php echo $exPaginator->sort('Username', 'ViewOnlineLog.username'); ?></b></th>
+	<th><b><?php echo $exPaginator->sort('IP', 'ViewOnlineLog.inip'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Login', 'ViewOnlineLog.intime'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Logout', 'ViewOnlineLog.outtime'); ?></b></th>
 </tr>
@@ -101,6 +102,7 @@ foreach ($rs as $r) {
 ?>
 <tr <?php echo $i % 2 == 0? '' : 'class="odd"'; ?>>
 	<td align="center"><?php echo $r['ViewOnlineLog']['username']; ?></td>
+	<td align="center"><?php echo $r['ViewOnlineLog']['inip']; ?></td>
 	<td align="center"><?php echo $r['ViewOnlineLog']['intime']; ?></td>
 	<td align="center"><?php echo $r['ViewOnlineLog']['outtime']; ?></td>
 </tr>

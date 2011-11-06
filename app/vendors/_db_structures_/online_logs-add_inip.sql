@@ -1,0 +1,1 @@
+ALTER TABLE `online_logs` ADD `inip` VARCHAR( 15 ) NULL AFTER `intime`;
