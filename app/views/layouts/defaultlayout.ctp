@@ -517,9 +517,11 @@ if (in_array($userinfo['role'], array(0, 1, 2)) && !$session->check('switch_pass
 </div>
 <div style="display:none">
 	<div id="attentions_for_agents" style="width:800px;">
+		<!--  
 		<p class="p-blink" style="font:italic bolder 24px/100% Georgia;color:red;margin:0px 0px 6px 0px;">
 		ATTENTION, EVERYONES: 
 		</p>
+		-->
 		<script type="text/javascript" language="javascript">
 		/*//we just don't blink the title of the popup message here
 		colors = new Array(6);
