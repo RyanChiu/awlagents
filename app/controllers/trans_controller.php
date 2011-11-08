@@ -2137,7 +2137,7 @@ class TransController extends AppController {
 		if (!copy($_file['tmp_name'], $filename)) {
 			$this->set('script', __mkuploadhtml($fn, '', 'Failed to upload.'));
 		} else {
-			$this->set('script', __mkuploadhtml($fn, '/../awl/uploads/images/' . $_file['name'], 'Image uploaded.'));
+			$this->set('script', __mkuploadhtml($fn, '/../awl/uploads/images/' . $_file['name'], ''));
 		}
 	}
 }
