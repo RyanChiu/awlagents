@@ -28,7 +28,13 @@ echo $form->end();
 ?>
 
 <script type="text/javascript">
-	CKEDITOR.replace('BulletinInfo');
+	CKEDITOR.replace('BulletinInfo',
+		{
+	        filebrowserUploadUrl : '/act/trans/upload',
+	        filebrowserWindowWidth : '640',
+	        filebrowserWindowHeight : '480'
+	    }
+	);
 	CKEDITOR.config.height = '500px';
 	CKEDITOR.config.width = '850px';
 	CKEDITOR.config.resize_maxWidth = '850px';

@@ -209,4 +209,19 @@
 		);
 		return $dt;
 	}
+	
+	/*
+	 * for CKEditor, the file upload function module
+	 */
+	function __mkuploadhtml($fn,$fileurl,$message) 
+	{ 
+		$str = '<script type="text/javascript">window.parent.CKEDITOR.tools.callFunction('
+			. $fn
+			. ', \''
+			. $fileurl
+			. '\', \''
+			. $message
+			. '\');</script>'; 
+		return $str;
+	}
 ?>

@@ -28,7 +28,13 @@ echo $form->end();
 ?>
 
 <script type="text/javascript">
-	CKEDITOR.replace('TransAdminNotes');
+	CKEDITOR.replace('TransAdminNotes',
+		{
+	        filebrowserUploadUrl : '/act/trans/upload',
+	        filebrowserWindowWidth : '640',
+	        filebrowserWindowHeight : '480'
+	    }
+	);
 	CKEDITOR.config.height = '300px';
 	CKEDITOR.config.width = '850px';
 	CKEDITOR.config.resize_maxWidth = '850px';

@@ -2108,4 +2108,36 @@ class TransController extends AppController {
 		//$this->Session->setFlash($url);//for debug
 		$this->__go($siteid, $typeid, $url, $phost, $agentid, date('Y-m-d H:i:s'));
 	}
+	
+	function upload() {
+		Configure::write('debug', '0');
+		$this->layout = 'errorlayout';
+		
+		if (!array_key_exists('CKEditorFuncNum', $_GET)) {
+			$this->set('script', __makeuploadhtml(1, '', 'Illegal request!'));
+			exit();
+		}
+		$fn = $_GET['CKEditorFuncNum'];
+		/*
+		 * see if there is any file uploads
+		*/
+		if (!isset($HTTP_POST_FILES) && !isset($_FILES)) {
+			$this->set('script', __makeuploadhtml(1, '', "No file uploads."));
+			exit();
+		}
+		
+		if(!isset($_FILES) && isset($HTTP_POST_FILES)) {
+			$_FILES = $HTTP_POST_FILES;
+		}
+		
+		$files = array_values($_FILES);
+		$_file = $files[0];
+		
+		$filename = "/var/www/awl/uploads/images/" . $_file['name'];
+		if (!copy($_file['tmp_name'], $filename)) {
+			$this->set('script', __mkuploadhtml($fn, '', 'Failed to upload.'));
+		} else {
+			$this->set('script', __mkuploadhtml($fn, '/../awl/uploads/images/' . $_file['name'], 'Image uploaded.'));
+		}
+	}
 }
