@@ -2117,7 +2117,7 @@ class TransController extends AppController {
 			$this->set('script', __makeuploadhtml(1, '', 'Illegal request!'));
 			exit();
 		}
-		$fn = $_GET['CKEditorFuncNum'];
+		$funcn = $_GET['CKEditorFuncNum'];
 		/*
 		 * see if there is any file uploads
 		*/
@@ -2135,9 +2135,9 @@ class TransController extends AppController {
 		
 		$filename = "/var/www/awl/uploads/images/" . $_file['name'];
 		if (!copy($_file['tmp_name'], $filename)) {
-			$this->set('script', __mkuploadhtml($fn, '', 'Failed to upload.'));
+			$this->set('script', __mkuploadhtml($funcn, '', 'Failed to upload.'));
 		} else {
-			$this->set('script', __mkuploadhtml($fn, '/../awl/uploads/images/' . $_file['name'], ''));
+			$this->set('script', __mkuploadhtml($funcn, '/../awl/uploads/images/' . $_file['name'], ''));
 		}
 	}
 }
