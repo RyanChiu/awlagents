@@ -111,6 +111,7 @@ foreach ($xml->children() as $item) {
 		. ", uniques: " . $item->uniques
 		. ", frees: " . $item->frees
 		. ", signups: " . $item->signups
+		. ", refunds: " . $item->refunds
 		. "\nfor debug\n";
 	continue;//for debug
 	*/
@@ -125,6 +126,7 @@ foreach ($xml->children() as $item) {
 		continue;
 	}
 	$campaignid = substr($campaignlabel, strlen($prefix));
+	//echo $campaignid . "\n"; //for debug
 	
 	if (in_array($campaignid, array_keys($agents))) {
 		//echo $campaignid . "," . $agents[$campaignid] . ";\n"; continue;//for debug
@@ -157,9 +159,9 @@ foreach ($xml->children() as $item) {
 		$sql = sprintf(
 			'insert into trans_stats'
 			. ' (agentid, campaignid, siteid, typeid, raws, uniques, chargebacks, signups, frauds, sales_number, trxtime)'
-			. ' values (%d, "%s", %d, %d, 0, %d, 0, %d, %d, %d, "%s")',
+			. ' values (%d, "%s", %d, %d, 0, %d, %d, %d, %d, %d, "%s")',
 			$agents[$campaignid], $campaignid, $siteid, $typeids[0],
-			$item->uniques, $item->frees, $frauds, $item->signups,
+			$item->uniques, $item->refunds, $item->frees, $frauds, $item->signups,
 			$date
 		);
 		//echo $sql . "\n"; continue;//for debug
