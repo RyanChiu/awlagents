@@ -36,8 +36,8 @@ echo $form->end();
 	    }
 	);
 	CKEDITOR.config.height = '300px';
-	CKEDITOR.config.width = '850px';
-	CKEDITOR.config.resize_maxWidth = '850px';
+	CKEDITOR.config.width = '840px';
+	CKEDITOR.config.resize_maxWidth = '840px';
 	CKEDITOR.config.toolbar =
 		[
 		    ['Source','-','NewPage','Preview','-','Templates'],
