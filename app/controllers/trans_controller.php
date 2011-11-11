@@ -11,7 +11,7 @@ class TransController extends AppController {
 		'TransLink', 'TransClickout', 'AgentSiteMapping', 'TransType',
 		'TransSite', 'SiteExcluding', 'TransStats',
 		'TransViewAdmin', 'TransViewCompany', 'TransViewAgent',
-		'TransViewStats', 'ViewMapping',
+		'TransViewStats', 'ViewMapping', 'SiteManual',
 		'FakeContactUs'
 	);
 	var $components = array(
@@ -63,6 +63,7 @@ class TransController extends AppController {
 				case 'updpopupmsg':
 				case 'regcompany':
 				case 'lstcompanies':
+				case 'updtoolbox':
 					$this->__accessDenied();
 					return;
 				case 'lstagents':
@@ -100,6 +101,7 @@ class TransController extends AppController {
 				case 'lstcompanies':
 				case 'lstagents':
 				case 'lstlogins':
+				case 'updtoolbox':
 					$this->__accessDenied();
 					return;
 				case 'updagent':
@@ -2107,6 +2109,62 @@ class TransController extends AppController {
 		
 		//$this->Session->setFlash($url);//for debug
 		$this->__go($siteid, $typeid, $url, $phost, $agentid, date('Y-m-d H:i:s'));
+	}
+	
+	function updtoolbox() {
+		$this->layout = 'defaultlayout';
+		
+		$site = -1;
+		
+		if (empty($this->data)) {
+			if (array_key_exists('site', $this->passedArgs)) {
+				$site = $this->passedArgs['site'];
+			}
+			
+			$this->data = $this->SiteManual->find('first',
+				array(
+					'conditions' => array('siteid' => $site)
+				)
+			);
+		} else {
+			if ($this->SiteManual->save($this->data)) {
+				$this->Session->setFlash('Updted.');
+			} else {
+				$this->Session->setFlash('Failed to update.');
+			}
+			
+			$site = $this->data['SiteManual']['siteid'];
+		}
+		
+		$rs = $this->TransSite->find('first',
+			array(
+				'conditions' => array('id' => $site)
+			)
+		);
+		$this->set(compact('rs'));
+	}
+	
+	function toolbox() {
+		$this->layout = 'defaultlayout';
+		
+		$site = -1;
+		if (array_key_exists('site', $this->passedArgs)) {
+			$site = $this->passedArgs['site'];
+		}
+		$rs = $this->TransSite->find('first',
+			array(
+				'conditions' => array('id' => $site)
+			)
+		);
+		$this->set(compact('rs'));
+		
+		$this->set('data',
+			$this->SiteManual->find('first',
+				array(
+					'conditions' => array('siteid' => $site)
+				)
+			)
+		);
 	}
 	
 	function upload() {

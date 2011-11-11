@@ -351,6 +351,43 @@ $curmenuidx = 0;
 			<?php
 			}
 			?>
+			<?php
+			if ($role == 0) {//means an administrator
+				$menuitemscount++;
+				//if cur route matches this menu item, then set the number to inform the js code
+				if (strpos($this->here, 'toolbox') === false) {
+				} else {
+					$curmenuidx = $menuitemscount - 1;
+				}
+			?>
+			<li>
+			<?php 
+			echo $html->link('<span><font color="white">TOOL BOX</font></span>',
+				"#",
+				array('rel' => 'dropmenu_toolbox_admin'),
+				false, false);
+			?>
+			</li>
+			<?php 
+			} else {//means an office or an agent
+				$menuitemscount++;
+				//if cur route matches this menu item, then set the number to inform the js code
+				if (strpos($this->here, 'toolbox') === false) {
+				} else {
+					$curmenuidx = $menuitemscount - 1;
+				}
+			?>
+			<li>
+			<?php 
+			echo $html->link('<span><font color="white">TOOL BOX</font></span>',
+				"#",
+				array('rel' => 'dropmenu_toolbox_normal'),
+				false, false);
+			?>
+			</li>
+			<?php 
+			}
+			?>
 			<li>
 			<?php
 			echo $html->link('<span><font color="white">LOGOUT</font></span>',
@@ -400,6 +437,18 @@ $curmenuidx = 0;
 			);
 			?>
 		</div>
+		<div id="dropmenu_toolbox_admin" class="dropmenudiv_e" style="width:120px;">
+			<?php
+			echo $html->link('<font color="white"><b>Update HMS</b></font>',
+				array('controller' => 'trans', 'action' => 'updtoolbox', 'site' => 2),
+				null, false, false
+			);
+			echo $html->link('<font color="white"><b>Update XXBB</b></font>',
+				array('controller' => 'trans', 'action' => 'updtoolbox', 'site' => 1),
+				null, false, false
+			);
+			?>
+		</div>
 		<?php
 		}
 		?>
@@ -419,6 +468,26 @@ $curmenuidx = 0;
 		}
 		?>
 		<!--agent drop down menu -->
+		
+		<!--office and agent drop down menu -->
+		<?php
+		if ($role == 1 || $role == 2) {//means an office or an agent
+		?>
+		<div id="dropmenu_toolbox_normal" class="dropmenudiv_e" style="width:120px;">
+			<?php
+			echo $html->link('<font color="white"><b>HMS</b></font>',
+				array('controller' => 'trans', 'action' => 'toolbox', 'site' => 2),
+				null, false, false
+			);
+			echo $html->link('<font color="white"><b>XXBB</b></font>',
+				array('controller' => 'trans', 'action' => 'toolbox', 'site' => 1),
+				null, false, false
+			);
+			?>
+		</div>
+		<?php 
+		}
+		?>
 		
 		<!--everyone drop down menu -->
 		<div id="dropmenu_onlinemodels" class="dropmenudiv_e" style="width:110px;">
