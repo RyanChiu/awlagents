@@ -198,6 +198,7 @@ if (!empty($rs)) {
 			. '<br/><i>' . (count($typesv) > 1 ? $typesv[1] : 'N/A') . '</i>';
 		?>
 		</th>
+		<th><?php echo $exPaginator->sort('Net', 'TransTmpStats.net'); ?></th>
 		<?php
 		if ($userinfo['role'] == 0) {
 		?>
@@ -216,7 +217,7 @@ if (!empty($rs)) {
 	$pagetotals = array(
 		'raws' => 0, 'uniques' => 0, 'chargebacks' => 0, 'signups' => 0, 'frauds' => 0,
 		'sales_type1' => 0, 'sales_type2' => 0, 'sales_type3' => 0, 'sales_type4' => 0,
-		'payouts' => 0, 'earnings' => 0
+		'net' => 0, 'payouts' => 0, 'earnings' => 0
 	);
 	$i = 0;
 	foreach ($rs as $r) {
@@ -229,6 +230,7 @@ if (!empty($rs)) {
 		$pagetotals['sales_type2'] += $r['TransTmpStats']['sales_type2'];
 		$pagetotals['sales_type3'] += $r['TransTmpStats']['sales_type3'];
 		$pagetotals['sales_type4'] += $r['TransTmpStats']['sales_type4'];
+		$pagetotals['net'] += $r['TransTmpStats']['net'];
 		$pagetotals['payouts'] += $r['TransTmpStats']['payouts'];
 		$pagetotals['earnings'] += $r['TransTmpStats']['earnings'];
 	?>
@@ -348,6 +350,7 @@ if (!empty($rs)) {
 		<td><?php echo $r['TransTmpStats']['sales_type3']; ?></td>
 		<td><?php echo $r['TransTmpStats']['sales_type2']; ?></td>
 		<td><?php echo $r['TransTmpStats']['sales_type1']; ?></td>
+		<td><?php echo $r['TransTmpStats']['net']; ?></td>
 		<?php
 		if ($userinfo['role'] == 0) {
 		?>
@@ -398,6 +401,7 @@ if (!empty($rs)) {
 		<td class="totals"><?php echo $pagetotals['sales_type3']; ?></td>
 		<td class="totals"><?php echo $pagetotals['sales_type2']; ?></td>
 		<td class="totals"><?php echo $pagetotals['sales_type1']; ?></td>
+		<td class="totals"><?php echo $pagetotals['net']; ?></td>
 		<?php
 		if ($userinfo['role'] == 0) {
 		?>
@@ -444,6 +448,7 @@ if (!empty($rs)) {
 		<td class="totals"><?php echo $totals['sales_type3']; ?></td>
 		<td class="totals"><?php echo $totals['sales_type2']; ?></td>
 		<td class="totals"><?php echo $totals['sales_type1']; ?></td>
+		<td class="totals"><?php echo $totals['net']; ?></td>
 		<?php
 		if ($userinfo['role'] == 0) {
 		?>
@@ -499,6 +504,7 @@ if (!empty($rs)) {
 		<td class="totals"></td>
 		<td class="totals"></td>
 		<td class="totals"></td>
+		<td class="totals"></td>
 		<?php
 		if ($userinfo['role'] == 0) {
 		?>
@@ -546,6 +552,7 @@ if (!empty($rs)) {
 		</td>
 		<td class="totals"></td>
 		<!--<td class="totals"></td>-->
+		<td class="totals"></td>
 		<td class="totals"></td>
 		<td class="totals"></td>
 		<td class="totals"></td>

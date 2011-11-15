@@ -441,6 +441,7 @@ class StatsController extends AppController {
 								'sum(if(typeid = (SELECT id FROM trans_types WHERE siteid = ' . $selsite . ' order by id limit 2, 1), sales_number, 0)) as sales_type3',
 								'sum(if(typeid = (SELECT id FROM trans_types WHERE siteid = ' . $selsite . ' order by id limit 3, 1), sales_number, 0)) as sales_type4',
 								//'sum(sales_number) as sales_number',
+								'sum(net) as net',
 								'sum(payouts) as payouts',
 								'sum(earnings) as earnings'
 							),
@@ -476,6 +477,7 @@ class StatsController extends AppController {
 								'sales_type3' => $r[0]['sales_type3'],
 								'sales_type4' => $r[0]['sales_type4'],
 								//'sales_number' => $r[0]['sales_number'],
+								'net' => $r[0]['net'],
 								'payouts' => $r[0]['payouts'],
 								'earnings' => $r[0]['earnings']
 							)
@@ -552,6 +554,7 @@ class StatsController extends AppController {
 						'sum(if(typeid = (SELECT id FROM trans_types WHERE siteid = ' . $selsite . ' order by id limit 2, 1), sales_number, 0)) as sales_type3',
 						'sum(if(typeid = (SELECT id FROM trans_types WHERE siteid = ' . $selsite . ' order by id limit 3, 1), sales_number, 0)) as sales_type4',
 						//'sum(sales_number) as sales_number',
+						'sum(net) as net',
 						'sum(payouts) as payouts',
 						'sum(earnings) as earnings'
 					),
@@ -587,6 +590,7 @@ class StatsController extends AppController {
 						'sales_type3' => $r[0]['sales_type3'],
 						'sales_type4' => $r[0]['sales_type4'],
 						//'sales_number' => $r[0]['sales_number'],
+						'net' => $r[0]['net'],
 						'payouts' => $r[0]['payouts'],
 						'earnings' => $r[0]['earnings']
 					)
@@ -637,7 +641,7 @@ class StatsController extends AppController {
 		$totals = array(
 			'raws' => 0, 'uniques' => 0, 'chargebacks' => 0, 'signups' => 0, 'frauds' => 0,
 			'sales_type1' => 0, 'sales_type2' => 0, 'sales_type3' => 0, 'sales_type4' => 0,
-			'payouts' => 0, 'earnings' => 0
+			'net' => 0, 'payouts' => 0, 'earnings' => 0
 		);
 		$rs = $this->TransTmpStats->find('all',
 			array(
@@ -652,6 +656,7 @@ class StatsController extends AppController {
 					'sum(sales_type2) as sales_type2',
 					'sum(sales_type3) as sales_type3',
 					'sum(sales_type4) as sales_type4',
+					'sum(net) as net',
 					'sum(payouts) as payouts',
 					'sum(earnings) as earnings'
 				),
@@ -669,6 +674,7 @@ class StatsController extends AppController {
 			$totals['sales_type2'] = $rs[0][0]['sales_type2'];
 			$totals['sales_type3'] = $rs[0][0]['sales_type3'];
 			$totals['sales_type4'] = $rs[0][0]['sales_type4'];
+			$totals['net'] = $rs[0][0]['net'];
 			$totals['payouts'] = $rs[0][0]['payouts'];
 			$totals['earnings'] = $rs[0][0]['earnings'];
 		}
