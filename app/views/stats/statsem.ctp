@@ -154,7 +154,7 @@ if (!empty($rs)) {
 		<th <?php echo $selsite != -1 ? '' : 'class="naClassHide"'; ?>>
 		<?php echo $exPaginator->sort('Free*', 'TransTmpStats.signups'); ?>
 		</th>
-		<th <?php echo $userinfo['role'] == 0 ? '' : 'class="naClassHide"'; ?>>
+		<th <?php echo $userinfo['role'] == 0 ? 'class="naClassHide"' : 'class="naClassHide"'; ?>>
 		<?php //echo $exPaginator->sort('Frauds', 'TransTmpStats.frauds'); ?>
 		<?php
 			echo '<font size="1">'; 
