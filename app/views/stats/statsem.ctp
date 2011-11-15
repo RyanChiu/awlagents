@@ -154,18 +154,18 @@ if (!empty($rs)) {
 		<th <?php echo $selsite != -1 ? '' : 'class="naClassHide"'; ?>>
 		<?php echo $exPaginator->sort('Free*', 'TransTmpStats.signups'); ?>
 		</th>
-		<th <?php echo $userinfo['role'] == 0 ? '' : ''; ?>>
+		<th <?php echo $userinfo['role'] == 0 ? '' : 'class="naClassHide"'; ?>>
 		<?php //echo $exPaginator->sort('Frauds', 'TransTmpStats.frauds'); ?>
 		<?php
+			echo '<font size="1">'; 
 			echo $exPaginator->sort('Fraud', 'TransTmpStats.frauds');
+			echo '</font>';
+			echo '<br/><font size="1">(for revise)</font>';
 		?>
 		</th>
-		<th <?php echo $userinfo['role'] == 0 ? '' : 'class="naClassHide"'; ?>>
+		<th <?php echo $userinfo['role'] != -1 ? '' : 'class="naClassHide"'; ?>>
 		<?php
-			echo '<font size="1">'; 
 			echo $exPaginator->sort('Fraud', 'TransTmpStats.chargebacks');
-			echo '</font>';
-			echo '<br/><font size="1">(ORIGINAL)</font>';
 		?>
 		</th>
 		<?php
