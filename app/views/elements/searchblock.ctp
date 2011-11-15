@@ -41,7 +41,7 @@ echo $form->create(null, array('controller' => 'stats', 'action' => $curaction, 
 		onclick='javascript:__changeAction("frmStats", "<?php echo $html->url(array('controller' => 'stats', 'action' => 'statsagdetail')); ?>");return true;'
 		<?php echo $bywhat == 3 ? 'checked' : ''; ?>
 		/>
-		<label for="viewbyagdetail">Fraud Control</label>
+		<label for="viewbyagdetail">Detailed</label>
 		</div>
 		<?php
 		}
