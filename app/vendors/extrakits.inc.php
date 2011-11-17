@@ -164,10 +164,10 @@
 	/*
 	 * get the local date of the stats servers
 	 * parameters:
-	 * origin_dt	the string present date, like 2010-05-01 12:34:56
+	 * origin_dt	the string present date, like 2010-05-01,12:34:56
 	 * remote_tz	the time zone of the remote server, like "Europe/London"
 	 * offset_h		the offset time in hours
-	 * origin_tz	the time zone of the server which the origin_dt belongs to, , like "America/New_York"
+	 * origin_tz	the time zone of the server which the origin_dt belongs to, like "America/New_York"
 	 * islongf		if the return value should be as 2010-05-01 or 2010-05-01 12:00:01
 	 */
 	function __get_remote_date($origin_dt, $remote_tz = null, $offset_h = -1, $origin_tz = "America/New_York", $islongf = false) {
