@@ -198,7 +198,9 @@ if (!empty($rs)) {
 			. '<br/><i>' . (count($typesv) > 1 ? $typesv[1] : 'N/A') . '</i>';
 		?>
 		</th>
-		<th><?php echo $exPaginator->sort('Net', 'TransTmpStats.net'); ?></th>
+		<th <?php echo $selsite == 2 ? 'class="naClassHide"' : ''; // HARD CODE HERE: just do not show for the site HMS?>>
+		<?php echo $exPaginator->sort('Net', 'TransTmpStats.net'); ?>
+		</th>
 		<?php
 		if ($userinfo['role'] == 0) {
 		?>
@@ -207,7 +209,7 @@ if (!empty($rs)) {
 		<?php
 		} else if ($userinfo['role'] == 1) {
 		?>
-		<th>Payments</th>
+		<th <?php echo $selsite == 2 ? 'class="naClassHide"' : ''; // HARD CODE HERE: just do not show for the site HMS?>>Payments</th>
 		<?php
 		}
 		?>
