@@ -9,7 +9,7 @@ if (($argc - 1) != 1) {//if there is 1 parameter and it must mean a date like '2
 /*
  * the following line will make the whole script exit if date string format is wrong
  */
-$date = __get_remote_date($argv[1], "Europe/London", -1);
+$date = __get_remote_date($argv[1], "America/New_York", -1);
 
 /*get the abbreviation of the site*/
 $abbr = __stats_get_abbr($argv[0]);
