@@ -10,6 +10,7 @@ if (($argc - 1) != 1) {//if there is 1 parameter and it must mean a date like '2
  * the following line will make the whole script exit if date string format is wrong
  */
 $date = __get_remote_date($argv[1], "America/New_York", -1);
+$date_l = __get_remote_date($argv[1], "America/New_York", -1, "America/New_York", true);
 
 /*get the abbreviation of the site*/
 $abbr = __stats_get_abbr($argv[0]);
@@ -177,5 +178,5 @@ if ($i == 0) {
 echo $m . " row(s) deleted...$f...\n";
 echo $j . "(/" . $i . ") row(s) inserted.\n";
 echo "retried " . $retimes . " time(s).\n";
-echo "Processing " . $date . " OK\n";
+echo "Just got the stats data from the remote server at '" . $date_l . " on the remote server'.\n";
 ?>
