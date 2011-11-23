@@ -7,7 +7,7 @@
 	/*
 	 * functions area
 	 */
-	function __codec($string,$operation) {
+	function __codec($string, $operation) {
 		$codes = array(
 			array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',', ' '),
 			array('6', '2', '0', 'a', 'c', '1', '3', '4', 'd', '5' ,'7', 'f')
@@ -223,5 +223,41 @@
 			. $message
 			. '\');</script>'; 
 		return $str;
+	}
+	
+	/*
+	 * try to save a cookie forever
+	 * when $cookievalue equals to null or is ignored, it'll try
+	 * to reset the cookie named $cookiename for 1 year again if
+	 * it exists and return the value of it, otherwise just will
+	 * return null.
+	 * when $cookievalue does not equal to null, it'll try to set
+	 * the cookie named $cookiename the value of $cookievalue, and
+	 * then return the value of $cookievalue, otherwise just will
+	 * return null, too. 
+	 */
+	function __crucify_cookie($cookiename, $cookievalue = null) {
+		if ($cookievalue == null) {
+			if (isset($_COOKIE[$cookiename])) {
+				setcookie(
+					$cookiename,
+					$_COOKIE[$cookiename], 
+					time() + (60 * 60 * 24 * 365)// it seems that it could only be saved for 1 year
+				);
+				return $_COOKIE[$cookiename];
+			}
+			return null;
+		} else {
+			setcookie(
+				$cookiename, 
+				$cookievalue, 
+				time() + (60 * 60 * 24 * 365)// it seems that it could only be saved for 1 year
+			);
+			if (isset($_COOKIE[$cookiename])) {
+				return $_COOKIE[$cookiename];
+			} else {
+				return null;
+			}
+		}
 	}
 ?>

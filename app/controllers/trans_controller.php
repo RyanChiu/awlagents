@@ -258,7 +258,7 @@ class TransController extends AppController {
 	function index($id = null) {
 		if (!$this->Auth->user()) $this->redirect(array('controller' => 'trans', 'action' => 'login'));
 		$this->layout = 'defaultlayout';
-
+		
 		/*try to archive the bulletin*/
 		if ($id == -1 && $this->Auth->user('role') == 0) {
 			$this->Bulletin->updateAll(
@@ -459,10 +459,12 @@ class TransController extends AppController {
 				if ($this->Auth->user()) {//means username/password/status are all correct, login succeeded
 					$this->Auth->login();
 					/*
+					 * log login start:
 					 * before login redirect, we try to log the login time of the user. 
 					 */
 					$gonnalog = true;
 					$now = new DateTime("now", new DateTimeZone($this->__svrtz));
+					/*
 					if ($this->Auth->user('online') != -1) {
 						$ollog = $this->OnlineLog->find('first',
 							array(
@@ -474,11 +476,18 @@ class TransController extends AppController {
 							- strtotime($ollog['OnlineLog']['intime']);
 						if ($logtimediff < $this->__timeout) $gonnalog = false;
 					}
+					*/
 					if ($gonnalog) {
+						$terminalcookie = $this->Session->check('terminalcookie') ?
+							$this->Session->read('terminalcookie') : null;
 						$ollog = array('OnlineLog' => array());
 						$ollog['OnlineLog'] += array('accountid' => $this->Auth->user('id'));
 						$ollog['OnlineLog'] += array('intime' => $now->format('Y-m-d H:i:s'));
 						$ollog['OnlineLog'] += array('inip' => __getclientip());
+						$ollog['OnlineLog'] += array(
+							'terminalcookieid' => (($terminalcookie != null && isset($terminalcookie['id'])) ?
+								$terminalcookie['id'] : -2)
+						);
 						$ollog['OnlineLog'] += array(
 							'outtime' => date(
 								'Y-m-d H:i:s',
@@ -494,6 +503,9 @@ class TransController extends AppController {
 						$this->TransAccount->saveField('online', $this->OnlineLog->id);
 						$this->TransAccount->saveField('lastlogintime', $now->format('Y-m-d H:i:s'));
 					}
+					/*
+					 * log login end
+					 */
 					$this->redirect($this->Auth->redirect());
 				} else {// means login failed
 					if (!empty($userinfo)) {
