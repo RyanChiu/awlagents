@@ -1,4 +1,4 @@
-<h1>Login Logs</h1>
+<h1>Log in/out Logs</h1>
 <?php
 $userinfo = $session->read('Auth.TransAccount');
 ?>
