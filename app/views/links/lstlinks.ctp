@@ -35,10 +35,10 @@ echo $form->create(null, array('controller' => 'links', 'action' => 'lstlinks'))
 	</font>
 </caption>
 <tr>
-	<td width="29%" align="right">
+	<td width="31%" align="right">
 	<?php
 	echo $form->input('TransSite.id',
-		array('options' => $sites, 'style' => 'width:140px;', 'label' => 'Site:', 'type' => 'select')
+		array('options' => $sites, 'style' => 'width:170px;', 'label' => 'Site:', 'type' => 'select')
 	);
 	?>
 	</td>
@@ -49,7 +49,7 @@ echo $form->create(null, array('controller' => 'links', 'action' => 'lstlinks'))
 	);
 	?>
 	</td>
-	<td width="31%">
+	<td width="29%">
 	<?php
 	echo $form->submit('Generate Link Codes', array('style' => 'width:180px;'));
 	?>
@@ -88,19 +88,19 @@ if (!empty($rs)) {
 		} else if (array_key_exists('AgentSiteMapping', $r)) {
 			foreach ($types as $type) {
 	?>
-			<tr>
-				<td align="center">
-				<?php
-				echo $sites[$r['AgentSiteMapping']['siteid']] . '_' . $type['TransType']['typename'] . ':&nbsp;&nbsp;&nbsp;';
-				echo '<b>';
-				echo $html->url(array('controller' => 'trans', 'action' => 'go'), true) . '/'
-					. $r['AgentSiteMapping']['siteid'] . '/'
-					. $type['TransType']['id']. '/'
-					. $ags[$r['AgentSiteMapping']['agentid']];
-				echo '</b>';
-				?>
-				</td>
-			</tr>
+		<tr>
+			<td align="center">
+			<?php
+			echo $sites[$r['AgentSiteMapping']['siteid']] . '_' . $type['TransType']['typename'] . ':&nbsp;&nbsp;&nbsp;';
+			echo '<b>';
+			echo $html->url(array('controller' => 'trans', 'action' => 'go'), true) . '/'
+				. $r['AgentSiteMapping']['siteid'] . '/'
+				. $type['TransType']['id']. '/'
+				. $ags[$r['AgentSiteMapping']['agentid']];
+			echo '</b>';
+			?>
+			</td>
+		</tr>
 	<?php
 			}
 		}

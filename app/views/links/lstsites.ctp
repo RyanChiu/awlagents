@@ -19,6 +19,7 @@ echo $form->button('Add Site',
 	<tr>
 		<th><?php echo $exPaginator->sort('Campaigns', 'TransViewSite.hostname') . '<br/><font size="1">(for admin only)</font>'; ?></th>
 		<th><?php echo $exPaginator->sort('Site Name', 'TransViewSite.sitename') . '<br/><font size="1">(for office or agent)</font>'; ?></th>
+		<th><?php echo $exPaginator->sort('Site Type', 'TransViewSite.type'); ?></th>
 		<?php
 		if ($userinfo['id'] == 2) {
 		?>
@@ -37,6 +38,7 @@ echo $form->button('Add Site',
 	<tr>
 		<td><?php echo $r['TransViewSite']['hostname'];	?></td>
 		<td><?php echo $r['TransViewSite']['sitename'];	?></td>
+		<td><?php echo $r['TransViewSite']['type'];	?></td>
 		<?php
 		if ($userinfo['id'] == 2) {
 		?>

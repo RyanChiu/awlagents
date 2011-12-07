@@ -209,9 +209,9 @@ class LinksController extends AppController {
 					'order' => 'username4m'
 				)
 			);
-			$sites = $this->TransSite->find('list',
+			$sites = $this->TransViewSite->find('list',
 				array(
-					'fields' => array('id', 'sitename'),
+					'fields' => array('id', 'sitenametype'),
 					'order' => 'id'
 				)
 			);
@@ -233,9 +233,9 @@ class LinksController extends AppController {
 					'group' => 'siteid'
 				)
 			);
-			$sites = $this->TransSite->find('list',
+			$sites = $this->TransViewSite->find('list',
 				array(
-					'fields' => array('id', 'sitename'),
+					'fields' => array('id', 'sitenametype'),
 					'conditions' => array('status' => 1, 'not' => array('id' => $__exsites)),
 					'order' => 'sitename'
 				)
