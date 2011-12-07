@@ -15,7 +15,7 @@ class TransAccount extends AppModel {
 			),
 			'usernameRule_3' => array(
 				'rule' => 'isAgentUsernameOrganized',
-				'message' => 'Managers, please sign up your agents with the alpha numeric user names/rids, or the sales will not track properly.(If the last user name rid was LL22, the next agent will be LL23, and so on. Note that LL23_1 is valid as it represents an alternative name for LL23)'
+				'message' => 'Managers, please sign up your agents with the alpha numeric user names/rids, or the sales will not track properly.(If the last user name rid was LL22, the next agent will be LL23, and so on.)'
 			),
 			'usernameRule_4' => array(
 				'rule' => 'isAgentUsernameInMappings',
