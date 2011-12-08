@@ -244,7 +244,11 @@ if ($userinfo['role'] == 1) {
 	</tr>
 </table>
 <script type="text/javascript" language="javascript"> 
-jQuery(":checkbox").attr({style: "border:0px;width:16px;vertical-align:middle;"}); 
+jQuery(":checkbox").attr({style: "border:0px;width:16px;vertical-align:middle;"});
+jQuery("#TransAccountUsername").keyup(function(){
+	//this.value = this.value.replace('/^[a-z]{1,3}\d{0,4}_{0,1}\d{0,2}$/i', '');
+	this.value = this.value.toUpperCase();
+});
 </script>
 <?php
 echo $form->input('TransAccount.role', array('type' => 'hidden', 'value' => '2'));//the value 2 as being an agent
