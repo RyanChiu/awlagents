@@ -971,6 +971,33 @@ class TransController extends AppController {
 				return;
 			}
 			
+			/*
+			 * check if "auto-generate" was checked, if it was then generate a user name
+			 * by +1 to the number in it, say if the largest one is "AA01", then it's
+			 * "AA02".
+			 */
+			if ($this->data['TransAccount']['auto'] == true) {
+				$largestname = $this->TransViewAgent->find('first',
+					array(
+						'fields' => array('username', 'RIGHT(username4m, 32) as num'),
+						'conditions' => array(
+							'companyid' => $this->data['TransAgent']['companyid']
+						),
+						'order' => 'RIGHT(username4m, 32) desc'
+					)
+				);
+				if (empty($largestname)) {
+					$this->data['TransAccount']['username'] =
+						strtoupper(substr($cps[$this->data['TransAgent']['companyid']], 0, 2))
+						. '01';
+				} else {
+					$largestnum = intval($largestname[0]['num']) + 1;
+					$this->data['TransAccount']['username'] =
+						strtoupper(substr($cps[$this->data['TransAgent']['companyid']], 0, 2))
+						. ($largestnum < 10 ? ('0' . $largestnum) : $largestnum);
+				}
+			}
+			
 			/*validate the posted fields*/
 			$this->TransAccount->set($this->data);
 			$this->TransAgent->set($this->data);

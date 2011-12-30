@@ -85,7 +85,22 @@ if ($userinfo['role'] == 1) {
 		</td>
 	</tr>
 	<tr>
-		<td>Username : </td>
+		<td>
+		<div style="float:left">Username : </div>
+		<div style="float:left">
+		<?php
+		echo '('
+			. $form->checkbox(
+				'TransAccount.auto',
+				array(
+					'checked' => 'checked',
+					'style' => 'border:0px;width:16px;'
+				)
+			)
+			. 'Auto-generated)';
+		?>
+		</div>
+		</td>
 		<td>
 		<div style="float:left">
 		<?php
@@ -248,6 +263,17 @@ jQuery(":checkbox").attr({style: "border:0px;width:16px;vertical-align:middle;"}
 jQuery("#TransAccountUsername").keyup(function(){
 	//this.value = this.value.replace('/^[a-z]{1,3}\d{0,4}_{0,1}\d{0,2}$/i', '');
 	this.value = this.value.toUpperCase();
+});
+function dimUsernameInput() {
+	if (jQuery("#TransAccountAuto").attr("checked") == true) {
+		jQuery("#TransAccountUsername").attr('disabled','disabled');
+	} else {
+		jQuery("#TransAccountUsername").removeAttr('disabled');
+	}
+}
+dimUsernameInput();
+jQuery("#TransAccountAuto").click(function(){
+	dimUsernameInput();
 });
 </script>
 <?php
