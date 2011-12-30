@@ -15,7 +15,7 @@ class TransAccount extends AppModel {
 			),
 			'usernameRule_3' => array(
 				'rule' => 'isAgentUsernameOrganized',
-				'message' => 'Managers, please sign up your agents with the alpha numeric user names/rids, or the sales will not track properly.(If the last user name rid was LL22, the next agent will be LL23, and so on.)'
+				'message' => 'Managers, please sign up your agents with the alpha (uppercase) numeric user names/rids, or the sales will not track properly.(If the last user name rid was LL22, the next agent will be LL23, and so on.)'
 			),
 			'usernameRule_4' => array(
 				'rule' => 'isAgentUsernameInMappings',
@@ -61,7 +61,7 @@ class TransAccount extends AppModel {
 		if (isset($data) && $data['role'] == 2) {//only if it's an agent
 			$value = array_values($check);
 			$value = $value[0];
-			//this rule means:the first 2~5 chars should be a-z or A-Z or 0-9 or _, and the following 2~4 chars should be 0-9
+			//this rule means:the first 1~3 chars should be A-Z or 0-9 or _, and the following 2~4 chars should be 0-9
 			return preg_match('/^[A-Z]{1,3}\d{0,4}_{0,1}\d{0,2}$/i', $value);
 		}
 		return true;
