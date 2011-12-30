@@ -62,7 +62,7 @@ class TransAccount extends AppModel {
 			$value = array_values($check);
 			$value = $value[0];
 			//this rule means:the first 2~5 chars should be a-z or A-Z or 0-9 or _, and the following 2~4 chars should be 0-9
-			return preg_match('/^[a-z]{1,3}\d{0,4}_{0,1}\d{0,2}$/i', $value);
+			return preg_match('/^[A-Z]{1,3}\d{0,4}_{0,1}\d{0,2}$/i', $value);
 		}
 		return true;
 	}
