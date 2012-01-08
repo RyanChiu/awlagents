@@ -209,7 +209,7 @@ if (!empty($rs)) {
 		<?php
 		} else if ($userinfo['role'] == 1) {
 		?>
-		<th <?php echo $selsite == 2 ? 'class="naClassHide"' : 'class="naClassHide"'; // HARD CODE HERE: just do not show the column at all as Marijana request.?>>Payments</th>
+		<th <?php echo $selsite == 2 ? '' : 'class="naClassHide"'; // HARD CODE HERE: just do not show the column for the site HMS?>>Payments</th>
 		<?php
 		}
 		?>
@@ -361,7 +361,7 @@ if (!empty($rs)) {
 		<?php
 		} else if ($userinfo['role'] == 1) {
 		?>
-		<td><?php echo '$' . ($r['TransTmpStats']['earnings'] - $r['TransTmpStats']['payouts'])?></td>
+		<td><?php echo '$' . $r['TransTmpStats']['payouts']?></td>
 		<?php
 		}
 		?>
