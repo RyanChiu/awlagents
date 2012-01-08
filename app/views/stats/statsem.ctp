@@ -209,7 +209,7 @@ if (!empty($rs)) {
 		<?php
 		} else if ($userinfo['role'] == 1) {
 		?>
-		<th <?php echo $selsite == 2 ? '' : 'class="naClassHide"'; // HARD CODE HERE: just do not show the column for the site HMS?>>Payments</th>
+		<th <?php echo $selsite == 2 ? 'class="naClassHide"' : ''; // HARD CODE HERE: just do not show the column for the site HMS?>>Payments</th>
 		<?php
 		}
 		?>
