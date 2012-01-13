@@ -151,7 +151,7 @@ if (!empty($rs)) {
 		<?php //echo $exPaginator->sort('Fraud', 'TransTmpStats.chargebacks'); ?>
 		</th>
 		-->
-		<th <?php echo $selsite != -1 ? '' : 'class="naClassHide"'; ?>>
+		<th <?php echo !in_array($selsite, array(3)) ? '' : 'class="naClassHide"'; ?>>
 		<?php echo $exPaginator->sort('Free*', 'TransTmpStats.signups'); ?>
 		</th>
 		<th <?php echo $userinfo['role'] == 0 ? 'class="naClassHide"' : 'class="naClassHide"'; ?>>
@@ -163,7 +163,7 @@ if (!empty($rs)) {
 			echo '<br/><font size="1">(for revise)</font>';
 		?>
 		</th>
-		<th <?php echo $userinfo['role'] != -1 ? '' : 'class="naClassHide"'; ?>>
+		<th <?php echo $userinfo['role'] != -1 && !in_array($selsite, array(3)) ? '' : 'class="naClassHide"'; ?>>
 		<?php
 			echo $exPaginator->sort('Frauds', 'TransTmpStats.chargebacks');
 		?>
@@ -198,7 +198,7 @@ if (!empty($rs)) {
 			. '<br/><i>' . (count($typesv) > 1 ? $typesv[1] : 'N/A') . '</i>';
 		?>
 		</th>
-		<th <?php echo $selsite == 2 ? 'class="naClassHide"' : ''; // HARD CODE HERE: just do not show for the site HMS?>>
+		<th <?php echo in_array($selsite, array(2, 3)) ? 'class="naClassHide"' : ''; // HARD CODE HERE: just do not show for the site HMS?>>
 		<?php echo $exPaginator->sort('Net', 'TransTmpStats.net'); ?>
 		</th>
 		<?php
