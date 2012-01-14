@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+	<script type="text/javascript" src="./jquery-jsonrpc/jquery.jsonrpc.js"></script>
+	<script type="text/javascript">
+	function generate() {
+		/*
+		 * get values from inputs
+		 */
+		var prefix = $("#iptPrefix").val();
+		var num = $("#iptNum").val();
+		/*
+		 * valicate the values of inputs
+		 */
+		prefix = prefix.replace(/\s/g, "");
+		num = num.replace(/\s/g, "");
+		if (prefix.length == 0 || num.length == 0) {
+			alert('please enter some characters...');
+			return;
+		}
+		if (isNaN(num)) {
+			alert('please enter a number...');
+			return;
+		}
+		$("#iptPrefix").val(prefix);
+		$("#iptNum").val(num);
+		/*
+		 * start to create batch of users
+		 */
+		$("#btnStart").attr('disabled','disabled');
+		num = parseInt(num);
+		
+		$.jsonRPC.setup({endPoint:'http://www.morepesos.com/json/?username=JADE02&password=aomangels', namespace:''});
+		for (var i = 0; i < num; i++) {
+			$.jsonRPC.request(
+				'affiliate.CreateNewUser', 
+				{
+					params:
+						['JADE02', 'aomangels', prefix + '' + i, '0000001', 'new_fn',
+						'test_ln', 'newtest@chasam.de', {'year': 1980,'month': 4, 'day':13},
+						'address', 'city', 'state', 'zip', 'US', 'home_phone', 'cellphone',
+						'chat_type', 'chat_id', 111, 'check', 'other_sites', 'more_comments',
+						1],
+					error: function(result) {
+						$("#divContent").append("error:begin---------->>>>>>>>>><br>");			
+						$("#divContent").append(JSON.stringify(result));
+						$("#divContent").append("<br>error:end<<<<<<<<<<<-----------<br>");
+						//alert(JSON.stringify(result));
+					},
+					success: function(result) {
+						$("#divContent").append("success:begin---------->>>>>>>>>><br>");			
+						$("#divContent").append(JSON.stringify(result));
+						$("#divContent").append("<br>success:end<<<<<<<<<<<-----------<br>");
+					}
+				}
+			)
+		}
+		
+		$("#btnStart").removeAttr("disabled");
+	}
+	</script>
+</head>
+<body>
+<div><font size="5">SEEME.COM JSON APIs</font></div><br/>
+<div><font size="2">(If you enter "cam" in Prefix, and "50" in the other, you will create 50 agents (or called campaigns) on site seeme.com, whoes username will be like "cam0, cam1, cam2, ..., cam10, cam11, ..., cam49".)</font></div>
+<div>
+	<div style="float:left;margin:0px 3px 0px 0px;">Prefix:</div>
+	<div style="float:left;margin:0px 16px 0px 0px;"><input id="iptPrefix" type="text" style="width:120px;"/></div>
+	<div style="float:left;margin:0px 3px 0px 0px;">How many this time:</div>
+	<div style="float:left;margin:0px 16px 0px 0xp;"><input id="iptNum" type="text" style="width:120px;"/></div>
+	<div style="float:left;margin:0px 3px 0px 0px;">
+		<input id="btnStart" type="button" value="Create New Users >>> GO!"
+			onclick="javascript:generate();"
+		/>
+	</div>
+</div>
+<br/><hr/>
+<div id="divContent">
+</div>
+</body>

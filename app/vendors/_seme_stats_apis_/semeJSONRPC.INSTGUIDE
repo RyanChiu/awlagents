@@ -1,0 +1,2 @@
+JUST PUT THE FILE "semeJSONRPC.html" and the directory "jquery-jsonrpc" into a directory of a web server, and make the html file could be visited from the web, like "http://www.xx.com/xx/semeJSONRPC.html".
+And then visit it and use it following the tips on the page.
