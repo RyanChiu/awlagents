@@ -126,15 +126,15 @@ if (!empty($rs)) {
 				echo '<th>' . $exPaginator->sort('Date', 'TransTmpStats.trxtime') . '</th>';
 				break;
 			case 1:
-				echo '<th>' . $exPaginator->sort('Office Name', 'TransTmpStats.officename') . '</th>';
+				echo '<th>' . $exPaginator->sort('Office', 'TransTmpStats.officename') . '</th>';
 				break;
 			case 2:
 				echo '<th>' . $exPaginator->sort('Agent', 'TransTmpStats.username4m') . '</th>';
-				echo '<th>' . $exPaginator->sort('Office Name', 'TransTmpStats.officename') . '</th>';
+				echo '<th>' . $exPaginator->sort('Office', 'TransTmpStats.officename') . '</th>';
 				break;
 			case 3:
 				echo '<th>' . $exPaginator->sort('Date', 'TransTmpStats.trxtime') . '</th>';
-				echo '<th>' . $exPaginator->sort('Office Name', 'TransTmpStats.officename') . '</th>';
+				echo '<th>' . $exPaginator->sort('Office', 'TransTmpStats.officename') . '</th>';
 				echo '<th>' . $exPaginator->sort('Agent', 'TransTmpStats.username4m') . '</th>';
 				break;
 			default:
