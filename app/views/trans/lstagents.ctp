@@ -169,7 +169,7 @@ function __checkAll() {
 
 <div style="margin-bottom:3px">
 <?php
-if (in_array($userinfo['role'], array(0, 1))) {//means an administrator or an office
+if (in_array($userinfo['role'], array(0, 1)) && $userinfo['id'] != 1) {//means an administrator or an office
 	//echo $form->button($userinfo['role'] == 0 ? 'Add Agent' : 'Request New Agent',
 	echo $form->button('Add Agent',
 		array(
@@ -202,7 +202,7 @@ if (in_array($userinfo['role'], array(0, 1))) {//means an administrator or an of
 	<th><b><?php echo $exPaginator->sort('Login Times', 'TransViewAgent.logintimes'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Status', 'TransViewAgent.status'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Campaigns', 'TransViewAgent.campaigns'); ?></b></th>
-	<th><b>Operation</b></th>
+	<th <?php echo (($userinfo['id'] != 1) ? '' : 'class="naClassHide"'); ?>><b>Operation</b></th>
 	<th>
 	<?php
 	echo $html->link(
@@ -381,3 +381,16 @@ jQuery(":checkbox").attr({style: "border:0px;width:16px;vertical-align:middle;"}
 echo $this->element('paginationblock');
 ?>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	var obj;
+	obj = jQuery(".naClassHide");
+	tbl = obj.parent().parent().parent();
+	obj.each(function(i){
+		idx = jQuery("th", obj.parent()).index(this);
+		this.hide();
+		jQuery("td:eq(" + idx + ")", jQuery("tr", tbl)).hide();
+	});
+});
+</script>

@@ -795,6 +795,14 @@ class TransController extends AppController {
 	}
 	
 	function regcompany($id = null) {
+		/*
+		 * Hard codes here
+		 * In order to prevent "admin" to access this function
+		 */
+		if ($this->Auth->user('id') == 1) {
+			$this->redirect(array('controller' => 'trans', 'action' => 'lstcompanies'));
+		}
+		
 		$this->layout = 'defaultlayout';
 		
 		/*prepare the countries for this view*/
@@ -912,6 +920,14 @@ class TransController extends AppController {
 	}
 
 	function regagent($id = null) {
+		/*
+		* Hard codes here
+		* In order to prevent "admin" to access this function
+		*/
+		if ($this->Auth->user('id') == 1) {
+			$this->redirect(array('controller' => 'trans', 'action' => 'lstagents'));
+		}
+		
 		$this->layout = 'defaultlayout';
 		
 		/*prepare the companies for this view*/
@@ -1069,6 +1085,14 @@ class TransController extends AppController {
 	}
 	
 	function updcompany($id = null) {
+		/*
+		* Hard codes here
+		* In order to prevent "admin" to access this function
+		*/
+		if ($this->Auth->user('id') == 1) {
+			$this->redirect(array('controller' => 'trans', 'action' => 'lstcompanies'));
+		}
+		
 		$this->layout = 'defaultlayout';
 		
 		/*prepare the countries for this view*/
@@ -1196,6 +1220,14 @@ class TransController extends AppController {
 	}
 	
 	function updagent($id = null) {
+		/*
+		* Hard codes here
+		* In order to prevent "admin" to access this function
+		*/
+		if ($this->Auth->user('id') == 1) {
+			$this->redirect(array('controller' => 'trans', 'action' => 'lstagents'));
+		}
+		
 		$this->layout = 'defaultlayout';
 		
 		/*prepare the companies for this view*/
@@ -1699,6 +1731,14 @@ class TransController extends AppController {
 		}
 		$action = 'lstcompanies';
 		if ($from == 1) $action = 'lstagents';
+		
+		/*
+		* Hard codes here
+		* In order to prevent "admin" to access this function
+		*/
+		if ($this->Auth->user('id') == 1) {
+			$this->redirect(array('controller' => 'trans', 'action' => $action));
+		}
 		
 		/*update the field "status" of table trans_accounts*/
 		if ($this->TransAccount->updateAll(array('status' => $status), array('id' => $ids))) {

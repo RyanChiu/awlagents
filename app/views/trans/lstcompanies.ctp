@@ -2,6 +2,7 @@
 <?php
 //echo '<br/>';
 //echo print_r($rs, true);
+$userinfo = $session->read('Auth.TransAccount');
 ?>
 <?php
 /*searching part*/
@@ -81,13 +82,15 @@ function __checkAll() {
 
 <div style="margin-bottom:3px">
 <?php
-echo $form->button('Add Office',
-	array(
-		'onclick' => 'javascript:location.href="'
-			. $html->url(array('controller' => 'trans', 'action' => 'regcompany')) . '"',
-		'style' => 'width:160px;'
-	)
-);
+if ($userinfo['id'] != 1) {
+	echo $form->button('Add Office',
+		array(
+			'onclick' => 'javascript:location.href="'
+				. $html->url(array('controller' => 'trans', 'action' => 'regcompany')) . '"',
+			'style' => 'width:160px;'
+		)
+	);
+}
 ?>
 </div>
 <table width="100%">
@@ -109,7 +112,7 @@ echo $form->button('Add Office',
 	<th><b><?php echo $exPaginator->sort('Password', 'TransViewCompany.originalpwd'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Registered', 'TransViewCompany.regtime'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('Status', 'TransViewCompany.status'); ?></b></th>
-	<th><b>Operation</b></th>
+	<th <?php echo (($userinfo['id'] != 1) ? '' : 'class="naClassHide"'); ?>><b>Operation</b></th>
 </tr>
 </thead>
 <?php
@@ -258,3 +261,16 @@ echo $html->link(
 echo $this->element('paginationblock');
 ?>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	var obj;
+	obj = jQuery(".naClassHide");
+	tbl = obj.parent().parent().parent();
+	obj.each(function(i){
+		idx = jQuery("th", obj.parent()).index(this);
+		this.hide();
+		jQuery("td:eq(" + idx + ")", jQuery("tr", tbl)).hide();
+	});
+});
+</script>
