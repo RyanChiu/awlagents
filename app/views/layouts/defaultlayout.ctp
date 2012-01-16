@@ -67,12 +67,11 @@ $curmenuidx = 0;
     <div class="header">
 		<div style="float:left; padding: 36px 0px 0px 12px;">
     		<span style="font-size:24px; color:black; font-weight:bold;">
-    		Boss Lee's...
     		</span>
     	</div>
     	<div style="float:left; padding: 12px 0px 0px 6px;">
     		<?php
-    		echo $html->image('main/Bentley.jpg', array('style' => 'height:84px; border: 0px;'));
+    		echo $html->image('main/Bentley.jpg', array('style' => 'height:100px; border: 0px;'));
     		?>
     	</div>
 		<div style="float: right; padding: 54px 12px 0px 0px;">
