@@ -303,6 +303,9 @@ endforeach;
 ?>
 </table>
 
+<?php
+if ($userinfo['id'] != 1) {
+?>
 <div style="margin-top:3px;">
 <font color="green">With selected :&nbsp;</font>
 <?php
@@ -346,6 +349,9 @@ echo $html->link(
 */
 ?>
 </div>
+<?php
+}
+?>
 
 <!-- ~~~~~~~~~~~~~~~~~~~the floating message box for "inform selected"~~~~~~~~~~~~~~~~~~~ -->
 <div id="message_box">
