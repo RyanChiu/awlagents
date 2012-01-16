@@ -64,6 +64,7 @@ class TransController extends AppController {
 				case 'regcompany':
 				case 'lstcompanies':
 				case 'updtoolbox':
+				case 'activatem':
 					$this->__accessDenied();
 					return;
 				case 'lstagents':
@@ -102,6 +103,7 @@ class TransController extends AppController {
 				case 'lstagents':
 				case 'lstlogins':
 				case 'updtoolbox':
+				case 'activatem':
 					$this->__accessDenied();
 					return;
 				case 'updagent':

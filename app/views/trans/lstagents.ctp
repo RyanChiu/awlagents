@@ -272,18 +272,20 @@ foreach ($rs as $r):
 		array('title' => 'Click to edit this record.'),
 		false, false
 	);
-	echo $html->link(
-		$html->image('iconActivate.png', array('border' => 0, 'width' => 16, 'height' => 16)) . '&nbsp;',
-		array('controller' => 'trans', 'action' => 'activatem', 'ids' => $r['TransViewAgent']['id'], 'status' => 1, 'from' => 1),
-		array('title' => 'Click to activate the user.'),
-		false, false
-	);
-	echo $html->link( 
-		$html->image('iconSuspend.png', array('border' => 0, 'width' => 16, 'height' => 16)) . '&nbsp;',
-		array('controller' => 'trans', 'action' => 'activatem', 'ids' => $r['TransViewAgent']['id'], 'status' => 0, 'from' => 1),
-		array('title' => 'Click to suspend the user.'),
-		false, false
-	);
+	if ($userinfo['role'] == 0) {
+		echo $html->link(
+			$html->image('iconActivate.png', array('border' => 0, 'width' => 16, 'height' => 16)) . '&nbsp;',
+			array('controller' => 'trans', 'action' => 'activatem', 'ids' => $r['TransViewAgent']['id'], 'status' => 1, 'from' => 1),
+			array('title' => 'Click to activate the user.'),
+			false, false
+		);
+		echo $html->link( 
+			$html->image('iconSuspend.png', array('border' => 0, 'width' => 16, 'height' => 16)) . '&nbsp;',
+			array('controller' => 'trans', 'action' => 'activatem', 'ids' => $r['TransViewAgent']['id'], 'status' => 0, 'from' => 1),
+			array('title' => 'Click to suspend the user.'),
+			false, false
+		);
+	}
 	?>
 	</td>
 	<td align="center">
@@ -304,7 +306,7 @@ endforeach;
 </table>
 
 <?php
-if ($userinfo['id'] != 1) {
+if ($userinfo['id'] != 1 && $userinfo['role'] != 1) {
 ?>
 <div style="margin-top:3px;">
 <font color="green">With selected :&nbsp;</font>
