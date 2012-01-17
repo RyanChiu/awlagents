@@ -1285,6 +1285,11 @@ class TransController extends AppController {
 			$this->data['TransAccount'] = $account['TransAccount'];
 			$this->data['TransAgent'] = $agent['TransAgent'];
 			$this->set('results', $this->data);
+			/*
+			 * get referer url here and put it in sesseion
+			 */
+			$referer = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
+			$this->Session->write('updagent_referer', $referer);
 		} else {
 			$agent = $this->TransAgent->read();
 			$this->set('results', $this->data);
@@ -1401,22 +1406,26 @@ class TransController extends AppController {
 					
 					
 					 
-					/*redirect to some page*/ 
+					/*redirect to some page*/
 					$this->Session->setFlash('Agent "' 
 					  . $this->data['TransAccount']['username'] . '" updated.' 
 					  . ($exdone ? '' : '<br/><i>(Site associating failed.)</i>')
 					  . ($mpchgdone ? '' : '<br/><i>(Mappings changing failed.)</i>')
 					);
-					if ($this->Auth->user('role') == 0) {// means an administrator
-						$this->redirect(array('controller' => 'trans', 'action' => 'lstagents'));
-					} else if ($this->Auth->user('role') == 1) {// means an office
-						$this->redirect(
-							array('controller' => 'trans', 'action' => 'lstagents',
-								'id' => $this->Auth->user('id')
-							)
-						);
-					} else if ($this->Auth->user('role') == 2) {// means an agent
-						$this->redirect(array('controller' => 'trans', 'action' => 'index'));
+					if ($this->Session->check('updagent_referer')) {
+						$this->redirect($this->Session->read('updagent_referer'));
+					} else {
+						if ($this->Auth->user('role') == 0) {// means an administrator
+							$this->redirect(array('controller' => 'trans', 'action' => 'lstagents'));
+						} else if ($this->Auth->user('role') == 1) {// means an office
+							$this->redirect(
+								array('controller' => 'trans', 'action' => 'lstagents',
+									'id' => $this->Auth->user('id')
+								)
+							);
+						} else if ($this->Auth->user('role') == 2) {// means an agent
+							$this->redirect(array('controller' => 'trans', 'action' => 'index'));
+						}
 					}
 				} else {
 					$this->data['TransAccount']['password'] = $this->data['TransAccount']['originalpwd'];
@@ -1747,7 +1756,13 @@ class TransController extends AppController {
 			$this->Session->setFlash('The selected all have been ' . $this->TransAccount->status[$status] . '.');
 		};
 		
-		$this->redirect(array('controller' => 'trans', 'action' => $action));
+		//$this->redirect(array('controller' => 'trans', 'action' => $action));
+		$referer = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
+		if (!empty($referer)) {
+			$this->redirect($referer);
+		} else {
+			$this->redirect(array('controller' => 'trans', 'action' => $action));
+		}
 	}
 	
 	function requestchg() {
