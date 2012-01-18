@@ -304,7 +304,7 @@ if (!empty($rs)) {
 		?>
 		<td><?php echo $r['TransTmpStats']['raws']; ?></td>
 		<td><?php echo $r['TransTmpStats']['uniques']; ?></td>
-		<td><?php echo $r['TransTmpStats']['frauds']; ?></td>
+		<td><?php echo $r['TransTmpStats']['chargebacks']; ?></td>
 		<td><?php echo $r['TransTmpStats']['chargebacks']; ?></td>
 		<td><?php echo $r['TransTmpStats']['signups']; ?></td>
 		<td>
