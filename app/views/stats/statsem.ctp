@@ -399,7 +399,7 @@ if (!empty($rs)) {
 		?>
 		<td class="totals"><?php echo $pagetotals['raws']; ?></td>
 		<td class="totals"><?php echo $pagetotals['uniques']; ?></td>
-		<td class="totals"><?php echo $pagetotals['frauds']; ?></td>
+		<td class="totals"><?php echo $pagetotals['chargebacks']; ?></td>
 		<td class="totals"><?php echo $pagetotals['chargebacks']; ?></td>
 		<td class="totals"><?php echo $pagetotals['signups']; ?></td>
 		<td class="totals"><?php echo $pagetotals['frauds']; ?></td>
@@ -446,7 +446,7 @@ if (!empty($rs)) {
 		?>
 		<td class="totals"><?php echo $totals['raws']; ?></td>
 		<td class="totals"><?php echo $totals['uniques']; ?></td>
-		<td class="totals"><?php echo $totals['frauds']; ?></td>
+		<td class="totals"><?php echo $totals['chargebacks']; ?></td>
 		<td class="totals"><?php echo $totals['chargebacks']; ?></td>
 		<td class="totals"><?php echo $totals['signups']; ?></td>
 		<td class="totals"><?php echo $totals['frauds']; ?></td>
