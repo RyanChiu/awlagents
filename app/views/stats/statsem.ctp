@@ -174,16 +174,10 @@ if (!empty($rs)) {
 		reset($typesv);
 		$typesv = array_values($typesv);
 		?>
-		<th <?php echo count($typesv) > 4 ? '' : 'class="naClassHide"'; ?>>
+		<th <?php echo count($typesv) > 1 ? '' : 'class="naClassHide"'; ?>>
 		<?php
-		echo $exPaginator->sort('Sales', 'TransTmpStats.sales_type4')
-			. '<br/><i>' . (count($typesv) > 4 ? $typesv[4] : 'N/A') . '</i>';
-		?>
-		</th>
-		<th <?php echo count($typesv) > 3 ? '' : 'class="naClassHide"'; ?>>
-		<?php
-		echo $exPaginator->sort('Sales', 'TransTmpStats.sales_type3')
-			. '<br/><i>' . (count($typesv) > 3 ? $typesv[3] : 'N/A') . '</i>';
+		echo $exPaginator->sort('Sales', 'TransTmpStats.sales_type1')
+			. '<br/><i>' . (count($typesv) > 1 ? $typesv[1] : 'N/A') . '</i>';
 		?>
 		</th>
 		<th <?php echo count($typesv) > 2 ? '' : 'class="naClassHide"'; ?>>
@@ -192,10 +186,16 @@ if (!empty($rs)) {
 			. '<br/><i>' . (count($typesv) > 2 ? $typesv[2] : 'N/A') . '</i>';
 		?>
 		</th>
-		<th <?php echo count($typesv) > 1 ? '' : 'class="naClassHide"'; ?>>
+		<th <?php echo count($typesv) > 3 ? '' : 'class="naClassHide"'; ?>>
 		<?php
-		echo $exPaginator->sort('Sales', 'TransTmpStats.sales_type1')
-			. '<br/><i>' . (count($typesv) > 1 ? $typesv[1] : 'N/A') . '</i>';
+		echo $exPaginator->sort('Sales', 'TransTmpStats.sales_type3')
+			. '<br/><i>' . (count($typesv) > 3 ? $typesv[3] : 'N/A') . '</i>';
+		?>
+		</th>
+		<th <?php echo count($typesv) > 4 ? '' : 'class="naClassHide"'; ?>>
+		<?php
+		echo $exPaginator->sort('Sales', 'TransTmpStats.sales_type4')
+			. '<br/><i>' . (count($typesv) > 4 ? $typesv[4] : 'N/A') . '</i>';
 		?>
 		</th>
 		<th <?php echo in_array($selsite, array(2, 3)) ? 'class="naClassHide"' : ''; // HARD CODE HERE: just do not show for the site HMS?>>
@@ -348,10 +348,10 @@ if (!empty($rs)) {
 		?>
 		</td>
 		<td><?php echo $r['TransTmpStats']['chargebacks']; ?></td>
-		<td><?php echo $r['TransTmpStats']['sales_type4']; ?></td>
-		<td><?php echo $r['TransTmpStats']['sales_type3']; ?></td>
-		<td><?php echo $r['TransTmpStats']['sales_type2']; ?></td>
 		<td><?php echo $r['TransTmpStats']['sales_type1']; ?></td>
+		<td><?php echo $r['TransTmpStats']['sales_type2']; ?></td>
+		<td><?php echo $r['TransTmpStats']['sales_type3']; ?></td>
+		<td><?php echo $r['TransTmpStats']['sales_type4']; ?></td>
 		<td><?php echo $r['TransTmpStats']['net']; ?></td>
 		<?php
 		if ($userinfo['role'] == 0) {
@@ -399,10 +399,10 @@ if (!empty($rs)) {
 		<td class="totals"><?php echo $pagetotals['signups']; ?></td>
 		<td class="totals"><?php echo $pagetotals['frauds']; ?></td>
 		<td class="totals"><?php echo $pagetotals['chargebacks']; ?></td>
-		<td class="totals"><?php echo $pagetotals['sales_type4']; ?></td>
-		<td class="totals"><?php echo $pagetotals['sales_type3']; ?></td>
-		<td class="totals"><?php echo $pagetotals['sales_type2']; ?></td>
 		<td class="totals"><?php echo $pagetotals['sales_type1']; ?></td>
+		<td class="totals"><?php echo $pagetotals['sales_type2']; ?></td>
+		<td class="totals"><?php echo $pagetotals['sales_type3']; ?></td>
+		<td class="totals"><?php echo $pagetotals['sales_type4']; ?></td>
 		<td class="totals"><?php echo $pagetotals['net']; ?></td>
 		<?php
 		if ($userinfo['role'] == 0) {
@@ -446,10 +446,10 @@ if (!empty($rs)) {
 		<td class="totals"><?php echo $totals['signups']; ?></td>
 		<td class="totals"><?php echo $totals['frauds']; ?></td>
 		<td class="totals"><?php echo $totals['chargebacks']; ?></td>
-		<td class="totals"><?php echo $totals['sales_type4']; ?></td>
-		<td class="totals"><?php echo $totals['sales_type3']; ?></td>
-		<td class="totals"><?php echo $totals['sales_type2']; ?></td>
 		<td class="totals"><?php echo $totals['sales_type1']; ?></td>
+		<td class="totals"><?php echo $totals['sales_type2']; ?></td>
+		<td class="totals"><?php echo $totals['sales_type3']; ?></td>
+		<td class="totals"><?php echo $totals['sales_type4']; ?></td>
 		<td class="totals"><?php echo $totals['net']; ?></td>
 		<?php
 		if ($userinfo['role'] == 0) {
