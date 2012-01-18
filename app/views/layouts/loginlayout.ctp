@@ -34,7 +34,8 @@
     	</div>
     	<div style="float:left; padding: 12px 0px 0px 6px;">
     		<?php
-    		echo $html->image('main/Bentley.jpg', array('style' => 'height:100px; border: 0px;'));
+    		echo $html->image('main/Bentley.jpg', array('style' => 'height:60px; border: 0px;'));
+    		echo $html->image('main/sunbirds.gif', array('style' => 'width:180px; border: 0px;'));
     		?>
     	</div>
 		<div style="float: right; padding: 54px 12px 0px 0px;">
