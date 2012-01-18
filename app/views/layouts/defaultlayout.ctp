@@ -446,6 +446,10 @@ $curmenuidx = 0;
 				array('controller' => 'trans', 'action' => 'updtoolbox', 'site' => 1),
 				null, false, false
 			);
+			echo $html->link('<font color="white"><b>Update SEME</b></font>',
+				array('controller' => 'trans', 'action' => 'updtoolbox', 'site' => 3),
+				null, false, false
+			);
 			?>
 		</div>
 		<?php
@@ -480,6 +484,10 @@ $curmenuidx = 0;
 			);
 			echo $html->link('<font color="white"><b>XXBB</b></font>',
 				array('controller' => 'trans', 'action' => 'toolbox', 'site' => 1),
+				null, false, false
+			);
+			echo $html->link('<font color="white"><b>SEME</b></font>',
+				array('controller' => 'trans', 'action' => 'toolbox', 'site' => 3),
 				null, false, false
 			);
 			?>
