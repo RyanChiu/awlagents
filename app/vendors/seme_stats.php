@@ -82,11 +82,14 @@ foreach ($xml->data->row as $xrow) {
 	 * end
 	 */
 	$campaignid = intval($xrow['user-id']);
-	$xraws = $xuniques = $xsales = array();
+	$xraws = $xuniques = $xsales = $xdenieds = $xpendings = $xrevokeds = array();
 	foreach ($xrow->children() as $child) {
 		array_push($xraws, intval($child->raw));
 		array_push($xuniques, intval($child->unique));
 		array_push($xsales, intval($child->sales));
+		array_push($xdenieds, intval($child->denied));
+		array_push($xpendings, intval($child->pengding));
+		array_push($xrevokeds, intval($child->revoked));
 	}
 	//echo print_r($xraws, true) . "\n";//for debug
 	//echo print_r($xuniques, true) . "\n";//for debug
@@ -124,13 +127,17 @@ foreach ($xml->data->row as $xrow) {
 			$ms[$k] += mysql_affected_rows();
 			
 			//only if not all the stats data are zero, we put them into our DB
-			if ($xraws[$k] != 0 || $xuniques[$k] != 0 || $xsales[$k] != 0) {
+			if ($xraws[$k] != 0 || $xuniques[$k] != 0 || $xsales[$k] != 0
+				|| $xdenieds[$k] != 0 || $xpendings[$k] != 0 || $xrevokeds[$k] != 0) {
+				/*
+				 * we regard "chargebacks" as revoked, "signups" as pending, "frauds" as denied in here
+				 */
 				$sql = sprintf(
 					'insert into trans_stats'
 					. ' (agentid, campaignid, siteid, typeid, raws, uniques, chargebacks, signups, frauds, sales_number, trxtime)'
-					. ' values (%d, "%s", %d, %d, %d, %d, 0, 0, 0, %d, "%s")',
+					. ' values (%d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, "%s")',
 					$agents[$campaignid], $campaignid, $siteid, $typeids[$k],
-					$xraws[$k], $xuniques[$k], $xsales[$k],
+					$xraws[$k], $xuniques[$k], $xrevokeds[$k], $xpendings[$k], $xdenieds[$k], $xsales[$k],
 					$date
 				);
 				//echo $sql . "\n"; continue;//for debug

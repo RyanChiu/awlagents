@@ -143,29 +143,33 @@ if (!empty($rs)) {
 		}
 		?>	
 		<th><?php echo $exPaginator->sort('Raws', 'TransTmpStats.raws'); ?></th>
-		<th <?php echo !in_array($selsite, array(6, 7, 8)) ? '' : 'class="naClassHide"'; ?>>
-		<?php echo $exPaginator->sort('Uniques', 'TransTmpStats.uniques'); ?>
+		<th><?php echo $exPaginator->sort('Uniques', 'TransTmpStats.uniques'); ?></th>
+		<th>
+		<?php
+		echo $exPaginator->sort(
+			(!in_array($selsite, array(3)) ? 'Frauds' : 'Denied'), 
+			'TransTmpStats.frauds'
+		);
+		?>
 		</th>
-		<!--
-		<th <?php //echo !in_array($selsite, array(6, 7, 8)) ? '' : 'class="naClassHide"'; ?>>
-		<?php //echo $exPaginator->sort('Fraud', 'TransTmpStats.chargebacks'); ?>
+		<th <?php echo in_array($selsite, array(3)) ? '' : 'class="naClassHide"'; ?>>
+		<?php echo $exPaginator->sort('Revoked', 'TransTmpStats.chargebacks'); ?>
 		</th>
-		-->
-		<th <?php echo !in_array($selsite, array(3)) ? '' : 'class="naClassHide"'; ?>>
-		<?php echo $exPaginator->sort('Free*', 'TransTmpStats.signups'); ?>
+		<th>
+		<?php
+		echo $exPaginator->sort(
+			(!in_array($selsite, array(3)) ? 'Free*' : 'Pending'),
+			'TransTmpStats.signups'
+		); 
+		?>
 		</th>
 		<th <?php echo $userinfo['role'] == 0 ? 'class="naClassHide"' : 'class="naClassHide"'; ?>>
 		<?php //echo $exPaginator->sort('Frauds', 'TransTmpStats.frauds'); ?>
 		<?php
-			echo '<font size="1">'; 
-			echo $exPaginator->sort('Frauds', 'TransTmpStats.frauds');
-			echo '</font>';
-			echo '<br/><font size="1">(for revise)</font>';
-		?>
-		</th>
-		<th <?php echo $userinfo['role'] != -1 && !in_array($selsite, array(3)) ? '' : 'class="naClassHide"'; ?>>
-		<?php
-			echo $exPaginator->sort('Frauds', 'TransTmpStats.chargebacks');
+		echo '<font size="1">'; 
+		echo $exPaginator->sort('Frauds', 'TransTmpStats.frauds');
+		echo '</font>';
+		echo '<br/><font size="1">(for revise)</font>';
 		?>
 		</th>
 		<?php
@@ -300,7 +304,8 @@ if (!empty($rs)) {
 		?>
 		<td><?php echo $r['TransTmpStats']['raws']; ?></td>
 		<td><?php echo $r['TransTmpStats']['uniques']; ?></td>
-		<!--<td><?php //echo $r['TransTmpStats']['chargebacks']; ?></td>-->
+		<td><?php echo $r['TransTmpStats']['frauds']; ?></td>
+		<td><?php echo $r['TransTmpStats']['chargebacks']; ?></td>
 		<td><?php echo $r['TransTmpStats']['signups']; ?></td>
 		<td>
 		<?php
@@ -347,7 +352,6 @@ if (!empty($rs)) {
 		}
 		?>
 		</td>
-		<td><?php echo $r['TransTmpStats']['chargebacks']; ?></td>
 		<td><?php echo $r['TransTmpStats']['sales_type1']; ?></td>
 		<td><?php echo $r['TransTmpStats']['sales_type2']; ?></td>
 		<td><?php echo $r['TransTmpStats']['sales_type3']; ?></td>
@@ -395,10 +399,10 @@ if (!empty($rs)) {
 		?>
 		<td class="totals"><?php echo $pagetotals['raws']; ?></td>
 		<td class="totals"><?php echo $pagetotals['uniques']; ?></td>
-		<!--<td class="totals"><?php //echo $pagetotals['chargebacks']; ?></td>-->
-		<td class="totals"><?php echo $pagetotals['signups']; ?></td>
 		<td class="totals"><?php echo $pagetotals['frauds']; ?></td>
 		<td class="totals"><?php echo $pagetotals['chargebacks']; ?></td>
+		<td class="totals"><?php echo $pagetotals['signups']; ?></td>
+		<td class="totals"><?php echo $pagetotals['frauds']; ?></td>
 		<td class="totals"><?php echo $pagetotals['sales_type1']; ?></td>
 		<td class="totals"><?php echo $pagetotals['sales_type2']; ?></td>
 		<td class="totals"><?php echo $pagetotals['sales_type3']; ?></td>
@@ -442,10 +446,10 @@ if (!empty($rs)) {
 		?>
 		<td class="totals"><?php echo $totals['raws']; ?></td>
 		<td class="totals"><?php echo $totals['uniques']; ?></td>
-		<!--<td class="totals"><?php //echo $totals['chargebacks']; ?></td>-->
-		<td class="totals"><?php echo $totals['signups']; ?></td>
 		<td class="totals"><?php echo $totals['frauds']; ?></td>
 		<td class="totals"><?php echo $totals['chargebacks']; ?></td>
+		<td class="totals"><?php echo $totals['signups']; ?></td>
+		<td class="totals"><?php echo $totals['frauds']; ?></td>
 		<td class="totals"><?php echo $totals['sales_type1']; ?></td>
 		<td class="totals"><?php echo $totals['sales_type2']; ?></td>
 		<td class="totals"><?php echo $totals['sales_type3']; ?></td>
@@ -498,7 +502,7 @@ if (!empty($rs)) {
 		?>
 		</td>
 		<td class="totals"></td>
-		<!--<td class="totals"></td>-->
+		<td class="totals"></td>
 		<td class="totals"></td>
 		<td class="totals"></td>
 		<td class="totals"></td>
@@ -553,7 +557,7 @@ if (!empty($rs)) {
 		?>
 		</td>
 		<td class="totals"></td>
-		<!--<td class="totals"></td>-->
+		<td class="totals"></td>
 		<td class="totals"></td>
 		<td class="totals"></td>
 		<td class="totals"></td>
