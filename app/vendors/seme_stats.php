@@ -130,14 +130,14 @@ foreach ($xml->data->row as $xrow) {
 			if ($xraws[$k] != 0 || $xuniques[$k] != 0 || $xsales[$k] != 0
 				|| $xdenieds[$k] != 0 || $xpendings[$k] != 0 || $xrevokeds[$k] != 0) {
 				/*
-				 * we regard "chargebacks" as revoked, "signups" as pending, "frauds" as denied in here
+				 * we regard "frauds" as revoked, "signups" as pending, "chargebacks" as denied in here
 				 */
 				$sql = sprintf(
 					'insert into trans_stats'
 					. ' (agentid, campaignid, siteid, typeid, raws, uniques, chargebacks, signups, frauds, sales_number, trxtime)'
 					. ' values (%d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, "%s")',
 					$agents[$campaignid], $campaignid, $siteid, $typeids[$k],
-					$xraws[$k], $xuniques[$k], $xrevokeds[$k], $xpendings[$k], $xdenieds[$k], $xsales[$k],
+					$xraws[$k], $xuniques[$k], $xdenieds[$k], $xpendings[$k], $xrevokeds[$k], $xsales[$k],
 					$date
 				);
 				//echo $sql . "\n"; continue;//for debug

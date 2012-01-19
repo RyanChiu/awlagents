@@ -148,12 +148,12 @@ if (!empty($rs)) {
 		<?php
 		echo $exPaginator->sort(
 			(!in_array($selsite, array(3)) ? 'Frauds' : 'Denied'), 
-			'TransTmpStats.frauds'
+			'TransTmpStats.chargebacks'
 		);
 		?>
 		</th>
 		<th <?php echo in_array($selsite, array(3)) ? '' : 'class="naClassHide"'; ?>>
-		<?php echo $exPaginator->sort('Revoked', 'TransTmpStats.chargebacks'); ?>
+		<?php echo $exPaginator->sort('Revoked', 'TransTmpStats.frauds'); ?>
 		</th>
 		<th>
 		<?php
