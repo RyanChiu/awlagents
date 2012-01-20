@@ -1072,7 +1072,11 @@ class TransController extends AppController {
 					  . ($exdone ? '' : '<br><i>(Site associating failed.)</i>') 
 					);
 					if ($id != -1) {
-						$this->redirect(array('controller' => 'trans', 'action' => 'lstagents'));
+						if ($this->Auth->user('role') == 0) {
+							$this->redirect(array('controller' => 'trans', 'action' => 'lstagents'));
+						} else if ($this->Auth->user('role') == 1) {
+							$this->redirect(array('controller' => 'trans', 'action' => 'lstagents', 'id' => $this->Auth->user('id')));
+						}
 					} else {
 						$this->redirect(array('controller' => 'trans', 'action' => 'regagent'));
 					}
