@@ -102,7 +102,11 @@ foreach ($rs as $r) {
 ?>
 <tr <?php echo $i % 2 == 0? '' : 'class="odd"'; ?>>
 	<td align="center"><?php echo $r['ViewOnlineLog']['username']; ?></td>
-	<td align="center"><?php echo $r['ViewOnlineLog']['inip']; ?></td>
+	<td align="center">
+		<a href="http://whatismyipaddress.com/ip/<?php echo $r['ViewOnlineLog']['inip']; ?>" target="findip_window">
+			<?php echo $r['ViewOnlineLog']['inip']; ?>
+		</a>
+	</td>
 	<td align="center"><?php echo $r['ViewOnlineLog']['intime']; ?></td>
 	<td align="center"><?php echo $r['ViewOnlineLog']['outtime']; ?></td>
 </tr>
