@@ -212,10 +212,7 @@ if ($userinfo['role'] == 1) {
 		</td>
 	</tr>
 	<tr>
-		<td>Status :<br/>
-		<font style="font-size:15px;font-weight:bold;color:#ff8040;">(Uncheck to suspend the agents</font><br/>
-		<font style="font-size:15px;font-weight:bold;color:#ff8040;">from all or some sites.)</font>
-		</td>
+		<td>Status :</td>
 		<td>
 		<?php
 		echo 'Activated' . $form->checkbox('TransAccount.status', array('checked' => 'checked', 'style' => 'border:0px;width:16px;'));
@@ -273,6 +270,12 @@ function dimUsernameInput() {
 }
 dimUsernameInput();
 jQuery("#TransAccountAuto").click(function(){
+	<?php
+	if ($userinfo['role'] > 0) {
+		echo 'alert("Don\'t worry, it\'ll be auto-generated.");';
+		echo 'return false;';
+	} 
+	?>
 	dimUsernameInput();
 });
 </script>

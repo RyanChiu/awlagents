@@ -108,7 +108,7 @@ if ($userinfo['role'] == 1) {
 		<td>
 		<div style="float:left">
 		<?php
-		if ($userinfo['role'] == 2) {//means an agent
+		if ($userinfo['role'] > 0) {//means an office manager or an agent
 			echo $form->input('TransAccount.username', array('label' => '', 'style' => 'width:390px;border:0px;background:transparent;', 'readonly' => 'readonly'));
 		} else {
 			echo $form->input('TransAccount.username', array('label' => '', 'style' => 'width:390px;'));
@@ -242,10 +242,7 @@ if ($userinfo['role'] == 1) {
 		</td> 
 	</tr>
 	<tr>
-		<td>Status :<br/>
-		<font style="font-size:15px;font-weight:bold;color:#ff8040;">(Uncheck to suspend the agents</font><br/>
-		<font style="font-size:15px;font-weight:bold;color:#ff8040;">from all or some sites.)</font>
-		</td>
+		<td>Status :</td>
 		<td>
 		<?php
 		if ($userinfo['role'] == 2) {//means an agent
