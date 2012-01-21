@@ -202,7 +202,7 @@ if (!empty($rs)) {
 			. '<br/><i>' . (count($typesv) > 4 ? $typesv[4] : 'N/A') . '</i>';
 		?>
 		</th>
-		<th <?php echo in_array($selsite, array(2, 3)) ? 'class="naClassHide"' : ''; // HARD CODE HERE: just do not show for the site HMS?>>
+		<th <?php echo in_array($selsite, array(2)) ? 'class="naClassHide"' : ''; // HARD CODE HERE: just do not show for the site HMS?>>
 		<?php echo $exPaginator->sort('Net', 'TransTmpStats.net'); ?>
 		</th>
 		<?php
