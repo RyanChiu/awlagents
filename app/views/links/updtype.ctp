@@ -69,5 +69,6 @@ echo $form->create(null, array('controller' => 'links', 'action' => 'updtype'));
 </table>
 <?php
 echo $form->input('TransType.id', array('type' => 'hidden'));
+echo $form->input('TransType.siteid', array('type' => 'hidden'));
 echo $form->end();
 ?>

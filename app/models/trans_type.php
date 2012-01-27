@@ -13,8 +13,8 @@ class TransType extends AppModel {
 				'message' => 'Please do not let this field empty.'
 			),
 			'typenameRule_2' => array(
-				'rule' => 'isUnique',
-				'message' => 'Sorry, this type name has already been taken.' 
+				'rule' => 'isUniqueInSite',
+				'message' => 'Sorry, this type name has already been taken in the site.' 
 			)
 		),
 		'url' => array(
@@ -22,5 +22,26 @@ class TransType extends AppModel {
 			'message' => 'Please fill out a valid url.'
 		)
 	);
+	
+	function isUniqueInSite($check) {
+		$data = $this->data[$this->name];
+		if (!isset($data) && !empty($data['siteid'])) return true;
+		$rs = $this->find('first',
+			array(
+				'conditions' => array(
+					'siteid' => $data['siteid'],
+					'typename' => $check['typename']
+				)
+			)
+		);
+		if (isset($this->data[$this->name]['id'])) {// if it's an updating operation
+			if (empty($rs)) return true;
+			else {
+				return ($rs[$this->name]['id'] == $this->data[$this->name]['id'] ? true : false);
+			}
+		} else {// otherwise, it's an inserting opreation
+			return empty($rs);
+		}
+	}
 }
 ?>
