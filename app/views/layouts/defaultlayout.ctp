@@ -713,7 +713,7 @@ jQuery(document).ready(function() {
 			jQuery("#models_iframe").load(function() {
 				jQuery("#models_iframe").css("display", "block");
 				jQuery("#models_loading_img").css("display", "none");
-			})
+			});
 		}
 	});
 });
