@@ -710,10 +710,17 @@ jQuery(document).ready(function() {
 		'onStart': function() {
 			jQuery("#models_iframe").attr("src", "<?php echo $html->url(array('controller' => 'pages', 'action' => 'iml_online'), true); ?>");
 			jQuery("#models_iframe").css("display", "none");
-			jQuery("#models_iframe").load(function() {
-				jQuery("#models_iframe").css("display", "block");
-				jQuery("#models_loading_img").css("display", "none");
-			});
+			if (jQuery.browser.msie) {
+				jQuery("#models_iframe").ready(function() {
+					jQuery("#models_iframe").css("display", "block");
+					jQuery("#models_loading_img").css("display", "none");
+				});
+			} else {
+				jQuery("#models_iframe").load(function() {
+					jQuery("#models_iframe").css("display", "block");
+					jQuery("#models_loading_img").css("display", "none");
+				});
+			}
 		}
 	});
 });
