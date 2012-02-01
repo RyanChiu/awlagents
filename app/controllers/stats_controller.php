@@ -392,7 +392,7 @@ class StatsController extends AppController {
 						$enddate = $tmp[1];
 						$conditions['trxtime >='] = $startdate . ' 00:00:00';
 						$conditions['trxtime <='] = $enddate . ' 23:59:59';
-						$selsite = 2; // HARD CODE HERE: means site "HMS" ---start
+						$selsite = -2; // HARD CODE HERE: means a defaut site id here---start
 						$types = $this->TransType->find('list',
 							array(
 								'fields' => array('id', 'typename'),
@@ -402,7 +402,7 @@ class StatsController extends AppController {
 						$types = array('0' => 'All') + $types;
 						$this->set(compact('types'));
 						$seltype = 0;
-						$conditions['siteid'] = $selsite; // HARD CODE HERE: means site "HMS" ---end
+						$conditions['siteid'] = $selsite; // HARD CODE HERE: means a defaut site id here ---end
 					} else {
 						$conditions['trxtime >='] = $startdate . ' 00:00:00';
 						$conditions['trxtime <='] = $enddate . ' 23:59:59';
