@@ -312,8 +312,86 @@ if (!empty($rs)) {
 		?>
 		<td><?php echo $r['TransTmpStats']['raws']; ?></td>
 		<td><?php echo $r['TransTmpStats']['uniques']; ?></td>
-		<td><?php echo $r['TransTmpStats']['chargebacks']; ?></td>
-		<td><?php echo $r['TransTmpStats']['frauds']; ?></td>
+		<td>
+		<?php 
+		if ($bywhat != 3) {
+			echo $r['TransTmpStats']['chargebacks'];
+		} else {
+			if ($selsite == 3) {// means site SEEME.COM
+				if (empty($r['TransTmpStats']['chargebacks'])) {
+					echo $r['TransTmpStats']['chargebacks'];
+				} else {
+					$reasonsurl = $html->url(
+						array(
+							'controller' => 'stats',
+							'action' => 'fraudreason',
+							'siteid' => $selsite,
+							'date' => substr($r['TransTmpStats']['trxtime'], 0, 10),
+							'username' => $r['TransTmpStats']['username'],
+							'fraudtype' => 1
+						),
+						true
+					);
+					echo "<div style='display:none'>"
+						. "<a class='fraudreasons' id='linkFraudreasons" . $i . "' href='#divFraudreasons'>"
+						. "#</a>"
+						. "</div>";
+					echo "<a href='#linkFraudreasons'"
+						. " onclick='javascript:jQuery(\"#divFraudreasons\").html(\"<b>Loading......</b>\");"
+						. "jQuery(\"#divFraudreasons\").load(\""
+						. $reasonsurl . "\");"
+						. "jQuery(\"#linkFraudreasons" . $i . "\").click();"
+						. "'>"
+						. $r['TransTmpStats']['chargebacks']
+						. $html->image('iconInform.png', array('style' => 'border:0;'))
+						. "</a>";
+				}
+			} else {
+				echo $r['TransTmpStats']['chargebacks'];
+			}
+		} 
+		?>
+		</td>
+		<td>
+		<?php
+		if ($bywhat != 3) { 
+			echo $r['TransTmpStats']['frauds'];
+		} else {
+			if ($selsite == 3) {// means site SEEME.COM
+				if (empty($r['TransTmpStats']['frauds'])) {
+					echo $r['TransTmpStats']['frauds'];
+				} else {
+					$reasonsurl = $html->url(
+						array(
+							'controller' => 'stats',
+							'action' => 'fraudreason',
+							'siteid' => $selsite,
+							'date' => substr($r['TransTmpStats']['trxtime'], 0, 10),
+							'username' => $r['TransTmpStats']['username'],
+							'fraudtype' => 2
+						),
+						true
+					);
+					echo "<div style='display:none'>"
+						. "<a class='fraudreasons' id='linkFraudreasons_" . $i . "' href='#divFraudreasons'>"
+						. "#</a>"
+						. "</div>";
+					echo "<a href='#linkFraudreasons'"
+						. " onclick='javascript:jQuery(\"#divFraudreasons\").html(\"Loading......\");"
+						. "jQuery(\"#divFraudreasons\").load(\""
+						. $reasonsurl . "\");"
+						. "jQuery(\"#linkFraudreasons_" . $i . "\").click();"
+						. "'>"
+						. $r['TransTmpStats']['frauds']
+						. $html->image('iconInform.png', array('style' => 'border:0;'))
+						. "</a>";
+				}
+			} else {
+				echo $r['TransTmpStats']['frauds'];
+			}
+		} 
+		?>
+		</td>
 		<td><?php echo $r['TransTmpStats']['signups']; ?></td>
 		<td>
 		<?php
@@ -598,8 +676,28 @@ echo $this->element('paginationblock');
 }
 ?>
 
-<script type="text/javascript">
-jQuery(document).ready(function(){
+<!-- for fraud reasons -->
+<div style="display:none;">
+	<div id="divFraudreasons">
+	</div>
+</div>
+<script type="text/javascript" language="javascript">
+jQuery(document).ready(function() {
+	/*
+	 * for "fraud reasons"
+	 */
+	jQuery("a.fraudreasons").fancybox({
+		'autoDimensions' : false,
+		'hideOnContentClick': false,
+		'overlayOpacity': 0.6,
+		'overlayColor': '#0A0A0A',
+		'width': 560,
+		'height': 322
+	});
+
+	/*
+	 * hide the coloums classed "naClassHide"
+	 */
 	var obj;
 	obj = jQuery(".naClassHide");
 	tbl = obj.parent().parent().parent();

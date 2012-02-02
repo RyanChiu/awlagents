@@ -5,7 +5,8 @@ class StatsController extends AppController {
 	var $uses = array(
 		'TransViewCompany', 'TransViewAgent', 'TransSite', 'TransType',
 		'TransStats', 'TransSite', 'TransType',
-		'TransViewStats', 'TransTmpStats', 'TransRunStats'
+		'TransViewStats', 'TransTmpStats', 'TransRunStats',
+		'ViewMapping'
 	);
 	var $components = array('RequestHandler');
 	var $helpers = array(
@@ -803,6 +804,93 @@ class StatsController extends AppController {
 			
 		}
 		$this->set(compact('frauds'));
+	}
+	
+	function fraudreason() {
+		$this->layout = "emptylayout";
+		Configure::write('debug', '0');
+		
+		if (!$this->Session->check("Auth")) {
+			$this->set('contents', array('error' => 'Please login firstly.'));
+			return;
+		}
+		
+		$fraudtype = 0;
+		$siteid = 0;
+		$date = '0000-00-00';
+		$username = '';
+		if (array_key_exists('fraudtype', $this->passedArgs)) {
+			$fraudtype = $this->passedArgs['fraudtype'];
+		}
+		if (array_key_exists('siteid', $this->passedArgs)) {
+			$siteid = $this->passedArgs['siteid'];
+		}
+		if (array_key_exists('date', $this->passedArgs)) {
+			$date = $this->passedArgs['date'];
+		}
+		if (array_key_exists('username', $this->passedArgs)) {
+			$username = $this->passedArgs['username'];
+		}
+		
+		$requesturl = '';
+		switch ($siteid) {
+		case 3:
+			//$date = date("Y-m-d", strtotime($date . " + 1 days"));
+			$affilateid = 0;
+			$rs = $this->ViewMapping->find('first',
+				array(
+					'conditions' => array(
+						'siteid' => $siteid,
+						'username' => $username
+					)
+				)
+			);
+			if (!empty($rs)) {
+				$affilateid = $rs['ViewMapping']['campaignid'];
+			}
+			if ($fraudtype == 1) {
+				$requesturl = sprintf(
+					"http://www.morepesos.com/xml_stats/sales/%s/denied_day?username=JADE02&password=aomangels&ds=%s",
+					$affilateid, $date
+				);
+			}
+			if ($fraudtype == 2) {
+				$requesturl = sprintf(
+					"http://www.morepesos.com/xml_stats/sales/%s/revoked_day?username=JADE02&password=aomangels&ds=%s",
+					$affilateid, $date
+				);
+			}
+			if (!empty($requesturl)) {
+				$xml = simplexml_load_file($requesturl);
+				if ($xml === false) {
+					$this->set('contents', 'Failed to get the reason, please try it later.');
+				} else {
+					$contents['date'] = '' . $xml->date;
+					$contents['data'] = array();
+					if ($xml->data->count() > 0) {
+						foreach ($xml->data->sale as $fraudsale) {
+							array_push(
+								$contents['data'],
+								array(
+									'id' => ('' . $fraudsale->id),
+									'email' => ('' . $fraudsale->email),
+									'signup-date' => (''. $fraudsale->{'signup-date'}),
+									'rejected-time' => ('' . $fraudsale->{'rejected-time'}),
+									'reason' => (''. $fraudsale->reason),
+									'tracking-code' => (''. $fraudsale->{'tracking-code'}),
+									'record-type' => ('' . $fraudsale->{'record-type'})
+								)
+							);
+						}
+					}
+					$contents['debug'] = $requesturl;//for debug
+					$this->set('contents', /*$xml*/$contents);
+				}
+			} else {
+				$this->set('contents', array());
+			}
+			break;
+		}
 	}
 }
 ?>
