@@ -144,16 +144,16 @@ if (!empty($rs)) {
 		?>	
 		<th><?php echo $exPaginator->sort('Raws', 'TransTmpStats.raws'); ?></th>
 		<th><?php echo $exPaginator->sort('Uniques', 'TransTmpStats.uniques'); ?></th>
+		<th <?php echo in_array($selsite, array(3)) ? '' : 'class="naClassHide"'; ?>>
+		<?php echo $exPaginator->sort('Denied', 'TransTmpStats.frauds'); ?>
+		</th>
 		<th>
 		<?php
 		echo $exPaginator->sort(
-			(!in_array($selsite, array(3)) ? 'Frauds' : 'Denied'), 
+			(!in_array($selsite, array(3)) ? 'Chargebacks' : 'Revoked'), 
 			'TransTmpStats.chargebacks'
 		);
 		?>
-		</th>
-		<th <?php echo in_array($selsite, array(3)) ? '' : 'class="naClassHide"'; ?>>
-		<?php echo $exPaginator->sort('Revoked', 'TransTmpStats.frauds'); ?>
 		</th>
 		<th>
 		<?php
@@ -313,46 +313,6 @@ if (!empty($rs)) {
 		<td><?php echo $r['TransTmpStats']['raws']; ?></td>
 		<td><?php echo $r['TransTmpStats']['uniques']; ?></td>
 		<td>
-		<?php 
-		if ($bywhat != 3) {
-			echo $r['TransTmpStats']['chargebacks'];
-		} else {
-			if ($selsite == 3) {// means site SEEME.COM
-				if (empty($r['TransTmpStats']['chargebacks'])) {
-					echo $r['TransTmpStats']['chargebacks'];
-				} else {
-					$reasonsurl = $html->url(
-						array(
-							'controller' => 'stats',
-							'action' => 'fraudreason',
-							'siteid' => $selsite,
-							'date' => substr($r['TransTmpStats']['trxtime'], 0, 10),
-							'username' => $r['TransTmpStats']['username'],
-							'fraudtype' => 1
-						),
-						true
-					);
-					echo "<div style='display:none'>"
-						. "<a class='fraudreasons' id='linkFraudreasons" . $i . "' href='#divFraudreasons'>"
-						. "#</a>"
-						. "</div>";
-					echo "<a href='#linkFraudreasons'"
-						. " onclick='javascript:jQuery(\"#divFraudreasons\").html(\"<b>Loading......</b>\");"
-						. "jQuery(\"#divFraudreasons\").load(\""
-						. $reasonsurl . "\");"
-						. "jQuery(\"#linkFraudreasons" . $i . "\").click();"
-						. "'>"
-						. $r['TransTmpStats']['chargebacks']
-						. $html->image('iconInform.png', array('style' => 'border:0;'))
-						. "</a>";
-				}
-			} else {
-				echo $r['TransTmpStats']['chargebacks'];
-			}
-		} 
-		?>
-		</td>
-		<td>
 		<?php
 		if ($bywhat != 3) { 
 			echo $r['TransTmpStats']['frauds'];
@@ -368,7 +328,7 @@ if (!empty($rs)) {
 							'siteid' => $selsite,
 							'date' => substr($r['TransTmpStats']['trxtime'], 0, 10),
 							'username' => $r['TransTmpStats']['username'],
-							'fraudtype' => 2
+							'fraudtype' => 1
 						),
 						true
 					);
@@ -388,6 +348,46 @@ if (!empty($rs)) {
 				}
 			} else {
 				echo $r['TransTmpStats']['frauds'];
+			}
+		} 
+		?>
+		</td>
+		<td>
+		<?php 
+		if ($bywhat != 3) {
+			echo $r['TransTmpStats']['chargebacks'];
+		} else {
+			if ($selsite == 3) {// means site SEEME.COM
+				if (empty($r['TransTmpStats']['chargebacks'])) {
+					echo $r['TransTmpStats']['chargebacks'];
+				} else {
+					$reasonsurl = $html->url(
+						array(
+							'controller' => 'stats',
+							'action' => 'fraudreason',
+							'siteid' => $selsite,
+							'date' => substr($r['TransTmpStats']['trxtime'], 0, 10),
+							'username' => $r['TransTmpStats']['username'],
+							'fraudtype' => 2
+						),
+						true
+					);
+					echo "<div style='display:none'>"
+						. "<a class='fraudreasons' id='linkFraudreasons" . $i . "' href='#divFraudreasons'>"
+						. "#</a>"
+						. "</div>";
+					echo "<a href='#linkFraudreasons'"
+						. " onclick='javascript:jQuery(\"#divFraudreasons\").html(\"<b>Loading......</b>\");"
+						. "jQuery(\"#divFraudreasons\").load(\""
+						. $reasonsurl . "\");"
+						. "jQuery(\"#linkFraudreasons" . $i . "\").click();"
+						. "'>"
+						. $r['TransTmpStats']['chargebacks']
+						. $html->image('iconInform.png', array('style' => 'border:0;'))
+						. "</a>";
+				}
+			} else {
+				echo $r['TransTmpStats']['chargebacks'];
 			}
 		} 
 		?>
@@ -485,8 +485,8 @@ if (!empty($rs)) {
 		?>
 		<td class="totals"><?php echo $pagetotals['raws']; ?></td>
 		<td class="totals"><?php echo $pagetotals['uniques']; ?></td>
-		<td class="totals"><?php echo $pagetotals['chargebacks']; ?></td>
 		<td class="totals"><?php echo $pagetotals['frauds']; ?></td>
+		<td class="totals"><?php echo $pagetotals['chargebacks']; ?></td>
 		<td class="totals"><?php echo $pagetotals['signups']; ?></td>
 		<td class="totals"><?php echo $pagetotals['frauds']; ?></td>
 		<td class="totals"><?php echo $pagetotals['sales_type1']; ?></td>
@@ -532,8 +532,8 @@ if (!empty($rs)) {
 		?>
 		<td class="totals"><?php echo $totals['raws']; ?></td>
 		<td class="totals"><?php echo $totals['uniques']; ?></td>
-		<td class="totals"><?php echo $totals['chargebacks']; ?></td>
 		<td class="totals"><?php echo $totals['frauds']; ?></td>
+		<td class="totals"><?php echo $totals['chargebacks']; ?></td>
 		<td class="totals"><?php echo $totals['signups']; ?></td>
 		<td class="totals"><?php echo $totals['frauds']; ?></td>
 		<td class="totals"><?php echo $totals['sales_type1']; ?></td>
