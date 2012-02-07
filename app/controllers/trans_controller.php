@@ -2018,12 +2018,15 @@ class TransController extends AppController {
 	}
 		
 	function __go($siteid, $typeid, $url, $referer, $agentid, $clicktime, $linkid = null) {
-		//if (__isblocked(__getclientip())) {
-		if (false) {
+		if (__isblocked(__getclientip())) {
+		//if (false) {
 			$this->Session->setFlash('Sorry, you\'re not allowed to check the link.');
 			$this->render('/trans/go');
 			return;
 		} else {
+			//$this->Session->setFlash('Normal redirecting for debugging.' . __getclientip());
+			//$this->render('/trans/go');
+			//return;
 			/*log this click*/
 			$this->data['TransClickout']['linkid'] = $linkid;
 			$this->data['TransClickout']['agentid'] = $agentid;

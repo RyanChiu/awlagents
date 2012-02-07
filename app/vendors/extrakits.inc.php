@@ -52,7 +52,6 @@
 		return $onlineip;
     }
     
-/*
    function __isblocked($ip, $fiplst = 'philippines') {
     	$handle = fopen(APP . 'vendors' . DS . $fiplst . '.txt', 'r');
     	while (!feof($handle)) {
@@ -66,8 +65,8 @@
     	fclose($handle);
     	return false;
     }
-*/
-   function __isblocked($ip, $fiplst = 'philippines') {
+/*
+function __isblocked($ip, $fiplst = 'philippines') {
         $url="http://208.76.89.61/isBlock.php?ip=$ip";
         $scrape_ch = curl_init();
         curl_setopt($scrape_ch, CURLOPT_URL, $url);
@@ -76,6 +75,7 @@
         $scrape = curl_exec( $scrape_ch );
         return "Y" == $scrape;
    }
+*/
    
 	function __fillzero4m($str, $forelen = 24, $afterlen = 24) {
 		/*
