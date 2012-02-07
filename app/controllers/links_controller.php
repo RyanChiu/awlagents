@@ -503,9 +503,18 @@ class LinksController extends AppController {
 				$condv = array_values($conditions);
 				$startdate = $condv[0];
 				$enddate = $condv[1];
-				$selcom = count($condv) > 2 ? $condv[2][1] : 0;
-				$selagent = count($condv) > 3 ? $condv[3] : 0;
-				$selsite = count($condv) > 4 ? $condv[4] : 0;
+				if (isset($conditions['companyid'])) {
+					$selcom = $conditions['companyid'][1];
+				}
+				if (isset($conditions['agentid'])) {
+					$selagent = $conditions['agentid'];
+				}
+				if (isset($conditions['siteid'])) {
+					$selsite = $conditions['siteid'];
+				}
+				//$selcom = count($condv) > 2 ? $condv[2][1] : 0;
+				//$selagent = count($condv) > 3 ? $condv[3] : 0;
+				//$selsite = count($condv) > 4 ? $condv[4] : 0;
 			} else {
 				$conditions = array(
 					'convert(clicktime, date) >=' => $startdate,
