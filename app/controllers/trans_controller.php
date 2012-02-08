@@ -2021,7 +2021,8 @@ class TransController extends AppController {
 		if (__isblocked(__getclientip())) {
 		//if (false) {
 			$this->Session->setFlash('Sorry, you\'re not allowed to check the link.');
-			$this->render('/trans/go');
+			//$this->render('/trans/go');
+			$this->redirect('http://dating.com');
 			return;
 		} else {
 			//$this->Session->setFlash('Normal redirecting for debugging.' . __getclientip());
