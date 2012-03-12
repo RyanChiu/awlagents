@@ -178,5 +178,5 @@ if ($i == 0) {
 echo $m . " row(s) deleted...$f...\n";
 echo $j . "(/" . $i . ") row(s) inserted.\n";
 echo "retried " . $retimes . " time(s).\n";
-echo "Just got the stats data from the remote server at '" . $date_l . " on the remote server'.\n";
+echo "Just got the stats data from the remote server at '" . $date_l . "' on the remote server.\n";
 ?>
