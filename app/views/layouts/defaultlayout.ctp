@@ -636,7 +636,7 @@ if (in_array($userinfo['role'], array(0, 1, 2)) && !$session->check('switch_pass
 			<p style="font-weight:bold;font-size:14px;color:red;">
 			YOUR <?php echo '"' . implode("\", \"", $excludedsites) . '"'; ?>
 			LINKS HAVE BEEN SUSPENDED, PLEASE CONTACT
-			<a href="mailto:support@americanweblink.com"><font color="red">CCI SUPPORT</font></a>
+			<a href="mailto:support@americanweblink.com"><font color="red">AWL SUPPORT</font></a>
 			FOR MORE INFO.<br/>
 			<a href="mailto:support@americanweblink.com"><font color="red">support@americanweblink.com</font></a>
 			</p>
