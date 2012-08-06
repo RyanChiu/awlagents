@@ -1,4 +1,7 @@
 <?php
+App::import('vendor', 'ExtraKits', array('file' => 'extrakits.inc.php'));
+?>
+<?php
 class StatsController extends AppController {
 	/*properties*/
 	var $name = 'Stats';
