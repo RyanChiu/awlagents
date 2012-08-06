@@ -560,9 +560,9 @@ $curmenuidx = 0;
 	        <script language="javascript">
 	        	function __zShowClock() {
 		        	var now = new Date();
-		        	now.setHours(now.getHours() + 8);
+		        	//now.setHours(now.getHours() + 8);
 		        	var nowStr = now.toUTCString();
-		        	nowStr = nowStr.replace("GMT", "Manila");
+		        	//nowStr = nowStr.replace("GMT", "Manila");
 	        		jQuery("#iptClock").val(nowStr);
 	        		setTimeout("__zShowClock()", 1000);
 	        	}
