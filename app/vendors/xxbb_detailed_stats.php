@@ -1,0 +1,158 @@
+<?php
+include 'zmysqlConn.class.php';
+include 'extrakits.inc.php';
+
+if (($argc - 1) != 1) {//if there is 1 parameter and it must mean a date like '2010-04-01,12:34:56'
+	exit("Only 1 parameter needed like '2010-05-01,12:34:56'.\n");
+}
+
+/*
+ * the following line will make the whole script exit if date string format is wrong
+ */
+$date = __get_remote_date($argv[1], "America/New_York", -5);
+$date_l = __get_remote_date($argv[1], "America/New_York", -5, "America/New_York", true);
+
+/*get the abbreviation of the site*/
+$abbr = __stats_get_abbr($argv[0]);
+
+/*find out the typeids and siteid from db by "xxxc" which is the abbreviation of the site*/
+$typeids = array();
+$siteid = null;
+$zconn = new zmysqlConn;
+__stats_get_types_site($typeids, $siteid, $abbr, $zconn->dblink);
+if (empty($siteid)) {
+	exit(sprintf("The site with abbreviation \"%s\" does not exist.\n", $abbr));
+}
+if (count($typeids) != 1) {
+	exit(sprintf("The site with abbreviation \"%s\" should have 1 type at least.\n", $abbr));
+}
+/*get all the campaign mappings of the site*/
+$sql = sprintf("select * from view_mappings where siteid = %d", $siteid);
+$rs = mysql_query($sql, $zconn->dblink)
+	or die ("Something wrong with: " . mysql_error());
+$agents = array();
+while ($row = mysql_fetch_assoc($rs)) {
+	$agents += array($row['campaignid'] => $row['agentid']);
+}
+if (empty($agents)) {
+	exit(sprintf("The site with abbreviation \"%s\" does not have any campaign ids asigned for agents.\n", $abbr));
+}
+
+/*
+ * start of the block that given by loadedcash.com
+ */
+/*
+$aid = 'YOUR LOADEDCASH AFFILIATE ID HERE';
+$username = 'YOUR LOADEDCASH USERNAME HERE';
+$password = 'YOUR LOADEDCASH PASSWORD HERE';
+*/
+$aid = '43800';
+$username = 'suzannebloch45';
+$password = 'Adutta11';
+
+$key_d_t = gmdate("Y-m-d H:i:s"); // Greenwich Mean Date Time
+$key = md5($username . $password . $key_d_t);
+
+$start_date = $date;//'2011-02-13';
+$end_date = $date;//'2011-02-15';
+
+$url = 'http://www.loadedcash.com/api.php?response_type=xml&json={"key":"' .
+	$key . '","key_d_t":"' . urlencode($key_d_t) .
+	'","c":"affiliateStats","a":"trafficStats","params":{"aid":"' . $aid .
+	'","start_date":"' . $start_date . '","end_date":"' . $end_date . '"}}';
+/*
+ * end of the block that given by loadedcash.com
+ */
+//echo "\n" . $url . "\n\n";//debug
+
+/*
+ * the following 3 lines are given by loadedcash.com
+ */
+//$response = file_get_contents($url);
+//var_dump($response);
+//$xml = simplexml_load_string($response);
+
+/*
+ * and we change and optimize the above 3 lines as the following block goes
+ */
+$retimes = 0;
+$response = file_get_contents($url);
+while ($response === false) {
+	$retimes++;
+	sleep(35);
+	$response = file_get_contents($url);
+	if ($retimes == 1) break;
+}
+if ($response === false) {
+	$mailinfo = 
+		__phpmail("maintainer.cci@gmail.com",
+			"XCUP STATS GETTING ERROR, REPORT WITH DATE: " . date('Y-m-d H:i:s') . "(retried " . $retimes . " times)",
+			"<b>FROM WEB02</b><br><b>--ERROR REPORT</b><br>"
+		);
+	exit(sprintf("Failed to read stats data.(%s)(%d times)\n", $mailinfo, $retimes));
+}
+//echo "var_dump\n";//for debug
+//var_dump($response);//for debug
+//echo "var_dump\n";//for debug
+$xml = simplexml_load_string($response);
+
+if ($xml === false) {
+	exit(sprintf("\nFailed to parse stats data.\n"));
+}
+
+$i = $j = $f = 0;
+foreach ($xml->children() as $item) {
+	$attr = $item->attributes();
+	
+	/*
+	echo 'node id ' . $attr['id'] . " => "
+		. "date: " . $item->date 
+		. ", campaign_label: " . $item->campaign_label //which is actually the campaign id
+		. ", campaign_name: " . $item->campaign_name //which is only the alias name for campaign id
+		. ", uniques: " . $item->uniques
+		. ", frees: " . $item->frees
+		. ", signups: " . $item->signups
+		. ", refunds: " . $item->refunds
+		. "\nfor debug\n";
+	continue;//for debug
+	*/
+	
+	/**
+	 * slice the campaign id from $item->campaign_label
+	 */
+	$campaignlabel = "" . $item->campaign_label;
+	$prefix = "a" . $aid . "_";
+	if (strpos($campaignlabel, $prefix) === false) {
+		$f++;
+		continue;
+	}
+	$campaignid = substr($campaignlabel, strlen($prefix));
+	//echo $campaignid . "\n"; //for debug
+	
+	if (in_array($campaignid, array_keys($agents))) {
+		//echo $campaignid . "," . $agents[$campaignid] . ";\n"; continue;//for debug
+		/*
+		 * we just insert the data with date and time anyway
+		 */
+		$sql = sprintf(
+			'insert into dup_stats'
+			. ' (agentid, campaignid, siteid, typeid, raws, uniques, chargebacks, signups, frauds, sales_number, trxtime)'
+			. ' values (%d, "%s", %d, %d, 0, %d, %d, %d, %d, %d, "%s")',
+			$agents[$campaignid], $campaignid, $siteid, $typeids[0],
+			$item->uniques, $item->refunds, $item->frees, null, $item->signups,
+			$date_l
+		);
+		//echo $sql . "\n"; continue;//for debug
+		mysql_query($sql, $zconn->dblink)
+			or die ("Something wrong with: " . mysql_error());
+		$j += mysql_affected_rows();
+		$i++;
+	}
+}
+if ($i == 0) {
+	echo "No stats data exist by now.\n";
+}
+echo $j . "(/" . $i . ") row(s) inserted.\n";
+echo "retried " . $retimes . " time(s).\n";
+echo "Just got the stats data from the remote server at '" . $date_l . "' on the remote server.\n";
+?>
