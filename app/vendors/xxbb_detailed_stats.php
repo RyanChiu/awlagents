@@ -132,16 +132,39 @@ foreach ($xml->children() as $item) {
 	if (in_array($campaignid, array_keys($agents))) {
 		//echo $campaignid . "," . $agents[$campaignid] . ";\n"; continue;//for debug
 		/*
-		 * we just insert the data with date and time anyway
+		 * we need to insert the balance data with date and time anyway
 		 */
+		$conditions = sprintf('convert(trxtime, date) = "%s" and siteid = %d'
+			. ' and typeid = %d and agentid = %d and campaignid = "%s"',
+			$date, $siteid, $typeids[0], $agents[$campaignid], $campaignid);
 		$sql = sprintf(
-			'insert into dup_stats'
-			. ' (agentid, campaignid, siteid, typeid, raws, uniques, chargebacks, signups, frauds, sales_number, trxtime)'
-			. ' values (%d, "%s", %d, %d, 0, %d, %d, %d, %d, %d, "%s")',
-			$agents[$campaignid], $campaignid, $siteid, $typeids[0],
-			$item->uniques, $item->refunds, $item->frees, null, $item->signups,
-			$date_l
+			'select sum(raws) as raws, sum(uniques) as uniques, sum(chargebacks) as chargebacks, sum(signups) as signups, sum(frauds) as frauds, sum(sales_number) as sales_number'
+			. ' from dup_stats where '. $conditions . ' group by agentid, campaignid, siteid, typeid, convert(trxtime, date)'
 		);
+		$result = mysql_query($sql, $zconn->dblink)
+			or die ("Something wrong with: " . mysql_error());
+		if (mysql_num_rows($result) != 0) {
+			$row = mysql_fetch_assoc($result);
+			$sql = sprintf(
+				'insert into dup_stats'
+				. ' (agentid, campaignid, siteid, typeid, raws, uniques, chargebacks, signups, frauds, sales_number, trxtime)'
+				. ' values (%d, "%s", %d, %d, 0, %d, %d, %d, %d, %d, "%s")',
+				$agents[$campaignid], $campaignid, $siteid, $typeids[0],
+				$item->uniques - $row['uniques'], $item->refunds - $row['chargebacks'], $item->frees - $row['signups'], null, $item->signups - $row['sales_number'],
+				$date_l
+			);
+		} else {
+			$sql = sprintf(
+				'insert into dup_stats'
+				. ' (agentid, campaignid, siteid, typeid, raws, uniques, chargebacks, signups, frauds, sales_number, trxtime)'
+				. ' values (%d, "%s", %d, %d, 0, %d, %d, %d, %d, %d, "%s")',
+				$agents[$campaignid], $campaignid, $siteid, $typeids[0],
+				$item->uniques, $item->refunds, $item->frees, null, $item->signups,
+				$date_l
+			);
+		}
+		
+		
 		//echo $sql . "\n"; continue;//for debug
 		mysql_query($sql, $zconn->dblink)
 			or die ("Something wrong with: " . mysql_error());
