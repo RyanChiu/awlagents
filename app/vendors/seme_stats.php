@@ -56,7 +56,7 @@ while ($xml === false) {
 	
 if ($xml === false) {
 	$mailinfo = 
-	__phpmail("ray.october@gmail.com",
+	__phpmail("maintainer.cci@gmail.com",
 		"MPS STATS GETTING ERROR, REPORT WITH DATE: " . date('Y-m-d H:i:s') . "(retried " . $retimes . " times)",
 		"<b>FROM WEB02</b><br><b>--ERROR REPORT</b><br>"
 	);
