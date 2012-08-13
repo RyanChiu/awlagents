@@ -135,33 +135,33 @@ function __isblocked($ip, $fiplst = 'philippines') {
 	 * try to use phpmail class to send email
 	 */
 	function __phpmail($mailto = "maintainer.cci@gmail.com", $subject = "", $content = "") {
-		require_once("class.phpmailer.php");	
-		$mailinfo = 'no email sent';
-		$mail = new PHPMailer();
-		$mail->IsSMTP();  // set mailer to use SMTP
-		$mail->Host = "smtpout.secureserver.net";  // specify main and backup server
-		$mail->Port = 25;
-		$mail->Timeout = 60;
-		$mail->Username = "support@americanweblink.com";  // SMTP username
-		$mail->Password = "Otvori54321A"; // SMTP password
-		$mail->From = "support@americanweblink.com";
-		$mail->FromName = "support@americanweblink.com";
-		$mail->AddAddress($mailto, "Maintainer AWL");// the second param "name" is optional                
-		$mail->AddReplyTo("support@americanweblink.com", "Information");
-		$mail->IsHTML(true);
-		$mail->Subject = $subject;
-		$mail->Body    = $content;
-		$mail->AltBody = "This is the body in plain text for non-HTML mail clients\n\n" . $content;
+		require_once("Mail.php");
+		$mailer = Mail::factory(
+			"SMTP",
+			array(
+				'host' => "ssl://smtp.gmail.com",
+				'port' => "465",
+				'auth' => true,
+				'username' => "agents.maintainer@gmail.com",
+				'password' => "`1qaz2wsx"
+			)
+		);
 		
-		if ($mail->Send()) {
+		$a_headers['From'] = "agents.maintainer@gmail.com";
+		$a_headers['To'] = $mailto;
+		
+		$a_headers['Subject'] = $subject;
+		
+		$res = $mailer->send($a_headers['To'], $a_headers, $content);
+		if ($res) {
 			$mailinfo = 'email sent.';
 		} else {
-			$mailinfo = $mail->ErrorInfo;
+			$mailinfo = $res->getMessage();
 		}
 		return $mailinfo;
 	}
 	
-	/*
+	/**
 	 * get the local date of the stats servers
 	 * parameters:
 	 * origin_dt	the string present date, like 2010-05-01,12:34:56
