@@ -53,8 +53,8 @@ if (mysql_num_rows($rs) != 0) {
 			"AWL STATS ALERTS ($date_l, threshold: $threshold, row(s): " . mysql_num_rows($rs) . ")",
 			$lines
 		);
-	exit($mailinfo . "\n");
+	exit($mailinfo . " ($date_l)\n");
 } else {
-	echo "No alerts.\n";
+	echo "No alerts. ($date_l)\n";
 }
 ?>
