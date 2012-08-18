@@ -7,7 +7,7 @@ $userinfo = $session->read('Auth.TransAccount');
 echo $form->create(null, array('controller' => 'trans', 'action' => 'lstlogins'));
 ?>
 	<div style="width:100%;margin-top:5px;">
-	<table width="100%">
+	<table style="width: 100%;">
 	<caption>
 	<?php echo $html->image('iconSearch.png', array('style' => 'width:16px;height:16px;')) . 'Search'; ?>
 	</caption>
@@ -87,7 +87,7 @@ echo $form->end();
 ?>
 
 <br/>
-<table width="100%">
+<table style="width: 100%;">
 <thead>
 <tr>
 	<th><b><?php echo $exPaginator->sort('Username', 'ViewOnlineLog.username'); ?></b></th>
