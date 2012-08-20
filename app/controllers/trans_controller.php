@@ -1371,14 +1371,15 @@ class TransController extends AppController {
 					$rs = $this->ViewMapping->find('first',
 						array(
 							'conditions' => array(
-								'LOWER(campaignid)' => strtolower($this->data['TransAccount']['username'])
+								'LOWER(campaignid)' => strtolower($this->data['TransAccount']['username']),
+								'flat' => 1
 							)
 						)
 					);
 					$__SAME__sites = $this->TransSite->find('list',
 						array(
 							'fields' => array('id', 'id'),
-							'conditions' => array('id not' => array(1, 2, 5))//which means not CAM4,2HM or ADMINTEST
+							'conditions' => array('id not' => array(-1, 3))//HARD CODE: which means not SEME
 						)
 					);
 					if (empty($rs)) {
