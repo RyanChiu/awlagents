@@ -9,8 +9,8 @@ if (($argc - 1) != 1) {//if there is 1 parameter and it must mean a date like '2
 /*
  * the following line will make the whole script exit if date string format is wrong
  */
-$date = __get_remote_date($argv[1], "America/New_York", -5);
-$date_l = __get_remote_date($argv[1], "America/New_York", -5, "America/New_York", true);
+$date = __get_remote_date($argv[1], "America/New_York", -1);
+$date_l = __get_remote_date($argv[1], "America/New_York", -1, "America/New_York", true);
 
 /*get the abbreviation of the site*/
 $abbr = __stats_get_abbr($argv[0]);
@@ -41,6 +41,7 @@ if (empty($agents)) {
 /*
  * start of the block that given by loadedcash.com
  */
+sleep(10);//we sleep 10 seconds here to avoid the conflict from other stats
 /*
 $aid = 'YOUR LOADEDCASH AFFILIATE ID HERE';
 $username = 'YOUR LOADEDCASH USERNAME HERE';
@@ -71,6 +72,7 @@ $url = 'http://www.loadedcash.com/api.php?response_type=xml&json={"key":"' .
 //$response = file_get_contents($url);
 //var_dump($response);
 //$xml = simplexml_load_string($response);
+//exit();//for debug
 
 /*
  * and we change and optimize the above 3 lines as the following block goes
@@ -85,8 +87,8 @@ while ($response === false) {
 }
 if ($response === false) {
 	$mailinfo = 
-		__phpmail("maintainer.cci@gmail.com",
-			"[AWL] XXBB STATS GETTING ERROR, REPORT WITH DATE: " . date('Y-m-d H:i:s') . "(retried " . $retimes . " times)",
+		__phpmail("agents.maintainer@gmail.com",
+			"[AWL] SPC STATS GETTING ERROR, REPORT WITH DATE: " . date('Y-m-d H:i:s') . "(retried " . $retimes . " times)",
 			"<b>FROM WEB02</b><br><b>--ERROR REPORT</b><br>"
 		);
 	exit(sprintf("Failed to read stats data.(%s)(%d times)\n", $mailinfo, $retimes));
@@ -122,16 +124,14 @@ foreach ($xml->children() as $item) {
 	 */
 	$campaignlabel = "" . $item->campaign_label;
 	$prefix = "a" . $aid . "_";
-	$prefix_x = $prefix . "-";
-	if (!(strpos($campaignlabel, $prefix_x) === false)) {
-		continue;
-	}
-	if (strpos($campaignlabel, $prefix) === false) {
+	$prefix_x = $prefix . "-spc"; //!important
+	if (strpos($campaignlabel, $prefix_x) === false) {
 		$f++;
 		continue;
 	}
-	$campaignid = substr($campaignlabel, strlen($prefix));
-	//echo $campaignid . "\n"; //for debug
+	$campaignid = substr($campaignlabel, strlen($prefix_x));
+	//echo $campaignlabel . ',' . $prefix_x . ',' . $campaignid . "\n"; continue;//for debug
+	//echo print_r($agents, true) . "\n"; continue;//for debug
 	
 	if (in_array($campaignid, array_keys($agents))) {
 		//echo $campaignid . "," . $agents[$campaignid] . ";\n"; continue;//for debug
@@ -146,6 +146,7 @@ foreach ($xml->children() as $item) {
 			. ' and typeid = %d and agentid = %d and campaignid = "%s"',
 			$date, $siteid, $typeids[0], $agents[$campaignid], $campaignid);
 		$sql = 'select * from trans_stats where ' . $conditions;
+		//echo $sql . "\n"; continue;//for debug
 		$result = mysql_query($sql, $zconn->dblink)
 			or die ("Something wrong with: " . mysql_error());
 		if (mysql_num_rows($result) != 0) {
@@ -157,6 +158,7 @@ foreach ($xml->children() as $item) {
 		}
 		
 		$sql = 'delete from trans_stats where ' . $conditions;
+		//echo $sql . "\n"; continue;//for debug
 		mysql_query($sql, $zconn->dblink)
 			or die ("Something wrong with: " . mysql_error());
 		$m += mysql_affected_rows();
@@ -182,5 +184,5 @@ if ($i == 0) {
 echo $m . " row(s) deleted...$f...\n";
 echo $j . "(/" . $i . ") row(s) inserted.\n";
 echo "retried " . $retimes . " time(s).\n";
-echo "Just got the stats data from the remote server at '" . $date_l . "' on the remote server.\n";
+echo "Just got the stats data from the remote server at '" . $date_l . " on the remote server'.\n";
 ?>
