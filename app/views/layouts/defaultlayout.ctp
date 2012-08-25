@@ -437,10 +437,10 @@ $curmenuidx = 0;
 			);
 			?>
 		</div>
-		<div id="dropmenu_toolbox_admin" class="dropmenudiv_e" style="width:120px;">
+		<div id="dropmenu_toolbox_admin" class="dropmenudiv_e" style="width:135px;">
 			<?php
-			echo $html->link('<font color="white"><b>Update HMS</b></font>',
-				array('controller' => 'trans', 'action' => 'updtoolbox', 'site' => 2),
+			echo $html->link('<font color="white"><b>Update SPC-cams</b></font>',
+				array('controller' => 'trans', 'action' => 'updtoolbox', 'site' => 4),
 				null, false, false
 			);
 			echo $html->link('<font color="white"><b>Update XXBB</b></font>',
@@ -479,8 +479,8 @@ $curmenuidx = 0;
 		?>
 		<div id="dropmenu_toolbox_normal" class="dropmenudiv_e" style="width:120px;">
 			<?php
-			echo $html->link('<font color="white"><b>HMS</b></font>',
-				array('controller' => 'trans', 'action' => 'toolbox', 'site' => 2),
+			echo $html->link('<font color="white"><b>SPC-cams</b></font>',
+				array('controller' => 'trans', 'action' => 'toolbox', 'site' => 4),
 				null, false, false
 			);
 			echo $html->link('<font color="white"><b>XXBB</b></font>',
