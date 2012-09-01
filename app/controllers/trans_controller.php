@@ -300,7 +300,7 @@ class TransController extends AppController {
 				)
 			);
 		}
-		$this->set('topnotes',  empty($info) ? '...' : $info['Bulletin']['info']);
+		$this->set('topnotes',  empty($info) ? '' : $info['Bulletin']['info']);
 		if ($this->Auth->user('role') == 0) {//means an administrator
 			$this->set('notes', '');//set the additional notes here
 		} else if ($this->Auth->user('role') == 1) {//means a company

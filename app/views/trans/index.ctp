@@ -64,7 +64,7 @@ if (!empty($archdata)) {
 <?php
 }
 ?>
-	<script type="text/javascript" language="javascript">
+	<script type="text/javascript">
 	jQuery("#linkMore").click(
 		function() {
 			var txtMore = jQuery(this).text();
@@ -81,13 +81,46 @@ if (!empty($archdata)) {
 </div>
 </div>
 
+<!-- show news -->
+<br/>
+<table style="width: 100%">
+<!-- <tr class="odd"> -->
+<tr>
+	<td>
+	<div style="margin:5px 20px 5px 20px;">
+	<?php
+	//echo $html->image('iconTopnotes.png');
+	echo $topnotes;
+	?>
+	<div style="height:6px"></div>
+	</div>
+	</td>
+</tr>
+<?php
+if (!empty($notes)) {
+?>
+<tr>
+	<td>
+	<div style="margin:5px 20px 5px 20px;">
+	<?php
+	//echo $html->image('iconAttention.png');
+	echo '<br/>' . $notes . '<br/><div style="height:6px"></div>';
+	?>
+	</div>
+	</td>
+</tr>
+<?php
+}
+?>
+</table>
+
 <!-- show the top selling list -->
 <br/>
-<table width="100%">
+<table style="width: 100%">
 <caption><font size="5" color="#bb2222">TOP 10 SELLERS</font></caption>
 <tr>
 	<td width="50%">
-		<table width="100%" style="font-size:90%;">
+		<table style="width: 100%" style="font-size:90%;">
 		<caption style="font-style:italic;">Till Today</caption>
 		<thead>
 		<tr>
@@ -114,7 +147,7 @@ if (!empty($archdata)) {
 		</table>
 	</td>
 	<td>
-		<table width="100%" style="font-size:90%;">
+		<table style="width: 100%" style="font-size:90%;">
 		<caption style="font-style:italic;">
 		This Week (From <?php echo $weekstart; ?> To <?php echo $weekend; ?>)
 		&nbsp;&nbsp;&nbsp;
@@ -152,32 +185,6 @@ if (!empty($archdata)) {
 		}
 		?>
 		</table>
-	</td>
-</tr>
-</table>
-
-<table width="100%">
-<!-- <tr class="odd"> -->
-<tr>
-	<td>
-	<div style="margin:5px 20px 5px 20px;">
-	<?php
-	//echo $html->image('iconTopnotes.png');
-	echo '<b><font size="3">News</font></b>';
-	echo '<br/>' . $topnotes;
-	?>
-	<div style="height:6px"></div>
-	</div>
-	</td>
-</tr>
-<tr>
-	<td>
-	<div style="margin:5px 20px 5px 20px;">
-	<?php
-	//echo $html->image('iconAttention.png');
-	echo '<br/>' . $notes . '<br/><div style="height:6px"></div>';
-	?>
-	</div>
 	</td>
 </tr>
 </table>
