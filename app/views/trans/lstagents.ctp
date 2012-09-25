@@ -15,7 +15,7 @@ $userinfo = $session->read('Auth.TransAccount');
 <?php
 echo $form->create(null, array('controller' => 'trans', 'action' => 'lstagents', 'id' => 'frmSearch'));
 ?>
-<table width="100%" border="0">
+<table style="width: 100%; border: 0;">
 	<caption>
 	<?php echo $html->image('iconSearch.png', array('style' => 'width:16px;height:16px;')) . 'Search'; ?>
 	</caption>
@@ -126,7 +126,7 @@ echo $form->end();
 <?php
 /*showing the results*/
 ?>
-<script type="text/javascript" language="javascript">
+<script type="text/javascript">
 function __setActSusLink() {
 	var checkboxes;
 	checkboxes = document.getElementsByName("data[TransViewAgent][selected]");
@@ -169,7 +169,7 @@ function __checkAll() {
 
 <div style="margin-bottom:3px">
 <?php
-if (in_array($userinfo['role'], array(0, 1)) && $userinfo['id'] != 1) {//means an administrator or an office
+if ($userinfo['id'] == 2 || $userinfo['role'] == 1) {//means a special "admin" or an office
 	//echo $form->button($userinfo['role'] == 0 ? 'Add Agent' : 'Request New Agent',
 	echo $form->button('Add Agent',
 		array(
@@ -181,7 +181,7 @@ if (in_array($userinfo['role'], array(0, 1)) && $userinfo['id'] != 1) {//means a
 }
 ?>
 </div>
-<table width="100%">
+<table style="width: 100%;">
 <thead>
 <tr>
 	<th><b>
@@ -357,7 +357,7 @@ echo $html->link(
 
 <!-- ~~~~~~~~~~~~~~~~~~~the floating message box for "inform selected"~~~~~~~~~~~~~~~~~~~ -->
 <div id="message_box">
-	<table width="100%">
+	<table style="width: 100%;">
 	<thead><tr><th>
 		<div style="float:left">Please enter your notes below.</div>
 		<?php echo $html->image('iconClose.png', array('id' => 'close_message', 'style' => 'float:right;cursor:pointer')); ?>
@@ -381,7 +381,7 @@ echo $html->link(
 	</td></tr>
 	</table>
 </div>
-<script type="text/javascript" language="javascript">
+<script type="text/javascript">
 jQuery(":checkbox").attr({style: "border:0px;width:16px;vertical-align:middle;"}); 
 </script>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

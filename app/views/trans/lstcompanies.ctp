@@ -11,7 +11,7 @@ $userinfo = $session->read('Auth.TransAccount');
 <?php
 echo $form->create(null, array('controller' => 'trans', 'action' => 'lstcompanies', 'id' => 'frmSearch'));
 ?>
-<table width="100%" border="0">
+<table style="width: 100%; border: 0;">
 	<caption>
 	<?php echo $html->image('iconSearch.png', array('style' => 'width:16px;height:16px;')) . 'Search'; ?>
 	</caption>
@@ -39,7 +39,7 @@ echo $form->end();
 <?php
 /*showing the results*/
 ?>
-<script type="text/javascript" language="javascript">
+<script type="text/javascript">
 function __setActSusLink() {
 	var checkboxes;
 	checkboxes = document.getElementsByName("data[TransViewCompany][selected]");
@@ -82,7 +82,11 @@ function __checkAll() {
 
 <div style="margin-bottom:3px">
 <?php
-if ($userinfo['id'] != 1) {
+/*
+ * Hard codes here
+ * In order to prevent "admins" except "adminuser" to access this function
+ */
+if ($userinfo['id'] == 2) {
 	echo $form->button('Add Office',
 		array(
 			'onclick' => 'javascript:location.href="'
@@ -93,7 +97,7 @@ if ($userinfo['id'] != 1) {
 }
 ?>
 </div>
-<table width="100%">
+<table style="width: 100%;">
 <thead>
 <tr>
 	<th><b>
@@ -237,7 +241,7 @@ echo $html->link(
 
 <!-- ~~~~~~~~~~~~~~~~~~~the floating message box for "inform selected"~~~~~~~~~~~~~~~~~~~ -->
 <div id="message_box">
-	<table width="100%">
+	<table style="width: 100%;">
 	<thead><tr><th>
 		<div style="float:left">Please enter your notes below.</div>
 		<?php echo $html->image('iconClose.png', array('id' => 'close_message', 'style' => 'float:right;cursor:pointer')); ?>

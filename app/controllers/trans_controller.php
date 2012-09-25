@@ -800,9 +800,9 @@ class TransController extends AppController {
 	function regcompany($id = null) {
 		/*
 		 * Hard codes here
-		 * In order to prevent "admin" to access this function
+		 * In order to prevent "admins" except "adminuser" to access this function
 		 */
-		if ($this->Auth->user('id') == 1) {
+		if ($this->Auth->user('id') != 2) {
 			$this->redirect(array('controller' => 'trans', 'action' => 'lstcompanies'));
 		}
 		
@@ -924,10 +924,10 @@ class TransController extends AppController {
 
 	function regagent($id = null) {
 		/*
-		* Hard codes here
-		* In order to prevent "admin" to access this function
-		*/
-		if ($this->Auth->user('id') == 1) {
+		 * Hard codes here
+		 * In order to prevent "admins" except "adminuser" to access this function
+		 */
+		if ($this->Auth->user('id') != 2) {
 			$this->redirect(array('controller' => 'trans', 'action' => 'lstagents'));
 		}
 		
@@ -1093,10 +1093,10 @@ class TransController extends AppController {
 	
 	function updcompany($id = null) {
 		/*
-		* Hard codes here
-		* In order to prevent "admin" to access this function
-		*/
-		if ($this->Auth->user('id') == 1) {
+		 * Hard codes here
+		 * In order to prevent "admins" except "adminuser" to access this function
+		 */
+		if ($this->Auth->user('id') != 2) {
 			$this->redirect(array('controller' => 'trans', 'action' => 'lstcompanies'));
 		}
 		
@@ -1228,10 +1228,10 @@ class TransController extends AppController {
 	
 	function updagent($id = null) {
 		/*
-		* Hard codes here
-		* In order to prevent "admin" to access this function
-		*/
-		if ($this->Auth->user('id') == 1) {
+		 * Hard codes here
+		 * In order to prevent "admins" except "adminuser" to access this function
+		 */
+		if ($this->Auth->user('id') != 2) {
 			$this->redirect(array('controller' => 'trans', 'action' => 'lstagents'));
 		}
 		
@@ -1750,10 +1750,10 @@ class TransController extends AppController {
 		if ($from == 1) $action = 'lstagents';
 		
 		/*
-		* Hard codes here
-		* In order to prevent "admin" to access this function
-		*/
-		if ($this->Auth->user('id') == 1) {
+		 * Hard codes here
+		 * In order to prevent "admins" except "adminuser" to access this function
+		 */
+		if ($this->Auth->user('id') != 2) {
 			$this->redirect(array('controller' => 'trans', 'action' => $action));
 		}
 		
