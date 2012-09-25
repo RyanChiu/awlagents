@@ -8,7 +8,7 @@ $userinfo = $session->read('Auth.TransAccount');
 <?php
 echo $form->create(null, array('controller' => 'links', 'action' => 'lstclickouts'));
 ?>
-<table width="100%">
+<table style="width: 100%;">
 <caption>
 <?php echo $html->image('iconSearch.png', array('style' => 'width:16px;height:16px;')) . 'Search'; ?>
 </caption>
@@ -124,7 +124,7 @@ echo $form->end();
 </div>
 <br/>
 
-<table width="100%">
+<table style="width: 100%;">
 <caption>
 Start Date:<?php echo $startdate; ?>&nbsp;&nbsp;End Date:<?php echo $enddate; ?>&nbsp;&nbsp;|&nbsp;&nbsp;
 Office:<?php echo $coms[$selcom]; ?>&nbsp;&nbsp;Agent:<?php echo $ags[$selagent]; ?>
@@ -140,7 +140,9 @@ Office:<?php echo $coms[$selcom]; ?>&nbsp;&nbsp;Agent:<?php echo $ags[$selagent]
 	<th><b>Link</b></th>
 	<th><b><?php echo $exPaginator->sort('Click Time', 'TransViewClickout.clicktime'); ?></b></th>
 	<th><b><?php echo $exPaginator->sort('IP From', 'TransViewClickout.fromip'); ?></b></th>
-	<th><b><?php echo $exPaginator->sort('Referer', 'TransViewClickout.referer'); ?></b></th>
+	<th <?php echo in_array($userinfo['id'], array(1, 2)) ? '' : 'class="naClassHide"'; // HARD CODES?>>
+		<b><?php echo $exPaginator->sort('Referer', 'TransViewClickout.referer'); ?></b>
+	</th>
 </tr>
 </thead>
 <?php
@@ -194,16 +196,25 @@ jQuery(document).ready(function(){
 			dateFormat: 'yy-mm-dd'
 		});
 	});
-});
-</script>
-<script type="text/javascript">
-jQuery(document).ready(function(){
+
 	jQuery(function() {
 		jQuery('#datepicker_end').datepicker({
 			changeMonth: true,
 			changeYear: true,
 			dateFormat: 'yy-mm-dd'
 		});
+	});
+
+	/*
+	 * hide the coloums classed "naClassHide"
+	 */
+	var obj;
+	obj = jQuery(".naClassHide");
+	tbl = obj.parent().parent().parent();
+	obj.each(function(i){
+		idx = jQuery("th", obj.parent()).index(this);
+		this.hide();
+		jQuery("td:eq(" + idx + ")", jQuery("tr", tbl)).hide();
 	});
 });
 </script>
